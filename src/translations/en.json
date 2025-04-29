@@ -1,0 +1,70 @@
+{
+  "navigation": {
+    "projects": "Projects",
+    "experience": "Experience",
+    "blog": "Blog",
+    "connect": "Connect"
+  },
+  "header": {
+    "title": "Ole Oskar Heinrichs",
+    "subtitle": "O$ka",
+    "profession": "Musician & Marketing Professional",
+    "description": "Focused on the intersection of music and AI. Currently working in Marketing & Distribution at EuroArts and as Marketing Manager at KI-Academy. Passionate about music creation and AI advancements."
+  },
+  "projects": {
+    "title": "Selected Projects",
+    "musicReleases": {
+      "title": "Music Releases",
+      "description": "Original music releases that showcase songwriting, production, mixing, mastering, and recording techniques. I have produced most of my tracks completely on my own. A significant part of my music history can be found on <a href='https://soundcloud.com/murphywav' target='_blank' rel='noopener noreferrer' class='text-accent-tertiary hover:underline'>SoundCloud</a>.",
+      "listenOn": "Listen on Spotify"
+    },
+    "youtubeCommentary": {
+      "title": "Music Analysis",
+      "description": "Together with producer CAS (Sound Engineering BA) and friends, we analyze various music pieces and provide in-depth insights into music production, composition techniques, and our musical influences.",
+      "viewOn": "View on YouTube"
+    }
+  },
+  "experience": {
+    "title": "Experience & Education",
+    "current": "Current",
+    "euroarts": {
+      "title": "Marketing & Distribution",
+      "period": "Jan 2023 - Present",
+      "description": "Responsible for marketing and distribution of classical music recordings."
+    },
+    "kiacademy": {
+      "title": "Marketing Manager",
+      "period": "Apr 2023 - Present",
+      "description": "Leading marketing initiatives for AI education programs."
+    },
+    "education": {
+      "title": "Music Production & Songwriting, BA",
+      "institution": "BIMM Berlin",
+      "period": "2019 - 2022",
+      "description": "Focus on music production, recording, and composition."
+    },
+    "internship": {
+      "title": "Internship",
+      "period": "2019",
+      "description": "Music production and event management"
+    }
+  },
+  "blog": {
+    "title": "Blog & Thoughts",
+    "comingSoon": "Coming soon",
+    "stayTuned": "Stay Tuned",
+    "description": "Content about music and AI will be available here soon."
+  },
+  "connect": {
+    "title": "Connect",
+    "description": "Interested in collaborating or have any questions? Get in touch through any of the following channels:",
+    "email": "Send Email",
+    "getInSection": "Get in Touch",
+    "socialMedia": "Social Media",
+    "management": "Management"
+  },
+  "footer": {
+    "copyright": " 2025 Ole Oskar Heinrichs. All rights reserved."
+  },
+  "languageSwitch": "DE"
+}

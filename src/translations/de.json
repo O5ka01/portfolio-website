@@ -1,0 +1,70 @@
+{
+  "navigation": {
+    "projects": "Projekte",
+    "experience": "Erfahrung",
+    "blog": "Blog",
+    "connect": "Kontakt"
+  },
+  "header": {
+    "title": "Ole Oskar Heinrichs",
+    "subtitle": "O$ka",
+    "profession": "Musiker & Marketing-Profi",
+    "description": "Spezialisiert auf die Schnittstelle zwischen Musik und KI. Derzeit tätig im Marketing & Vertrieb bei EuroArts und als Marketing Manager bei KI-Academy. Leidenschaftlich interessiert an Musikproduktion und KI-Entwicklungen."
+  },
+  "projects": {
+    "title": "Ausgewählte Projekte",
+    "musicReleases": {
+      "title": "Musik-Veröffentlichungen",
+      "description": "Originale Musikveröffentlichungen, die Songwriting, Produktion, Mixing, Mastering und Aufnahmetechniken demonstrieren. Ich habe die meisten meiner Tracks komplett alleine produziert. Ein großer Teil meiner Musikgeschichte befindet sich auf <a href='https://soundcloud.com/murphywav' target='_blank' rel='noopener noreferrer' class='text-accent-tertiary hover:underline'>SoundCloud</a>.",
+      "listenOn": "Auf Spotify hören"
+    },
+    "youtubeCommentary": {
+      "title": "Musik-Analyse",
+      "description": "Zusammen mit dem Producer CAS (Sound Engineering BA) und Freunden analysieren wir verschiedene Musikstücke und geben einen tiefgründigen Einblick in Musikproduktion, Kompositionstechniken und unsere musikalischen Einflüsse.",
+      "viewOn": "Auf YouTube ansehen"
+    }
+  },
+  "experience": {
+    "title": "Berufserfahrung & Ausbildung",
+    "current": "Aktuell",
+    "euroarts": {
+      "title": "Marketing & Vertrieb",
+      "period": "Jan 2023 - Heute",
+      "description": "Verantwortlich für Marketing und Vertrieb klassischer Musikaufnahmen."
+    },
+    "kiacademy": {
+      "title": "Marketing Manager",
+      "period": "Apr 2023 - Heute",
+      "description": "Leitung von Marketing-Initiativen für KI-Bildungsprogramme."
+    },
+    "education": {
+      "title": "Musikproduktion & Songwriting, BA",
+      "institution": "BIMM Berlin",
+      "period": "2019 - 2022",
+      "description": "Fokus auf Musikproduktion, Recording und Komposition."
+    },
+    "internship": {
+      "title": "Praktikum",
+      "period": "2019",
+      "description": "Musikproduktion und Veranstaltungsmanagement"
+    }
+  },
+  "blog": {
+    "title": "Blog & Gedanken",
+    "comingSoon": "Demnächst verfügbar",
+    "stayTuned": "Bleibe dran",
+    "description": "Inhalte zu Musik und KI werden bald hier verfügbar sein."
+  },
+  "connect": {
+    "title": "Kontakt",
+    "description": "Interessiert an einer Zusammenarbeit oder haben Sie Fragen? Kontaktieren Sie mich über einen der folgenden Kanäle:",
+    "email": "E-Mail senden",
+    "getInSection": "Kontakt aufnehmen",
+    "socialMedia": "Soziale Medien",
+    "management": "Management"
+  },
+  "footer": {
+    "copyright": " 2025 Ole Oskar Heinrichs. Alle Rechte vorbehalten."
+  },
+  "languageSwitch": "EN"
+}
