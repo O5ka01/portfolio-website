@@ -4,6 +4,7 @@ import "./globals.css";
 import JsonLd from "@/components/JsonLd";
 import Script from "next/script";
 import { LanguageProvider } from "@/context/LanguageContext";
+import { Analytics } from "@vercel/analytics/react";
 
 // Optimize font loading
 const inter = Inter({
@@ -141,6 +142,9 @@ export default function RootLayout({
         <LanguageProvider>
           {children}
         </LanguageProvider>
+        
+        {/* Add Vercel Analytics */}
+        <Analytics />
         
         {/* Load analytics with strategy="afterInteractive" to prioritize page loading */}
         <Script 
