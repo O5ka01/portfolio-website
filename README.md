@@ -2,6 +2,29 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+(For me)
+
+clone the repository:
+
+git clone https://github.com/O5ka01/portfolio-website.git
+
+Install dependencies:
+
+cd portfolio-website
+npm install
+
+Make changes to your code
+
+Commit and push changes:
+
+git add .
+git commit -m "Description of your changes"
+git push
+
+Pull changes when you switch between systems:
+
+git pull
+
 First, run the development server:
 
 ```bash
