@@ -14,6 +14,7 @@ const inter = Inter({
   display: 'swap', // Ensures text remains visible during font loading
   preload: true,
   fallback: ['system-ui', 'Arial', 'sans-serif'],
+  // Note: preconnect is handled with link tags in the head
 });
 
 export const metadata: Metadata = {
@@ -127,6 +128,8 @@ export default function RootLayout({
         {/* DNS Prefetch */}
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
         <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
         {/* Preload critical assets */}
         <link 
@@ -135,8 +138,14 @@ export default function RootLayout({
           as="image" 
           fetchPriority="high"
         />
+        
+        {/* Add favicon links */}
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className={`${inter.variable} antialiased`}>
+      <body className={`${inter.variable} antialiased min-h-screen flex flex-col`}>
         {/* Add JSON-LD structured data */}
         <JsonLd data={personStructuredData} />
         <JsonLd data={websiteStructuredData} />

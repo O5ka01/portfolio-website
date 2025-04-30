@@ -1,10 +1,13 @@
 "use client";
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import SocialIcons, { EmailLink } from '@/components/SocialIcons';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import ResponsiveNavbar from '@/components/ResponsiveNavbar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
 
 // Helper function to safely render HTML content
 const RenderHTML = ({ html }: { html: string }) => {
@@ -14,36 +17,74 @@ const RenderHTML = ({ html }: { html: string }) => {
 export default function Home() {
   // Use useEffect to ensure this code only runs on the client
   const [isMounted, setIsMounted] = useState(false);
-  const [enlargedVideo, setEnlargedVideo] = useState<string | null>(null);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const modalRef = useRef<HTMLDivElement>(null);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  
+  // Videos with browser-friendly backup image URLs
+  const musicVideoData = {
+    videoUrl: "https://res.cloudinary.com/daaynrl8l/video/upload/showcase_f6z4wq.mp4",
+    imageUrl: "https://res.cloudinary.com/daaynrl8l/video/upload/so_auto/showcase_f6z4wq.jpg"
+  };
+  const commentaryVideoData = {
+    videoUrl: "https://res.cloudinary.com/daaynrl8l/video/upload/commentary_clip_mobwhq.mp4",
+    imageUrl: "https://res.cloudinary.com/daaynrl8l/video/upload/so_auto/commentary_clip_mobwhq.jpg"
+  };
+  
+  // CSS styles as objects with proper TypeScript typing
+  const videoWrapperStyle = {
+    position: 'relative' as const,
+    width: '100%',
+    height: '100%',
+    overflow: 'hidden' as const
+  };
+  
+  // Completely revised video component that prioritizes working over features
+  const BrowserFriendlyVideo = ({ videoData }: { videoData: { videoUrl: string, imageUrl: string } }) => {
+    // Check if we're running in the browser
+    const [isClient, setIsClient] = useState(false);
+    
+    useEffect(() => {
+      setIsClient(true);
+    }, []);
+    
+    // If we're not in the browser, just show a black div
+    if (!isClient) {
+      return <div className="w-full h-full bg-black" />;
+    }
+    
+    // In the browser, try to use the HTML video element
+    return (
+      <div className="relative w-full h-full bg-black overflow-hidden">
+        {/* Fallback image (always shown) */}
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src={videoData.imageUrl || "https://res.cloudinary.com/daaynrl8l/image/upload/placeholder.jpg"} 
+            alt="Video placeholder"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </div>
+        
+        {/* Video overlay */}
+        <video 
+          className="absolute inset-0 z-10 w-full h-full object-cover"
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          controls={false}
+          preload="auto"
+        >
+          <source src={videoData.videoUrl} type="video/mp4" />
+        </video>
+      </div>
+    );
+  };
   
   // Fix hydration mismatch by only rendering client-specific content after mounting
   useEffect(() => {
     setIsMounted(true);
   }, []);
-
-  const openModal = (videoSrc: string) => {
-    setEnlargedVideo(videoSrc);
-    document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
-    setTimeout(() => setIsAnimating(true), 50); // Start animation after a short delay
-  };
-
-  const closeModal = () => {
-    setIsAnimating(false); // Start closing animation
-    setTimeout(() => {
-      setEnlargedVideo(null);
-      document.body.style.overflow = 'auto'; // Restore scrolling
-    }, 300); // Match this with the transition duration
-  };
-
-  // Handle click outside the video container to close modal
-  const handleModalClick = (e: React.MouseEvent) => {
-    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
-      closeModal();
-    }
-  };
 
   if (!isMounted) {
     // Return a skeleton or simplified version for server rendering
@@ -52,53 +93,6 @@ export default function Home() {
 
   return (
     <div className="bg-warm-beige min-h-screen">
-      {/* Video Modal with smooth transition */}
-      {enlargedVideo && (
-        <div 
-          className={`fixed inset-0 bg-black/0 z-50 flex items-center justify-center p-4 transition-all duration-300 ease-in-out ${isAnimating ? 'bg-black/80' : ''}`}
-          onClick={handleModalClick}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Video modal"
-          tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === 'Escape') {
-              closeModal();
-            }
-          }}
-        >
-          <div 
-            ref={modalRef}
-            className={`relative w-full max-w-4xl transition-all duration-300 ease-in-out ${isAnimating ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
-          >
-            <div className="aspect-video w-full rounded-xl overflow-hidden shadow-2xl">
-              <video 
-                className="w-full h-full object-contain" 
-                src={enlargedVideo}
-                autoPlay 
-                loop 
-                muted 
-                playsInline
-                aria-label="Video content"
-              />
-            </div>
-            {/* Close button for better usability on mobile */}
-            <button 
-              onClick={(e) => {
-                e.stopPropagation();
-                closeModal();
-              }}
-              className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-black/50 text-white rounded-full hover:bg-black/70 transition-colors focus:outline-none focus:ring-2 focus:ring-white"
-              aria-label="Close video"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      )}
-
       {/* Navigation - Using the new Responsive Navbar */}
       <header>
         <ResponsiveNavbar />
@@ -135,77 +129,69 @@ export default function Home() {
           <h2 id="projects-heading" className="text-2xl sm:text-3xl font-bold text-dark-text mb-6 sm:mb-8">{t('projects.title')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
             {/* Project 1 */}
-            <article className="bg-accent-primary/20 rounded-xl p-4 sm:p-6 transition-transform hover:scale-[1.01]">
+            <article className="bg-accent-primary/20 rounded-xl p-4 sm:p-6 transition-transform hover:scale-[1.01] flex flex-col">
               <h3 className="text-xl sm:text-2xl font-bold text-dark-text mb-3">{t('projects.musicReleases.title')}</h3>
-              <div className="aspect-video rounded-lg mb-4 overflow-hidden">
-                <iframe 
-                  src="https://open.spotify.com/embed/artist/4BTWTI3mEAVmYQbe94r0MY?utm_source=generator&theme=0" 
-                  width="100%" 
-                  height="352"
-                  frameBorder="0" 
-                  allowFullScreen
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                  loading="lazy"
-                  title="Spotify player for O$ka"
-                  className="rounded-lg"
-                ></iframe>
+              <div 
+                className="aspect-video bg-accent-secondary/30 rounded-lg mb-4 overflow-hidden" 
+              >
+                {/* Custom video player with no controls and auto-loop */}
+                <div style={videoWrapperStyle}>
+                  <BrowserFriendlyVideo videoData={musicVideoData} />
+                </div>
               </div>
               <div className="text-dark-text/80 mb-4">
                 <RenderHTML html={t('projects.musicReleases.description')} />
               </div>
-              <a 
-                href="https://open.spotify.com/intl-de/artist/4BTWTI3mEAVmYQbe94r0MY" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-accent-tertiary hover:text-dark-text transition-colors text-base sm:text-lg py-2 px-1"
-                aria-label="Listen to O$ka on Spotify"
-              >
-                <i className="fa-brands fa-spotify"></i>
-                <span>{t('projects.musicReleases.listenOn')}</span>
-              </a>
+              <div className="mt-auto flex items-center gap-4">
+                <a 
+                  href="https://open.spotify.com/artist/4BTWTI3mEAVmYQbe94r0MY" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-accent-tertiary hover:text-dark-text transition-colors text-base sm:text-lg py-2 px-1"
+                  aria-label="Listen to O$ka on Spotify"
+                >
+                  <i className="fa-brands fa-spotify text-xl"></i>
+                  <span>{t('projects.musicReleases.listenOn')}</span>
+                </a>
+                <a 
+                  href="https://music.apple.com/us/artist/o%24ka/1640653279" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-accent-tertiary hover:text-dark-text transition-colors text-base sm:text-lg py-2 px-1"
+                  aria-label="Listen to O$ka on Apple Music"
+                >
+                  <i className="fa-brands fa-apple text-xl"></i>
+                  <span>{t('projects.musicReleases.listenOnApple')}</span>
+                </a>
+              </div>
             </article>
 
             {/* Project 2 */}
-            <article className="bg-accent-primary/20 rounded-xl p-4 sm:p-6 transition-transform hover:scale-[1.01]">
+            <article className="bg-accent-primary/20 rounded-xl p-4 sm:p-6 transition-transform hover:scale-[1.01] flex flex-col">
               <h3 className="text-xl sm:text-2xl font-bold text-dark-text mb-3">{t('projects.youtubeCommentary.title')}</h3>
               <div 
-                className="aspect-video bg-accent-secondary/30 rounded-lg mb-4 overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-[1.02]" 
-                onClick={() => openModal("https://res.cloudinary.com/daaynrl8l/video/upload/commentary_clip_mobwhq.mp4")}
-                role="button"
-                aria-label="Open video modal"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    openModal("https://res.cloudinary.com/daaynrl8l/video/upload/commentary_clip_mobwhq.mp4");
-                  }
-                }}
+                className="aspect-video bg-accent-secondary/30 rounded-lg mb-4 overflow-hidden"
               >
-                {/* Use poster and preload="none" for better performance */}
-                <video 
-                  className="w-full h-full object-cover" 
-                  src="https://res.cloudinary.com/daaynrl8l/video/upload/commentary_clip_mobwhq.mp4"
-                  autoPlay 
-                  loop 
-                  muted 
-                  playsInline
-                  aria-label="Preview of YouTube Music Commentary video"
-                  preload="none"
-                  poster="https://res.cloudinary.com/daaynrl8l/image/upload/v1746152088/video_thumbnail_jaxofr.jpg"
-                />
+                {/* Custom video player with no controls and auto-loop */}
+                <div style={videoWrapperStyle}>
+                  <BrowserFriendlyVideo videoData={commentaryVideoData} />
+                </div>
               </div>
               <div className="text-dark-text/80 mb-4">
                 <RenderHTML html={t('projects.youtubeCommentary.description')} />
               </div>
-              <a 
-                href="https://www.youtube.com/@oska.hayati" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-accent-tertiary hover:text-dark-text transition-colors text-base sm:text-lg py-2 px-1"
-                aria-label="View O$ka's YouTube channel"
-              >
-                <i className="fa-brands fa-youtube"></i>
-                <span>{t('projects.youtubeCommentary.viewOn')}</span>
-              </a>
+              <div className="mt-auto">
+                <a 
+                  href="https://www.youtube.com/@oska.hayati" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-accent-tertiary hover:text-dark-text transition-colors text-base sm:text-lg py-2 px-1"
+                  aria-label="View O$ka's YouTube channel"
+                >
+                  <i className="fa-brands fa-youtube text-xl"></i>
+                  <span>{t('projects.youtubeCommentary.viewOn')}</span>
+                </a>
+              </div>
             </article>
           </div>
         </section>
@@ -276,30 +262,40 @@ export default function Home() {
         {/* Connect Section */}
         <section id="connect" className="mb-12 md:mb-20 scroll-mt-20" aria-labelledby="connect-heading">
           <h2 id="connect-heading" className="text-2xl sm:text-3xl font-bold text-dark-text mb-6 sm:mb-8">{t('connect.title')}</h2>
-          <div className="bg-accent-primary/10 rounded-xl p-4 sm:p-8">
-            <div className="mb-5 sm:mb-6">
-              <h3 className="text-lg sm:text-xl font-bold text-dark-text mb-2">{t('connect.getInSection')}</h3>
-              {/* Use the EmailLink component */}
-              <EmailLink />
+          
+          {/* Redesigned layout with cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Personal Contact Card */}
+            <div className="bg-accent-primary/10 rounded-xl p-6 flex flex-col h-full transition-transform hover:shadow-md">
+              <h3 className="text-lg sm:text-xl font-medium text-dark-text mb-5 text-center">{t('connect.getInSection')}</h3>
+              <div className="mb-6 flex justify-center">
+                <EmailLink />
+              </div>
+              
+              {/* Management Contact */}
+              <div className="mt-auto">
+                <h3 className="text-base font-medium text-dark-text mb-3 text-center">{t('connect.management')}</h3>
+                <div className="flex justify-center">
+                  <a 
+                    href="mailto:info@about-us-records.com" 
+                    className="inline-flex items-center gap-2 text-accent-tertiary hover:text-dark-text transition-colors"
+                    aria-label="Email Management"
+                  >
+                    <div className="bg-accent-secondary/40 w-8 h-8 rounded-full flex items-center justify-center shadow-sm">
+                      <FontAwesomeIcon icon={faEnvelope} className="text-dark-text" size="sm" />
+                    </div>
+                    <span>{t('connect.managementEmail')}</span>
+                  </a>
+                </div>
+              </div>
             </div>
             
-            <div className="mb-5 sm:mb-6">
-              <h3 className="text-lg sm:text-xl font-bold text-dark-text mb-3 sm:mb-4">{t('connect.socialMedia')}</h3>
-              {/* Use the SocialIcons component */}
-              <SocialIcons />
-            </div>
-
-            <div>
-              <h3 className="text-lg sm:text-xl font-bold text-dark-text mb-2">{t('connect.management')}</h3>
-              <p className="text-dark-text/80">
-                aboutusrecords{" "}
-                <a 
-                  href="mailto:info@about-us-records.com" 
-                  className="text-accent-tertiary hover:text-dark-text transition-colors py-1 inline-block"
-                >
-                  info@about-us-records.com
-                </a>
-              </p>
+            {/* Social Media Card */}
+            <div className="bg-accent-primary/10 rounded-xl p-6 h-full transition-transform hover:shadow-md">
+              <h3 className="text-lg sm:text-xl font-medium text-dark-text mb-5 text-center">{t('connect.socialMedia')}</h3>
+              <div className="flex flex-wrap justify-center">
+                <SocialIcons />
+              </div>
             </div>
           </div>
         </section>
@@ -308,7 +304,15 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-accent-primary/30 py-4 sm:py-6">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-          <p className="text-dark-text/70">&copy; {new Date().getFullYear()} Ole Oskar Heinrichs. All rights reserved.</p>
+          <p className="text-dark-text/70">&copy; {new Date().getFullYear()} Ole Oskar Heinrichs. {language === 'de' ? 'Alle Rechte vorbehalten.' : 'All rights reserved.'}</p>
+          <div className="mt-2">
+            <Link 
+              href="/imprint" 
+              className="text-dark-text/70 hover:text-dark-text text-sm transition-colors"
+            >
+              {language === 'de' ? 'Impressum' : 'Imprint'}
+            </Link>
+          </div>
         </div>
       </footer>
     </div>

@@ -8,7 +8,8 @@ import {
   faTiktok, 
   faYoutube, 
   faSpotify, 
-  faSoundcloud 
+  faSoundcloud, 
+  faGithub
 } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
@@ -72,6 +73,15 @@ const SocialIcons: FC<SocialIconsProps> = ({ size = "lg" }) => {
         aria-label="SoundCloud profile"
       >
         <FontAwesomeIcon icon={faSoundcloud} className="text-dark-text" size={size} />
+      </a>
+      <a 
+        href="https://github.com/O5ka01" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="bg-accent-secondary/40 hover:bg-accent-secondary/70 transition-colors w-12 h-12 rounded-full flex items-center justify-center shadow-sm"
+        aria-label="GitHub profile"
+      >
+        <FontAwesomeIcon icon={faGithub} className="text-dark-text" size={size} />
       </a>
     </div>
   );

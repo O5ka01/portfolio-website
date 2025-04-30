@@ -1,6 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* stylelint-disable */
+/* Global styles with Tailwind CSS */
+@tailwind base; /* Tailwind base styles */
+@tailwind components; /* Tailwind component styles */
+@tailwind utilities; /* Tailwind utility styles */
 
 :root {
   --background: #f5f0e8; /* Warm beige */
@@ -8,17 +10,65 @@
   --accent-primary: #e6c9ab;
   --accent-secondary: #c6a686;
   --accent-tertiary: #aa8b6f;
+  --border-radius: 0.5rem;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --accent-primary: #c6a686;
+    --accent-secondary: #aa8b6f;
+    --accent-tertiary: #8c6e57;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+}
+
+/* Custom utility classes */
+@layer components {
+  .container-custom {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8; /* Tailwind apply directive */
+  }
+
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-primary focus-visible:ring-opacity-75; /* Tailwind apply directive */
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Optimize scrolling */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Improve accessibility */
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Fix video display issues */
+video {
+  display: block !important; /* Ensure videos always display */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: var(--accent-secondary);
 }

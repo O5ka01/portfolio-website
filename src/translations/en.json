@@ -16,7 +16,8 @@
     "musicReleases": {
       "title": "Music Releases",
       "description": "Original music releases that showcase songwriting, production, mixing, mastering, and recording techniques. I have produced most of my tracks completely on my own. A significant part of my music history can be found on <a href='https://soundcloud.com/murphywav' target='_blank' rel='noopener noreferrer' class='text-accent-tertiary hover:underline'>SoundCloud</a>.",
-      "listenOn": "Listen on Spotify"
+      "listenOn": "Listen on Spotify",
+      "listenOnApple": "Listen on Apple Music"
     },
     "youtubeCommentary": {
       "title": "Music Analysis",
@@ -61,10 +62,38 @@
     "email": "Send Email",
     "getInSection": "Get in Touch",
     "socialMedia": "Social Media",
-    "management": "Management"
+    "management": "Management - Everything Music Related",
+    "managementEmail": "info@about-us-records.com"
   },
   "footer": {
-    "copyright": " 2025 Ole Oskar Heinrichs. All rights reserved."
+    "copyright": " 2025 Ole Oskar Heinrichs. All rights reserved.",
+    "imprint": "Imprint"
+  },
+  "imprint": {
+    "title": "Imprint",
+    "responsiblePerson": "Information according to § 5 TMG",
+    "addressTitle": "Contact:",
+    "addressLine1": "Ole Oskar Heinrichs",
+    "addressLine2": "Mendelstr. 3",
+    "addressLine3": "13187 Berlin",
+    "addressLine4": "Germany",
+    "contact": "Contact Options",
+    "email": "Email",
+    "emailAddress": "ooh.oska@outlook.de",
+    "umsatzsteuer": "VAT Identification Number",
+    "umsatzsteuerID": "No VAT ID available, as this is a private website",
+    "verantwortlich": "Responsible for Content",
+    "verantwortlicherName": "Ole Oskar Heinrichs (address as above)",
+    "streitbeilegung": "Dispute Resolution",
+    "streitbeilegungText": "The European Commission provides a platform for online dispute resolution (OS): https://ec.europa.eu/consumers/odr. You can find my email address in the imprint above. I am not willing or obliged to participate in dispute resolution proceedings before a consumer arbitration board.",
+    "disclaimer": "Disclaimer",
+    "haftungInhalte": "Liability for Content",
+    "haftungInhalteText": "As a service provider, I am responsible for my own content on these pages in accordance with general laws according to § 7 Para.1 TMG. According to §§ 8 to 10 TMG, however, as a service provider, I am not obligated to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity. Obligations to remove or block the use of information according to general laws remain unaffected by this. However, liability in this regard is only possible from the time of knowledge of a specific legal violation. Upon becoming aware of corresponding legal violations, I will remove this content immediately.",
+    "haftungLinks": "Liability for Links",
+    "haftungLinksText": "My offer contains links to external websites of third parties, the content of which I have no influence on. Therefore, I cannot assume any liability for these external contents. The respective provider or operator of the pages is always responsible for the content of the linked pages. The linked pages were checked for possible legal violations at the time of linking. Illegal content was not recognizable at the time of linking. However, permanent content control of the linked pages is not reasonable without concrete evidence of a violation of law. Upon becoming aware of legal violations, I will remove such links immediately.",
+    "urheberrecht": "Copyright",
+    "urheberrechtText": "The content and works created by the site operator on these pages are subject to German copyright law. The reproduction, editing, distribution and any kind of exploitation outside the limits of copyright require the written consent of the respective author or creator. Downloads and copies of this site are only permitted for private, non-commercial use. Insofar as the content on this site was not created by the operator, the copyrights of third parties are respected. In particular, third-party content is identified as such. Should you nevertheless become aware of a copyright infringement, please inform me accordingly. Upon becoming aware of legal violations, I will remove such content immediately.",
+    "backToHome": "Back to Home"
   },
   "languageSwitch": "DE"
 }
