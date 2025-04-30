@@ -305,12 +305,18 @@ export default function Home() {
       <footer className="bg-accent-primary/30 py-4 sm:py-6">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
           <p className="text-dark-text/70">&copy; {new Date().getFullYear()} Ole Oskar Heinrichs. {language === 'de' ? 'Alle Rechte vorbehalten.' : 'All rights reserved.'}</p>
-          <div className="mt-2">
+          <div className="mt-2 flex justify-center space-x-6">
             <Link 
               href="/imprint" 
               className="text-dark-text/70 hover:text-dark-text text-sm transition-colors"
             >
-              {language === 'de' ? 'Impressum' : 'Imprint'}
+              {t('footer.imprint')}
+            </Link>
+            <Link 
+              href="/datenschutz" 
+              className="text-dark-text/70 hover:text-dark-text text-sm transition-colors"
+            >
+              {t('footer.datenschutz')}
             </Link>
           </div>
         </div>
