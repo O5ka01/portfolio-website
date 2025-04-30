@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import JsonLd from "@/components/JsonLd";
-import Script from "next/script";
 import { LanguageProvider } from "@/context/LanguageContext";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import { ConsentProvider } from "@/context/ConsentContext";
+import CookieBanner from "@/components/CookieBanner";
+import ConditionalScripts from "@/components/ConditionalScripts";
 
 // Optimize font loading
 const inter = Inter({
@@ -149,29 +149,13 @@ export default function RootLayout({
         {/* Add JSON-LD structured data */}
         <JsonLd data={personStructuredData} />
         <JsonLd data={websiteStructuredData} />
-        <LanguageProvider>
-          {children}
-        </LanguageProvider>
-        
-        {/* Add Vercel Analytics */}
-        <Analytics />
-        
-        {/* Add Speed Insights for performance monitoring */}
-        <SpeedInsights />
-        
-        {/* Load analytics with strategy="afterInteractive" to prioritize page loading */}
-        <Script 
-          strategy="afterInteractive"
-          id="clarity-script"
-        >
-          {`
-            (function(c,l,a,r,i,t,y){
-              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window, document, "clarity", "script", "INSERT_YOUR_CLARITY_ID");
-          `}
-        </Script>
+        <ConsentProvider>
+          <LanguageProvider>
+            {children}
+            <CookieBanner />
+          </LanguageProvider>
+          <ConditionalScripts />
+        </ConsentProvider>
       </body>
     </html>
   );

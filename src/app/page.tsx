@@ -7,7 +7,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import ResponsiveNavbar from '@/components/ResponsiveNavbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import Link from 'next/link';
+import Footer from '@/components/Footer';
 
 // Helper function to safely render HTML content
 const RenderHTML = ({ html }: { html: string }) => {
@@ -17,7 +17,7 @@ const RenderHTML = ({ html }: { html: string }) => {
 export default function Home() {
   // Use useEffect to ensure this code only runs on the client
   const [isMounted, setIsMounted] = useState(false);
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   
   // Videos with browser-friendly backup image URLs
   const musicVideoData = {
@@ -302,25 +302,7 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-accent-primary/30 py-4 sm:py-6">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-          <p className="text-dark-text/70">&copy; {new Date().getFullYear()} Ole Oskar Heinrichs. {language === 'de' ? 'Alle Rechte vorbehalten.' : 'All rights reserved.'}</p>
-          <div className="mt-2 flex justify-center space-x-6">
-            <Link 
-              href="/imprint" 
-              className="text-dark-text/70 hover:text-dark-text text-sm transition-colors"
-            >
-              {t('footer.imprint')}
-            </Link>
-            <Link 
-              href="/datenschutz" 
-              className="text-dark-text/70 hover:text-dark-text text-sm transition-colors"
-            >
-              {t('footer.datenschutz')}
-            </Link>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

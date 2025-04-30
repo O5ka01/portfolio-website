@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 import ImprintHeader from '@/components/ImprintHeader';
+import Footer from '@/components/Footer';
 
 export default function Datenschutz() {
   const { language } = useLanguage();
@@ -263,11 +264,7 @@ export default function Datenschutz() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-accent-primary/30 py-4 sm:py-6">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-          <p className="text-dark-text/70">&copy; {new Date().getFullYear()} Ole Oskar Heinrichs. {language === 'de' ? 'Alle Rechte vorbehalten.' : 'All rights reserved.'}</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

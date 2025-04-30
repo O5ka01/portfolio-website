@@ -68,7 +68,24 @@
   "footer": {
     "copyright": " 2025 Ole Oskar Heinrichs. All rights reserved.",
     "imprint": "Imprint",
-    "datenschutz": "Privacy Policy"
+    "datenschutz": "Privacy Policy",
+    "cookieSettings": "Cookie Settings"
+  },
+  "cookies": {
+    "title": "Privacy Settings",
+    "description": "This website uses cookies and similar technologies that are necessary for the website to function. You can optionally consent to the use of cookies for analytics purposes.",
+    "necessary": "Necessary",
+    "necessaryDescription": "These cookies are necessary for the basic functions of the website and cannot be disabled.",
+    "analytics": "Analytics",
+    "analyticsDescription": "These cookies help us understand how visitors interact with the website.",
+    "functional": "Functional",
+    "functionalDescription": "These cookies enable enhanced functionality and personalization.",
+    "acceptAll": "Accept all",
+    "rejectAll": "Reject all",
+    "acceptSelected": "Accept selected",
+    "preferences": "Preferences",
+    "close": "Close",
+    "cookiePolicy": "Cookie Policy"
   },
   "imprint": {
     "title": "Imprint",
