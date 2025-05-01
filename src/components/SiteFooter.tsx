@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 import CookieSettings from './CookieSettings';
 
-export default function Footer() {
+export default function SiteFooter() {
   const { language } = useLanguage();
   const currentYear = new Date().getFullYear();
 

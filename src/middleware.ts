@@ -34,25 +34,20 @@ export function middleware(request: NextRequest) {
     response.headers.set('Cache-Control', CACHE_CONTROL_VALUE);
   }
 
-  // 3. Automatic language detection for first-time visitors without saved preference
-  // Only check on root requests and when no saved preference exists
+  // 3. Handle language preference without redirecting
+  // This just sets a cookie for client-side language detection
   if (pathname === '/' || pathname === '') {
-    // Skip language detection if cookie is already set
+    // Skip if cookie is already set
     const cookie = request.cookies.get('preferred-language');
     if (!cookie) {
       // Detect language from browser
       const locale = getLocale(request);
       
-      // Only redirect if it's not the default locale
-      if (locale !== defaultLocale) {
-        // Store detected language in cookie
-        const response = NextResponse.redirect(new URL(`/${locale}`, request.url));
-        response.cookies.set('preferred-language', locale, {
-          path: '/',
-          maxAge: 60 * 60 * 24 * 365, // 1 year
-        });
-        return response;
-      }
+      // Instead of redirecting, just set the cookie
+      response.cookies.set('preferred-language', locale, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 365, // 1 year
+      });
     }
   }
 

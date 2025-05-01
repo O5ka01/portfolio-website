@@ -1,0 +1,35 @@
+[
+  {
+    "id": "1",
+    "title": "Neueste Musik-Veröffentlichungen",
+    "description": "Aktuelle Singles und EPs mit einer Mischung aus elektronischen und akustischen Elementen.",
+    "imageUrl": "https://res.cloudinary.com/daaynrl8l/image/upload/v1619541234/projects/music.jpg",
+    "link": "https://open.spotify.com/intl-de/artist/4BTWTI3mEAVmYQbe94r0MY",
+    "technologies": ["Ableton Live", "FL Studio", "Serum"],
+    "featured": true,
+    "createdAt": "2025-04-15T12:00:00Z",
+    "updatedAt": "2025-04-15T12:00:00Z"
+  },
+  {
+    "id": "2",
+    "title": "Musikproduktion Workshops",
+    "description": "Eine Reihe von Online-Workshops über moderne Produktionstechniken und AI-Integration in Musik.",
+    "imageUrl": "https://res.cloudinary.com/daaynrl8l/image/upload/v1619541235/projects/workshops.jpg",
+    "link": "https://www.youtube.com/@oska.hayati",
+    "technologies": ["YouTube", "Final Cut Pro", "Logic Pro"],
+    "featured": true,
+    "createdAt": "2025-03-20T12:00:00Z",
+    "updatedAt": "2025-04-10T12:00:00Z"
+  },
+  {
+    "id": "3",
+    "title": "KI-basierte Musikanalyse",
+    "description": "Fortlaufendes Forschungsprojekt zur Anwendung von KI-Technologien bei der Analyse von Musiktrends und -merkmalen.",
+    "imageUrl": "https://res.cloudinary.com/daaynrl8l/image/upload/v1619541236/projects/ai-music.jpg",
+    "link": "https://ki.academy/",
+    "technologies": ["Python", "TensorFlow", "Spotify API"],
+    "featured": false,
+    "createdAt": "2025-02-15T12:00:00Z",
+    "updatedAt": "2025-04-01T12:00:00Z"
+  }
+]
