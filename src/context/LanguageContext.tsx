@@ -1,14 +1,25 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode, useMemo } from 'react';
+import { getDefaultLanguage, getFeaturedContent } from '@/utils/edgeConfig';
 
 type Language = 'de' | 'en';
+
+// Define the structure for featured content from Edge Config
+interface FeaturedContent {
+  title?: string;
+  description?: string;
+  link?: string;
+  linkText?: string;
+  // Add any other properties your featured content might have
+}
 
 interface LanguageContextType {
   language: Language;
   setLanguage: (language: Language) => void;
   t: (key: string) => string;
   isLoading: boolean;
+  featuredContent: FeaturedContent | null;
 }
 
 interface Translations {
@@ -21,10 +32,11 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguage] = useState<Language>('de'); // Default to German
   const [translations, setTranslations] = useState<Translations>({});
   const [isLoading, setIsLoading] = useState(true);
+  const [featuredContent, setFeaturedContent] = useState<FeaturedContent | null>(null);
 
-  // Load translations when language changes
+  // Load Edge Config settings and translations when language changes
   useEffect(() => {
-    const loadTranslations = async () => {
+    const loadLanguageResources = async () => {
       try {
         setIsLoading(true);
         
@@ -32,24 +44,27 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
         const cachedTranslations = sessionStorage.getItem(`translations-${language}`);
         if (cachedTranslations) {
           setTranslations(JSON.parse(cachedTranslations));
-          setIsLoading(false);
-          return;
+        } else {
+          // If not cached, load from file
+          const fetchedTranslations = await import(`@/translations/${language}.json`);
+          setTranslations(fetchedTranslations);
+          
+          // Cache in sessionStorage
+          sessionStorage.setItem(`translations-${language}`, JSON.stringify(fetchedTranslations));
         }
         
-        // If not cached, load from file
-        const fetchedTranslations = await import(`@/translations/${language}.json`);
-        setTranslations(fetchedTranslations);
-        
-        // Cache in sessionStorage
-        sessionStorage.setItem(`translations-${language}`, JSON.stringify(fetchedTranslations));
+        // Fetch featured content from Edge Config
+        const content = await getFeaturedContent(language);
+        // Safely handle the result with proper typing
+        setFeaturedContent(content as FeaturedContent | null);
       } catch (error) {
-        console.error(`Failed to load translations for ${language}`, error);
+        console.error(`Failed to load resources for ${language}`, error);
       } finally {
         setIsLoading(false);
       }
     };
 
-    loadTranslations();
+    loadLanguageResources();
 
     // Store language preference in localStorage for persistence
     if (typeof window !== 'undefined') {
@@ -58,21 +73,42 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [language]);
 
-  // Check for stored language preference on initial load
+  // Check for Edge Config settings and stored language preference on initial load
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedLanguage = localStorage.getItem('preferred-language') as Language;
-      if (storedLanguage && (storedLanguage === 'de' || storedLanguage === 'en')) {
-        setLanguage(storedLanguage);
-      } else {
-        // Detect browser language as fallback
-        const browserLang = navigator.language.split('-')[0].toLowerCase();
-        if (browserLang === 'en') {
-          setLanguage('en');
+    const initializeLanguage = async () => {
+      if (typeof window !== 'undefined') {
+        try {
+          // First try to get default language from Edge Config
+          const configDefaultLanguage = await getDefaultLanguage();
+          
+          // Then check local storage
+          const storedLanguage = localStorage.getItem('preferred-language') as Language;
+          
+          if (storedLanguage && (storedLanguage === 'de' || storedLanguage === 'en')) {
+            setLanguage(storedLanguage);
+          } else {
+            // Detect browser language as fallback
+            const browserLang = navigator.language.split('-')[0].toLowerCase();
+            if (browserLang === 'en') {
+              setLanguage('en');
+            } else {
+              // Use default from Edge Config, ensuring it's a valid Language type
+              const safeDefaultLang = configDefaultLanguage === 'en' ? 'en' : 'de';
+              setLanguage(safeDefaultLang as Language);
+            }
+          }
+        } catch (error) {
+          console.error('Error initializing language settings', error);
+          // Fallback to defaults if Edge Config fails
+          const storedLanguage = localStorage.getItem('preferred-language') as Language;
+          if (storedLanguage && (storedLanguage === 'de' || storedLanguage === 'en')) {
+            setLanguage(storedLanguage);
+          }
         }
-        // Default is already 'de'
       }
-    }
+    };
+    
+    initializeLanguage();
   }, []);
 
   // Translation function that finds nested keys using dot notation - memoized for performance
@@ -95,8 +131,9 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     language,
     setLanguage,
     t,
-    isLoading
-  }), [language, t, isLoading]);
+    isLoading,
+    featuredContent
+  }), [language, t, isLoading, featuredContent]);
 
   return (
     <LanguageContext.Provider value={contextValue}>
