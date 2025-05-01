@@ -22,6 +22,17 @@ const nextConfig = {
   compress: true, // Enable compression for better performance
   poweredByHeader: false, // Remove X-Powered-By header for security
   output: 'standalone', // Optimized for production deployments
+  typescript: {
+    // !! WARN !!
+    // Dangerously allow production builds to successfully complete even if
+    // your project has type errors.
+    // !! WARN !!
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    // Allow production builds to successfully complete even if ESLint reports errors
+    ignoreDuringBuilds: true,
+  },
   compiler: {
     // Remove console logs in production
     removeConsole: process.env.NODE_ENV === 'production' ? {

@@ -5,18 +5,18 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createApiError, handleApiError } from './errorHandler';
 import { z } from 'zod';
 
-type ApiHandler = (req: NextRequest, context?: any) => Promise<NextResponse> | NextResponse;
+type ApiHandler = (req: NextRequest, context?: Record<string, unknown>) => Promise<NextResponse> | NextResponse;
 type MiddlewareFunction = (handler: ApiHandler) => ApiHandler;
 
 // Standard API response format
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;
   meta?: {
     timestamp: string;
     requestId?: string;
-    [key: string]: any;
+    [key: string]: unknown;
   };
 }
 
@@ -67,7 +67,7 @@ export function withRateLimit(options: { windowMs: number; maxRequests: number }
 export function withValidation<T>(schema: z.ZodType<T>, target: 'json' | 'searchParams' = 'json'): MiddlewareFunction {
   return (handler) => async (req, context) => {
     try {
-      let data: any;
+      let data: unknown;
       
       if (target === 'json' && !['GET', 'HEAD'].includes(req.method)) {
         data = await req.json();
@@ -199,7 +199,7 @@ export function composeMiddleware(...middlewares: MiddlewareFunction[]): Middlew
  * Create a standard API route with common middleware
  */
 export function createApiRoute(handler: ApiHandler, options: {
-  validate?: z.ZodType<any>;
+  validate?: z.ZodType<unknown>;
   validationTarget?: 'json' | 'searchParams';
   cache?: { ttl: number; scope?: 'private' | 'public' };
   rateLimit?: { windowMs: number; maxRequests: number };

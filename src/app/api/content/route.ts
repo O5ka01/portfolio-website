@@ -28,7 +28,7 @@ async function contentHandler(request: NextRequest) {
   };
   
   // Validate parameters
-  const { type, language, slug } = contentRequestSchema.parse(params);
+  const { type, slug } = contentRequestSchema.parse(params);
   
   // Handle different content types
   try {
