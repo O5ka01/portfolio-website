@@ -23,7 +23,10 @@ const ResponsiveNavbar = () => {
 
   return (
     <>
-      <nav aria-label="Main navigation" className="sticky top-0 z-50 bg-warm-beige/80 backdrop-blur-sm border-b border-accent-primary/20 px-4 sm:px-6 py-4">
+      <nav 
+        aria-label="Main navigation" 
+        className="sticky top-0 z-50 bg-warm-beige/80 backdrop-blur-sm border-b border-accent-primary/20 px-4 sm:px-6 py-4 transition-all duration-300"
+      >
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <div className="text-xl font-bold text-dark-text">O$ka</div>
           

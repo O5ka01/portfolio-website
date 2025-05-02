@@ -7,6 +7,7 @@ import { ConsentProvider } from "@/context/ConsentContext";
 import { ReleaseBannerProvider } from "@/context/ReleaseBannerContext";
 import CookieBanner from "@/components/CookieBanner";
 import ConditionalScripts from "@/components/ConditionalScripts";
+import SlimReleaseBanner from "@/components/SlimReleaseBanner";
 import NewReleaseBanner from "@/components/NewReleaseBanner";
 
 // Optimize font loading
@@ -155,6 +156,7 @@ export default function RootLayout({
           <ReleaseBannerProvider>
             <LanguageProvider>
               <NewReleaseBanner />
+              <SlimReleaseBanner />
               {children}
               <CookieBanner />
             </LanguageProvider>
