@@ -44,11 +44,24 @@ body {
   .animate-fade-in {
     animation: fadeIn 0.5s ease-in-out forwards;
   }
+  
+  .animate-fadeIn {
+    animation: fadeIn 0.5s ease-in-out forwards;
+  }
+  
+  .animate-slideDown {
+    animation: slideDown 0.4s ease-out forwards;
+  }
 }
 
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 /* Optimize scrolling */

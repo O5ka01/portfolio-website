@@ -4,8 +4,10 @@ import "./globals.css";
 import JsonLd from "@/components/JsonLd";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { ConsentProvider } from "@/context/ConsentContext";
+import { ReleaseBannerProvider } from "@/context/ReleaseBannerContext";
 import CookieBanner from "@/components/CookieBanner";
 import ConditionalScripts from "@/components/ConditionalScripts";
+import NewReleaseBanner from "@/components/NewReleaseBanner";
 
 // Optimize font loading
 const inter = Inter({
@@ -150,10 +152,13 @@ export default function RootLayout({
         <JsonLd data={personStructuredData} />
         <JsonLd data={websiteStructuredData} />
         <ConsentProvider>
-          <LanguageProvider>
-            {children}
-            <CookieBanner />
-          </LanguageProvider>
+          <ReleaseBannerProvider>
+            <LanguageProvider>
+              <NewReleaseBanner />
+              {children}
+              <CookieBanner />
+            </LanguageProvider>
+          </ReleaseBannerProvider>
           <ConditionalScripts />
         </ConsentProvider>
       </body>
