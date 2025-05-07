@@ -1,0 +1,40 @@
+<svg width="800" height="450" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="450" fill="#f3ebe3" />
+  
+  <!-- DAW Interface Representation -->
+  <rect x="50" y="80" width="700" height="290" rx="8" fill="#333333" />
+  
+  <!-- Top Bar -->
+  <rect x="50" y="80" width="700" height="30" rx="8" fill="#555555" />
+  
+  <!-- Track Lanes -->
+  <rect x="70" y="120" width="660" height="40" rx="2" fill="#444444" />
+  <rect x="70" y="165" width="660" height="40" rx="2" fill="#444444" />
+  <rect x="70" y="210" width="660" height="40" rx="2" fill="#444444" />
+  <rect x="70" y="255" width="660" height="40" rx="2" fill="#444444" />
+  <rect x="70" y="300" width="660" height="40" rx="2" fill="#444444" />
+  
+  <!-- Audio Waveforms -->
+  <path d="M100,140 Q115,130 130,140 Q145,150 160,140 Q175,130 190,140 Q205,150 220,140 Q235,130 250,140 Q265,150 280,140 Q295,130 310,140 Q325,150 340,140 Q355,130 370,140 Q385,150 400,140 Q415,130 430,140 Q445,150 460,140 Q475,130 490,140 Q505,150 520,140 Q535,130 550,140 Q565,150 580,140 Q595,130 610,140 Q625,150 640,140 Q655,130 670,140 Q685,150 700,140" stroke="#96785d" stroke-width="2" fill="none" />
+  
+  <path d="M100,185 Q115,175 130,195 Q145,215 160,185 Q175,155 190,185 Q205,215 220,185 Q235,155 250,185 Q265,215 280,185 Q295,155 310,185 Q325,215 340,185 Q355,155 370,185 Q385,215 400,185 Q415,155 430,185 Q445,215 460,185 Q475,155 490,185 Q505,215 520,185 Q535,155 550,185 Q565,215 580,185 Q595,155 610,185 Q625,215 640,185 Q655,155 670,185 Q685,215 700,185" stroke="#96785d" stroke-width="2" fill="none" />
+  
+  <path d="M100,230 L130,230 L130,235 L160,235 L160,225 L190,225 L190,235 L220,235 L220,230 L250,230 L250,225 L280,225 L280,235 L310,235 L310,225 L340,225 L340,235 L370,235 L370,230 L400,230 L400,225 L430,225 L430,235 L460,235 L460,225 L490,225 L490,235 L520,235 L520,230 L550,230 L550,225 L580,225 L580,235 L610,235 L610,225 L640,225 L640,235 L670,235 L670,230 L700,230" stroke="#96785d" stroke-width="2" fill="none" />
+  
+  <!-- Pattern Blocks -->
+  <rect x="100" y="275" width="120" height="20" rx="3" fill="#96785d" />
+  <rect x="230" y="275" width="80" height="20" rx="3" fill="#96785d" opacity="0.7" />
+  <rect x="320" y="275" width="150" height="20" rx="3" fill="#96785d" />
+  <rect x="480" y="275" width="60" height="20" rx="3" fill="#96785d" opacity="0.8" />
+  <rect x="550" y="275" width="120" height="20" rx="3" fill="#96785d" />
+  
+  <rect x="100" y="320" width="90" height="20" rx="3" fill="#96785d" opacity="0.9" />
+  <rect x="200" y="320" width="130" height="20" rx="3" fill="#96785d" />
+  <rect x="340" y="320" width="70" height="20" rx="3" fill="#96785d" opacity="0.7" />
+  <rect x="420" y="320" width="110" height="20" rx="3" fill="#96785d" />
+  <rect x="540" y="320" width="130" height="20" rx="3" fill="#96785d" opacity="0.8" />
+  
+  <!-- Title -->
+  <text x="400" y="50" font-family="Arial, sans-serif" font-size="32" text-anchor="middle" fill="#403526" font-weight="bold">FL Studio Overview</text>
+</svg>

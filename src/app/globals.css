@@ -1,8 +1,12 @@
 /* stylelint-disable */
 /* Global styles with Tailwind CSS */
-@tailwind base; /* Tailwind base styles */
-@tailwind components; /* Tailwind component styles */
-@tailwind utilities; /* Tailwind utility styles */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* The directives above will be processed by Tailwind's PostCSS plugin */
+/* while being ignored by standard CSS linters */
 
 :root {
   --background: #f5f0e8; /* Warm beige */
@@ -29,18 +33,126 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   scroll-behavior: smooth;
+  
+  /* Custom scrollbar styling for entire website */
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #aa8b6f #f3ebe3; /* Using solid colors to match WebKit styling */
+}
+
+/* WebKit scrollbar styling (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 10px; /* Slightly wider for better visibility */
+}
+
+::-webkit-scrollbar-track {
+  background: #f3ebe3; /* Solid color instead of rgba for better visibility */
+  border-radius: 6px;
+  border: 1px solid #e6d9c6; /* Add a subtle border */
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.05); /* Subtle inset shadow */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #aa8b6f; /* Solid color instead of rgba */
+  border-radius: 6px;
+  border: 2px solid #f3ebe3; /* Border creates padding effect */
+  transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #96785d; /* Darker on hover */
+}
+
+/* Blog Post Content Styling */
+.prose .blog-post-content,
+.blog-post-content {
+  max-width: 100%;
+  margin: 0 auto;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  color: #333333 !important; /* Dark text color for the beige background */
+}
+
+.prose .blog-post-content *,
+.blog-post-content * {
+  color: #333333 !important; /* Force dark text on all elements */
+}
+
+.blog-post-content p {
+  margin-bottom: 1.5rem;
+  text-align: justify;
+  color: #333333;
+}
+
+.blog-post-content h1,
+.blog-post-content h2,
+.blog-post-content h3,
+.blog-post-content h4,
+.blog-post-content h5,
+.blog-post-content h6 {
+  color: #333333;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.blog-post-content .intro-paragraph {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 2rem;
+  border-left: 3px solid var(--accent-tertiary);
+  padding-left: 1rem;
+}
+
+.blog-post-content .section-heading {
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #333333;
+  border-bottom: 2px solid var(--accent-primary);
+  padding-bottom: 0.5rem;
+  width: fit-content;
+}
+
+.blog-post-content .journey-steps {
+  background-color: rgba(230, 201, 171, 0.15);
+  border-radius: var(--border-radius);
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.blog-post-content .journey-steps p {
+  margin-bottom: 1rem;
+}
+
+.blog-post-content .journey-steps p:last-child {
+  margin-bottom: 0;
+}
+
+.blog-post-content .conclusion {
+  font-weight: 500;
+  font-style: italic;
+  font-size: 1.125rem;
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: rgba(230, 201, 171, 0.2);
+  border-radius: var(--border-radius);
+  text-align: center;
 }
 
 /* Custom utility classes */
 @layer components {
   .container-custom {
-    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8; /* Tailwind apply directive */
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
   .focus-ring {
-    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-primary focus-visible:ring-opacity-75; /* Tailwind apply directive */
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-primary focus-visible:ring-opacity-75;
   }
 
+  /* Animation utility classes */
   .animate-fade-in {
     animation: fadeIn 0.5s ease-in-out forwards;
   }
@@ -94,3 +206,5 @@ video {
   object-fit: cover;
   background-color: var(--accent-secondary);
 }
+
+/* Note: Blog modal scrollbar styling has been moved to site-wide scrollbar styling */

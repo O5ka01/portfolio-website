@@ -1,0 +1,27 @@
+<svg width="800" height="450" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="450" fill="#f3ebe3" />
+  
+  <!-- Decorative elements -->
+  <rect x="50" y="150" width="700" height="150" rx="20" fill="#e0ceb3" opacity="0.6" />
+  
+  <!-- Music notes and AI elements -->
+  <g transform="translate(400, 225)" fill="#96785d">
+    <!-- Musical notes -->
+    <path d="M-150,0 C-120,-50 -80,-30 -80,0 C-80,30 -120,50 -150,0 Z" />
+    <path d="M-70,-20 L-70,60 L-60,60 L-60,-20 Z" />
+    <path d="M-30,-30 C0,-80 40,-60 40,-30 C40,0 0,20 -30,-30 Z" />
+    <path d="M50,-10 L50,70 L60,70 L60,-10 Z" />
+    
+    <!-- AI circuit elements -->
+    <circle cx="100" cy="-30" r="15" fill="none" stroke="#96785d" stroke-width="3" />
+    <circle cx="140" cy="20" r="15" fill="none" stroke="#96785d" stroke-width="3" />
+    <line x1="100" y1="-15" x2="140" y2="5" stroke="#96785d" stroke-width="3" />
+    <line x1="115" y1="-30" x2="155" y2="-30" stroke="#96785d" stroke-width="3" />
+    <line x1="155" y1="-30" x2="155" y2="20" stroke="#96785d" stroke-width="3" />
+    <line x1="155" y1="20" x2="155" y2="70" stroke="#96785d" stroke-width="3" />
+  </g>
+  
+  <!-- Title text -->
+  <text x="400" y="80" font-family="Arial, sans-serif" font-size="32" text-anchor="middle" fill="#403526" font-weight="bold">AI in Music Production</text>
+</svg>

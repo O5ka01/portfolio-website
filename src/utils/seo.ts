@@ -17,8 +17,8 @@ type SeoProps = {
  * @returns Next.js Metadata object
  */
 export function generateMetadata({
-  title = 'Ole Oskar Heinrichs | Musician & Marketing Professional',
-  description = 'Personal portfolio of Ole Oskar Heinrichs (O$ka) - Musician, Producer, and Marketing Professional specializing in music and AI integration',
+  title = 'O$ka (Ole Oskar Heinrichs) | Musician, Producer & Marketing Professional',
+  description = 'Official website of O$ka (Ole Oskar Heinrichs) - Musician, Producer, and Marketing Professional specializing in music production and AI integration',
   keywords = [],
   image = 'https://res.cloudinary.com/daaynrl8l/image/upload/WhatsApp_Image_2025-04-29_at_11.36.15_v0w2ab.jpg',
   canonical = 'https://oleoskarheinrichs.com',
@@ -27,14 +27,17 @@ export function generateMetadata({
   noIndex = false,
 }: SeoProps = {}): Metadata {
   const defaultKeywords = [
-    'Ole Oskar Heinrichs', 
     'O$ka', 
+    'O$ka musician',
+    'O$ka producer',
+    'murphywav',
+    'Ole Oskar Heinrichs', 
     'musician', 
     'producer', 
     'marketing professional',
-    'music', 
-    'AI',
-    'portfolio'
+    'music production', 
+    'AI music',
+    'electronic music'
   ];
   
   const allKeywords = [...defaultKeywords, ...keywords];

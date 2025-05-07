@@ -21,9 +21,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Ole Oskar Heinrichs | Musician & Marketing Professional",
-  description: "Personal portfolio of Ole Oskar Heinrichs (O$ka) - Musician, Producer, and Marketing Professional specializing in music and AI integration",
-  keywords: ["Ole Oskar Heinrichs", "O$ka", "musician", "producer", "marketing professional", "music", "AI", "portfolio"],
+  title: "O$ka (Ole Oskar Heinrichs) | Musician, Producer & Marketing Professional",
+  description: "Official website of O$ka (Ole Oskar Heinrichs) - Musician, Producer, and Marketing Professional specializing in music production and AI integration",
+  keywords: ["O$ka", "O$ka musician", "O$ka producer", "Ole Oskar Heinrichs", "musician", "producer", "marketing professional", "music", "AI", "portfolio", "murphywav"],
   authors: [{ name: "Ole Oskar Heinrichs" }],
   creator: "Ole Oskar Heinrichs",
   publisher: "Ole Oskar Heinrichs",
@@ -33,10 +33,10 @@ export const metadata: Metadata = {
     telephone: true,
   },
   openGraph: {
-    title: "Ole Oskar Heinrichs | Musician & Marketing Professional",
-    description: "Personal portfolio of Ole Oskar Heinrichs (O$ka) - Musician, Producer, and Marketing Professional",
+    title: "O$ka (Ole Oskar Heinrichs) | Musician, Producer & Marketing Professional",
+    description: "Official website of O$ka (Ole Oskar Heinrichs) - Musician, Producer, and Marketing Professional specializing in music production and AI integration",
     url: "https://oleoskarheinrichs.com",
-    siteName: "Ole Oskar Heinrichs Portfolio",
+    siteName: "O$ka - Official Website",
     images: [
       {
         url: "https://res.cloudinary.com/daaynrl8l/image/upload/WhatsApp_Image_2025-04-29_at_11.36.15_v0w2ab.jpg",
@@ -50,8 +50,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ole Oskar Heinrichs | Musician & Marketing Professional",
-    description: "Personal portfolio of Ole Oskar Heinrichs (O$ka) - Musician, Producer, and Marketing Professional",
+    title: "O$ka (Ole Oskar Heinrichs) | Musician, Producer & Marketing Professional",
+    description: "Official website of O$ka (Ole Oskar Heinrichs) - Musician, Producer, and Marketing Professional specializing in music production and AI integration",
     images: ["https://res.cloudinary.com/daaynrl8l/image/upload/WhatsApp_Image_2025-04-29_at_11.36.15_v0w2ab.jpg"],
   },
   robots: {
@@ -90,7 +90,8 @@ export default function RootLayout({
       "https://www.linkedin.com/in/ole-oskar-heinrichs/",
       "https://www.instagram.com/oska.hayati/",
       "https://www.youtube.com/@oska.hayati",
-      "https://open.spotify.com/intl-de/artist/4BTWTI3mEAVmYQbe94r0MY"
+      "https://open.spotify.com/intl-de/artist/4BTWTI3mEAVmYQbe94r0MY",
+      "https://soundcloud.com/murphywav"
     ],
     "jobTitle": "Musician & Marketing Professional",
     "worksFor": [
@@ -112,12 +113,35 @@ export default function RootLayout({
     }
   };
 
+  const musicianStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    "name": "O$ka",
+    "alternateName": "murphywav",
+    "url": "https://oleoskarheinrichs.com",
+    "image": "https://res.cloudinary.com/daaynrl8l/image/upload/WhatsApp_Image_2025-04-29_at_11.36.15_v0w2ab.jpg",
+    "description": "O$ka (Ole Oskar Heinrichs) is a music producer and artist specializing in electronic music and AI integration.",
+    "sameAs": [
+      "https://open.spotify.com/intl-de/artist/4BTWTI3mEAVmYQbe94r0MY",
+      "https://soundcloud.com/murphywav",
+      "https://www.instagram.com/oska.hayati/",
+      "https://www.youtube.com/@oska.hayati"
+    ],
+    "genre": ["Electronic", "EDM", "Producer"],
+    "member": {
+      "@type": "Person",
+      "name": "Ole Oskar Heinrichs",
+      "alternateName": "O$ka"
+    }
+  };
+
   const websiteStructuredData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Ole Oskar Heinrichs Portfolio",
+    "name": "O$ka - Official Website",
     "url": "https://oleoskarheinrichs.com",
-    "description": "Personal portfolio of Ole Oskar Heinrichs (O$ka) - Musician, Producer, and Marketing Professional"
+    "description": "Official website of O$ka (Ole Oskar Heinrichs) - Musician, Producer, and Marketing Professional specializing in music production and AI integration",
+    "keywords": "O$ka, O$ka musician, O$ka producer, Ole Oskar Heinrichs, music, AI"
   };
 
   return (
@@ -151,6 +175,7 @@ export default function RootLayout({
       <body className={`${inter.variable} antialiased min-h-screen flex flex-col`}>
         {/* Add JSON-LD structured data */}
         <JsonLd data={personStructuredData} />
+        <JsonLd data={musicianStructuredData} />
         <JsonLd data={websiteStructuredData} />
         <ConsentProvider>
           <ReleaseBannerProvider>

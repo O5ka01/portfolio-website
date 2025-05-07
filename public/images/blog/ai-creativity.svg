@@ -1,0 +1,58 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f5f0e8" />
+
+  <!-- Circular Brain Network with Gradient -->
+  <defs>
+    <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e6c9ab" />
+      <stop offset="100%" stop-color="#aa8b6f" />
+    </linearGradient>
+  </defs>
+
+  <!-- Main circle representing brain/AI -->
+  <circle cx="400" cy="300" r="180" fill="none" stroke="url(#brainGradient)" stroke-width="3" />
+
+  <!-- Connection nodes -->
+  <g>
+    <!-- Central node -->
+    <circle cx="400" cy="300" r="25" fill="#c6a686" />
+    <text x="400" y="305" font-family="sans-serif" font-size="12" fill="#333333" text-anchor="middle">AI</text>
+
+    <!-- Tool nodes -->
+    <circle cx="280" cy="200" r="20" fill="#e6c9ab" />
+    <text x="280" y="205" font-family="sans-serif" font-size="10" fill="#333333" text-anchor="middle">GPT</text>
+    <line x1="338" y1="253" x2="290" y2="210" stroke="#c6a686" stroke-width="2" />
+
+    <circle cx="520" cy="200" r="20" fill="#e6c9ab" />
+    <text x="520" y="205" font-family="sans-serif" font-size="10" fill="#333333" text-anchor="middle">Manus</text>
+    <line x1="462" y1="253" x2="510" y2="210" stroke="#c6a686" stroke-width="2" />
+
+    <circle cx="220" cy="340" r="20" fill="#e6c9ab" />
+    <text x="220" y="345" font-family="sans-serif" font-size="10" fill="#333333" text-anchor="middle">Notion</text>
+    <line x1="338" y1="347" x2="240" y2="340" stroke="#c6a686" stroke-width="2" />
+
+    <circle cx="580" cy="340" r="20" fill="#e6c9ab" />
+    <text x="580" y="345" font-family="sans-serif" font-size="10" fill="#333333" text-anchor="middle">Zapier</text>
+    <line x1="462" y1="347" x2="560" y2="340" stroke="#c6a686" stroke-width="2" />
+
+    <circle cx="330" cy="450" r="20" fill="#e6c9ab" />
+    <text x="330" y="455" font-family="sans-serif" font-size="10" fill="#333333" text-anchor="middle">Gemini</text>
+    <line x1="380" y1="380" x2="340" y2="430" stroke="#c6a686" stroke-width="2" />
+
+    <circle cx="470" cy="450" r="20" fill="#e6c9ab" />
+    <text x="470" y="455" font-family="sans-serif" font-size="10" fill="#333333" text-anchor="middle">Readwise</text>
+    <line x1="420" y1="380" x2="460" y2="430" stroke="#c6a686" stroke-width="2" />
+
+    <circle cx="400" cy="150" r="20" fill="#e6c9ab" />
+    <text x="400" y="155" font-family="sans-serif" font-size="10" fill="#333333" text-anchor="middle">Windsurf</text>
+    <line x1="400" y1="220" x2="400" y2="170" stroke="#c6a686" stroke-width="2" />
+
+    <circle cx="400" cy="450" r="20" fill="#e6c9ab" />
+    <text x="400" y="455" font-family="sans-serif" font-size="8" fill="#333333" text-anchor="middle">Opus Clip</text>
+    <line x1="400" y1="380" x2="400" y2="430" stroke="#c6a686" stroke-width="2" />
+  </g>
+
+  <!-- Title -->
+  <text x="400" y="550" font-family="sans-serif" font-size="24" font-weight="bold" fill="#333333" text-anchor="middle">AI Tools for Creativity and Productivity</text>
+</svg>

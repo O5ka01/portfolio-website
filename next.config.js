@@ -1,11 +1,8 @@
 /** @type {import('next').NextConfig} */
+// Note: Using App Router internationalization instead of Pages Router i18n config
+// See implementation in src/context/LanguageContext.tsx using client-side language detection
 const nextConfig = {
   reactStrictMode: true,
-  i18n: {
-    locales: ['en', 'de'],
-    defaultLocale: 'de',
-    localeDetection: true
-  },
   images: {
     formats: ['image/avif', 'image/webp'], // Enable modern image formats
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048], // Responsive image sizes

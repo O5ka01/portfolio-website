@@ -1,10 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- German (Default) -->  
   <url>
     <loc>https://oleoskarheinrichs.com/</loc>
-    <lastmod>2025-04-29</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-05-07</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://oleoskarheinrichs.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oleoskarheinrichs.com/en"/>
   </url>
-  <!-- Add more URLs as your site grows -->
+  
+  <!-- English -->  
+  <url>
+    <loc>https://oleoskarheinrichs.com/en</loc>
+    <lastmod>2025-05-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://oleoskarheinrichs.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oleoskarheinrichs.com/en"/>
+  </url>
+  
+  <!-- O$ka Artist Info (Will redirect to homepage but good for SEO) -->
+  <url>
+    <loc>https://oleoskarheinrichs.com/oska</loc>
+    <lastmod>2025-05-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://oleoskarheinrichs.com/oska"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oleoskarheinrichs.com/en/oska"/>
+  </url>
+  
+  <!-- Projects section -->
+  <url>
+    <loc>https://oleoskarheinrichs.com/#projects</loc>
+    <lastmod>2025-05-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Experience section -->
+  <url>
+    <loc>https://oleoskarheinrichs.com/#experience</loc>
+    <lastmod>2025-05-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Music releases (for SEO) -->
+  <url>
+    <loc>https://oleoskarheinrichs.com/music</loc>
+    <lastmod>2025-05-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

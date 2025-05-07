@@ -1,5 +1,6 @@
 {
   "navigation": {
+    "home": "Startseite",
     "projects": "Projekte",
     "experience": "Erfahrung",
     "blog": "Blog",
@@ -54,7 +55,21 @@
     "title": "Blog & Gedanken",
     "comingSoon": "Demnächst verfügbar",
     "stayTuned": "Bleibe dran",
-    "description": "Inhalte zu Musik und KI werden bald hier verfügbar sein."
+    "description": "Inhalte zu Musik und KI werden bald hier verfügbar sein.",
+    "headerDescription": "Meine Gedanken und Artikel zu Musikproduktion, KI und kreativen Prozessen.",
+    "readMore": "Mehr lesen",
+    "viewAll": "Alle Artikel anzeigen",
+    "allTags": "Alle Kategorien",
+    "categories": "Kategorien",
+    "search": "Suchen",
+    "searchPlaceholder": "Nach Artikeln suchen...",
+    "searchingFor": "Suche nach",
+    "closeSearch": "Suche schließen",
+    "rssFeed": "RSS",
+    "noPostsWithTag": "Keine Beiträge mit dieser Kategorie",
+    "noPostsYet": "Es sind noch keine Blogbeiträge verfügbar",
+    "viewAllPosts": "Alle Artikel",
+    "backToHome": "Zur Startseite"
   },
   "connect": {
     "title": "Kontakt",

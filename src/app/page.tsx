@@ -8,6 +8,8 @@ import ResponsiveNavbar from '@/components/ResponsiveNavbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import Footer from '@/components/Footer';
+import BlogSection from '@/components/BlogSection';
+import ForceTranslationRefresh from '@/components/ForceTranslationRefresh';
 
 // Helper function to safely render HTML content
 const RenderHTML = ({ html }: { html: string }) => {
@@ -90,12 +92,16 @@ export default function Home() {
     // Return a skeleton or simplified version for server rendering
     return <div className="bg-warm-beige min-h-screen"></div>;
   }
+  
+  // Force translation refresh to ensure new keys are loaded
+  // This helps fix issues with showing raw translation keys like "blog.readMore"
 
   return (
     <div className="bg-warm-beige min-h-screen">
       {/* Navigation - Using the new Responsive Navbar */}
       <header>
         <ResponsiveNavbar />
+        <ForceTranslationRefresh />
       </header>
 
       {/* Main Content */}
@@ -244,20 +250,7 @@ export default function Home() {
         </section>
 
         {/* Blog Section */}
-        <section id="blog" className="mb-12 md:mb-20 scroll-mt-20" aria-labelledby="blog-heading">
-          <h2 id="blog-heading" className="text-2xl sm:text-3xl font-bold text-dark-text mb-6 sm:mb-8">{t('blog.title')}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-            {/* Blog Post Placeholders */}
-            <div className="bg-accent-primary/20 rounded-xl p-4 sm:p-6 transition-transform hover:scale-[1.01]">
-              <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('blog.comingSoon')}</h3>
-              <p className="text-dark-text/80 mt-2">{t('blog.description')}</p>
-            </div>
-            <div className="bg-accent-primary/20 rounded-xl p-4 sm:p-6 transition-transform hover:scale-[1.01]">
-              <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('blog.stayTuned')}</h3>
-              <p className="text-dark-text/80 mt-2">{t('blog.description')}</p>
-            </div>
-          </div>
-        </section>
+        <BlogSection />
 
         {/* Connect Section */}
         <section id="connect" className="mb-12 md:mb-20 scroll-mt-20" aria-labelledby="connect-heading">
