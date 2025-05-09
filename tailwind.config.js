@@ -10,15 +10,35 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'warm-beige': '#f5f0e8',
-        'dark-text': '#333333',
-        'accent-primary': '#e6c9ab',
-        'accent-secondary': '#c6a686',
-        'accent-tertiary': '#aa8b6f',
+        'background': '#F8F2E8', /* Your original warm beige, slightly brightened */
+        'foreground': '#2C2622', /* Rich dark brown that's softer than black */
+        'warm-beige': '#f5f0e8', /* Original warm beige as reference */
+        'dark-text': '#2C2622',  /* Rich brown for text */
+        'accent-primary': '#E9D5C3', /* Warm peach-cream - analogous to background */
+        'accent-secondary': '#D6B795', /* Warm caramel - perfect midtone */
+        'accent-tertiary': '#B08968', /* Rich caramel - warm accent for emphasis */
       },
       fontFamily: {
-        sans: ['var(--font-sans)', 'ui-sans-serif', 'system-ui'],
-        inter: ['var(--font-inter)', 'ui-sans-serif', 'system-ui'],
+        sans: ['var(--font-text)', '-apple-system', 'BlinkMacSystemFont', 'system-ui'],
+        display: ['var(--font-display)', '-apple-system', 'BlinkMacSystemFont', 'system-ui'],
+      },
+      fontWeight: {
+        normal: '400',
+        medium: '500',
+        semibold: '600',
+        bold: '700',
+      },
+      transitionDuration: {
+        '300': '300ms',
+        '400': '400ms',
+        '500': '500ms',
+      },
+      transitionTimingFunction: {
+        'apple': 'cubic-bezier(0.25, 0.1, 0.25, 1)',
+      },
+      lineHeight: {
+        body: 'var(--line-height-body)',
+        headings: 'var(--line-height-headings)',
       },
       borderRadius: {
         'custom': 'var(--border-radius)',

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+// Import local fonts to use SF Pro or similar system fonts that mimic Apple's design language
 import "./globals.css";
 import JsonLd from "@/components/JsonLd";
 import { LanguageProvider } from "@/context/LanguageContext";
@@ -9,16 +9,10 @@ import CookieBanner from "@/components/CookieBanner";
 import ConditionalScripts from "@/components/ConditionalScripts";
 import SlimReleaseBanner from "@/components/SlimReleaseBanner";
 import NewReleaseBanner from "@/components/NewReleaseBanner";
+import PageTransition from "@/components/PageTransition";
 
-// Optimize font loading
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: 'swap', // Ensures text remains visible during font loading
-  preload: true,
-  fallback: ['system-ui', 'Arial', 'sans-serif'],
-  // Note: preconnect is handled with link tags in the head
-});
+// Using system fonts that mimic SF Pro Display and SF Pro Text - defined in globals.css
+// No need for a font variable since we're using system fonts for better performance
 
 export const metadata: Metadata = {
   title: "O$ka (Ole Oskar Heinrichs) | Musician, Producer & Marketing Professional",
@@ -172,7 +166,7 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className={`${inter.variable} antialiased min-h-screen flex flex-col`}>
+      <body className="antialiased min-h-screen flex flex-col">
         {/* Add JSON-LD structured data */}
         <JsonLd data={personStructuredData} />
         <JsonLd data={musicianStructuredData} />
@@ -182,7 +176,9 @@ export default function RootLayout({
             <LanguageProvider>
               <NewReleaseBanner />
               <SlimReleaseBanner />
-              {children}
+              <PageTransition>
+                {children}
+              </PageTransition>
               <CookieBanner />
             </LanguageProvider>
           </ReleaseBannerProvider>

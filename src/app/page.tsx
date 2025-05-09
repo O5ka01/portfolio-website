@@ -10,6 +10,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import Footer from '@/components/Footer';
 import BlogSection from '@/components/BlogSection';
 import ForceTranslationRefresh from '@/components/ForceTranslationRefresh';
+import ScrollAnimationSection from '@/components/ScrollAnimationSection';
 
 // Helper function to safely render HTML content
 const RenderHTML = ({ html }: { html: string }) => {
@@ -107,17 +108,21 @@ export default function Home() {
       {/* Main Content */}
       <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
         {/* Header Section */}
-        <section className="flex flex-col md:flex-row gap-8 md:gap-10 items-center mb-12 md:mb-20">
-          <div className="w-full md:w-1/2 space-y-3 md:space-y-4 text-center md:text-left">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-dark-text">{t('header.title')}</h1>
+        <ScrollAnimationSection 
+          className="flex flex-col md:flex-row gap-12 md:gap-16 items-center mb-16 md:mb-24 mt-8"
+          animation="fade"
+          duration={0.9}
+        >
+          <div className="w-full md:w-1/2 space-y-5 md:space-y-6 text-center md:text-left">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-dark-text tracking-tight">{t('header.title')}</h1>
             <p className="text-lg sm:text-xl text-accent-tertiary">{t('header.subtitle')}</p>
             <h2 className="text-xl sm:text-2xl font-medium text-dark-text">{t('header.profession')}</h2>
-            <p className="text-base sm:text-lg text-dark-text/80 leading-relaxed">
+            <p className="text-base sm:text-lg text-dark-text/80 leading-relaxed max-w-xl">
               {t('header.description')}
             </p>
           </div>
           <div className="w-full md:w-1/2 flex justify-center py-4">
-            <div className="w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden border-4 border-accent-primary shadow-lg relative">
+            <div className="w-48 h-48 sm:w-64 sm:h-64 rounded-2xl overflow-hidden shadow-[0_2px_10px_rgba(0,0,0,0.08)] relative transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_4px_20px_rgba(0,0,0,0.15)]">
               <Image 
                 src="https://res.cloudinary.com/daaynrl8l/image/upload/WhatsApp_Image_2025-04-29_at_11.36.15_v0w2ab.jpg" 
                 alt="Ole Oskar Heinrichs (O$ka) - Musician and Marketing Professional"
@@ -128,32 +133,38 @@ export default function Home() {
               />
             </div>
           </div>
-        </section>
+        </ScrollAnimationSection>
 
         {/* Projects Section */}
-        <section id="projects" className="mb-12 md:mb-20 scroll-mt-20" aria-labelledby="projects-heading">
-          <h2 id="projects-heading" className="text-2xl sm:text-3xl font-bold text-dark-text mb-6 sm:mb-8">{t('projects.title')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        <ScrollAnimationSection 
+          id="projects" 
+          className="mb-16 md:mb-28 py-6 scroll-mt-20" 
+          animation="slide-up"
+          duration={0.8}
+          aria-labelledby="projects-heading"
+        >
+          <h2 id="projects-heading" className="text-2xl sm:text-3xl md:text-4xl font-semibold text-dark-text mb-8 sm:mb-12 transition-all duration-300 hover:text-accent-tertiary">{t('projects.title')}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 lg:gap-12">
             {/* Project 1 */}
-            <article className="bg-accent-primary/20 rounded-xl p-4 sm:p-6 transition-transform hover:scale-[1.01] flex flex-col">
-              <h3 className="text-xl sm:text-2xl font-bold text-dark-text mb-3">{t('projects.musicReleases.title')}</h3>
+            <article className="bg-accent-primary/5 rounded-xl p-8 sm:p-10 transition-all duration-400 ease-apple hover:scale-[1.02] flex flex-col shadow-[0_2px_6px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] border border-accent-secondary/10 group animate-scaleIn" style={{ animationDelay: '100ms' }}>
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-dark-text mb-5 group-hover:text-accent-tertiary transition-colors duration-300">{t('projects.musicReleases.title')}</h3>
               <div 
-                className="aspect-video bg-accent-secondary/30 rounded-lg mb-4 overflow-hidden" 
+                className="aspect-video bg-accent-secondary/20 rounded-xl mb-6 overflow-hidden shadow-sm" 
               >
                 {/* Custom video player with no controls and auto-loop */}
                 <div style={videoWrapperStyle}>
                   <BrowserFriendlyVideo videoData={musicVideoData} />
                 </div>
               </div>
-              <div className="text-dark-text/80 mb-4">
+              <div className="text-dark-text/80 mb-6 text-base sm:text-lg leading-relaxed">
                 <RenderHTML html={t('projects.musicReleases.description')} />
               </div>
-              <div className="mt-auto flex items-center gap-4">
+              <div className="mt-auto flex items-center gap-6">
                 <a 
                   href="https://open.spotify.com/artist/4BTWTI3mEAVmYQbe94r0MY" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-accent-tertiary hover:text-dark-text transition-colors text-base sm:text-lg py-2 px-1"
+                  className="inline-flex items-center gap-2 text-accent-tertiary hover:text-dark-text transition-all duration-300 ease-apple text-base sm:text-lg py-2 px-4 rounded-full hover:bg-accent-primary/20 hover:shadow-sm"
                   aria-label="Listen to O$ka on Spotify"
                 >
                   <i className="fa-brands fa-spotify text-xl"></i>
@@ -163,7 +174,7 @@ export default function Home() {
                   href="https://music.apple.com/us/artist/o%24ka/1640653279" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-accent-tertiary hover:text-dark-text transition-colors text-base sm:text-lg py-2 px-1"
+                  className="inline-flex items-center gap-2 text-accent-tertiary hover:text-dark-text transition-all duration-300 ease-apple text-base sm:text-lg py-2 px-4 rounded-full hover:bg-accent-primary/20 hover:shadow-sm"
                   aria-label="Listen to O$ka on Apple Music"
                 >
                   <i className="fa-brands fa-apple text-xl"></i>
@@ -173,25 +184,25 @@ export default function Home() {
             </article>
 
             {/* Project 2 */}
-            <article className="bg-accent-primary/20 rounded-xl p-4 sm:p-6 transition-transform hover:scale-[1.01] flex flex-col">
-              <h3 className="text-xl sm:text-2xl font-bold text-dark-text mb-3">{t('projects.youtubeCommentary.title')}</h3>
+            <article className="bg-accent-primary/5 rounded-xl p-8 sm:p-10 transition-all duration-400 ease-apple hover:scale-[1.02] flex flex-col shadow-[0_2px_6px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] border border-accent-secondary/10 group animate-scaleIn" style={{ animationDelay: '250ms' }}>
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-dark-text mb-5 group-hover:text-accent-tertiary transition-colors duration-300">{t('projects.youtubeCommentary.title')}</h3>
               <div 
-                className="aspect-video bg-accent-secondary/30 rounded-lg mb-4 overflow-hidden"
+                className="aspect-video bg-accent-secondary/20 rounded-xl mb-6 overflow-hidden shadow-sm"
               >
                 {/* Custom video player with no controls and auto-loop */}
                 <div style={videoWrapperStyle}>
                   <BrowserFriendlyVideo videoData={commentaryVideoData} />
                 </div>
               </div>
-              <div className="text-dark-text/80 mb-4">
+              <div className="text-dark-text/80 mb-6 text-base sm:text-lg leading-relaxed">
                 <RenderHTML html={t('projects.youtubeCommentary.description')} />
               </div>
-              <div className="mt-auto">
+              <div className="mt-auto flex items-center">
                 <a 
                   href="https://www.youtube.com/@oska.hayati" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-accent-tertiary hover:text-dark-text transition-colors text-base sm:text-lg py-2 px-1"
+                  className="inline-flex items-center gap-2 text-accent-tertiary hover:text-dark-text transition-all duration-300 ease-apple text-base sm:text-lg py-2 px-4 rounded-full hover:bg-accent-primary/20 hover:shadow-sm"
                   aria-label="View O$ka's YouTube channel"
                 >
                   <i className="fa-brands fa-youtube text-xl"></i>
@@ -200,14 +211,21 @@ export default function Home() {
               </div>
             </article>
           </div>
-        </section>
+        </ScrollAnimationSection>
 
         {/* Experience & Education Section */}
-        <section id="experience" className="mb-12 md:mb-20 scroll-mt-20" aria-labelledby="experience-heading">
+        <ScrollAnimationSection
+          id="experience"
+          className="mb-12 md:mb-20 scroll-mt-20"
+          animation="slide-up"
+          duration={0.8}
+          delay={100}
+          aria-labelledby="experience-heading"
+        >
           <h2 id="experience-heading" className="text-2xl sm:text-3xl font-bold text-dark-text mb-6 sm:mb-8">{t('experience.title')}</h2>
           <div className="space-y-4 sm:space-y-6">
             {/* Work Experience Cards */}
-            <div className="bg-accent-primary/10 rounded-xl p-4 sm:p-6 border-l-4 border-accent-secondary">
+            <div className="bg-accent-primary/10 rounded-xl p-4 sm:p-6 border-l-4 border-accent-secondary animate-slideUp" style={{ animationDelay: '100ms' }}>
               <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('experience.euroarts.title')}</h3>
               <p className="text-accent-tertiary">
                 <a href="https://www.euroarts.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">
@@ -217,7 +235,7 @@ export default function Home() {
               <p className="text-dark-text/70">{t('experience.euroarts.period')}</p>
             </div>
 
-            <div className="bg-accent-primary/10 rounded-xl p-4 sm:p-6 border-l-4 border-accent-secondary">
+            <div className="bg-accent-primary/10 rounded-xl p-4 sm:p-6 border-l-4 border-accent-secondary animate-slideUp" style={{ animationDelay: '200ms' }}>
               <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('experience.kiacademy.title')}</h3>
               <p className="text-accent-tertiary">
                 <a href="https://ki.academy/" target="_blank" rel="noopener noreferrer" className="hover:underline">
@@ -228,7 +246,7 @@ export default function Home() {
             </div>
 
             {/* Education */}
-            <div className="bg-accent-primary/10 rounded-xl p-4 sm:p-6 border-l-4 border-accent-tertiary">
+            <div className="bg-accent-primary/10 rounded-xl p-4 sm:p-6 border-l-4 border-accent-tertiary animate-slideUp" style={{ animationDelay: '300ms' }}>
               <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('experience.education.title')}</h3>
               <p className="text-accent-tertiary">
                 <a href="https://studium.bimm-institute.de/" target="_blank" rel="noopener noreferrer" className="hover:underline">BIMM Berlin</a>
@@ -237,7 +255,7 @@ export default function Home() {
             </div>
 
             {/* Internship */}
-            <div className="bg-accent-primary/10 rounded-xl p-4 sm:p-6 border-l-4 border-accent-tertiary">
+            <div className="bg-accent-primary/10 rounded-xl p-4 sm:p-6 border-l-4 border-accent-tertiary animate-slideUp" style={{ animationDelay: '400ms' }}>
               <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('experience.internship.title')}</h3>
               <p className="text-accent-tertiary">
                 <a href="https://www.about-us-records.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">
@@ -247,19 +265,33 @@ export default function Home() {
               <p className="text-dark-text/70">{t('experience.internship.period')}</p>
             </div>
           </div>
-        </section>
+        </ScrollAnimationSection>
 
-        {/* Blog Section */}
-        <BlogSection />
+        {/* Blog Section - Wrapped in ScrollAnimationSection */}
+        <ScrollAnimationSection
+          className="mb-12 md:mb-20"
+          animation="slide-up"
+          duration={0.8}
+          delay={200}
+        >
+          <BlogSection />
+        </ScrollAnimationSection>
 
         {/* Connect Section */}
-        <section id="connect" className="mb-12 md:mb-20 scroll-mt-20" aria-labelledby="connect-heading">
+        <ScrollAnimationSection
+          id="connect"
+          className="mb-12 md:mb-20 scroll-mt-20"
+          animation="fade"
+          duration={0.8}
+          delay={300}
+          aria-labelledby="connect-heading"
+        >
           <h2 id="connect-heading" className="text-2xl sm:text-3xl font-bold text-dark-text mb-6 sm:mb-8">{t('connect.title')}</h2>
           
           {/* Redesigned layout with cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Personal Contact Card */}
-            <div className="bg-accent-primary/10 rounded-xl p-6 flex flex-col h-full transition-transform hover:shadow-md">
+            <div className="bg-accent-primary/10 rounded-xl p-6 flex flex-col h-full transition-all duration-300 hover:shadow-md animate-fadeIn" style={{ animationDelay: '150ms' }}>
               <h3 className="text-lg sm:text-xl font-medium text-dark-text mb-5 text-center">{t('connect.getInSection')}</h3>
               <div className="mb-6 flex justify-center">
                 <EmailLink />
@@ -284,14 +316,14 @@ export default function Home() {
             </div>
             
             {/* Social Media Card */}
-            <div className="bg-accent-primary/10 rounded-xl p-6 h-full transition-transform hover:shadow-md">
+            <div className="bg-accent-primary/10 rounded-xl p-6 h-full transition-all duration-300 hover:shadow-md animate-fadeIn" style={{ animationDelay: '300ms' }}>
               <h3 className="text-lg sm:text-xl font-medium text-dark-text mb-5 text-center">{t('connect.socialMedia')}</h3>
               <div className="flex flex-wrap justify-center">
                 <SocialIcons />
               </div>
             </div>
           </div>
-        </section>
+        </ScrollAnimationSection>
       </main>
 
       {/* Footer */}

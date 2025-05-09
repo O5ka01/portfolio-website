@@ -9,35 +9,68 @@
 /* while being ignored by standard CSS linters */
 
 :root {
-  --background: #f5f0e8; /* Warm beige */
-  --foreground: #333333; /* Dark text */
-  --accent-primary: #e6c9ab;
-  --accent-secondary: #c6a686;
-  --accent-tertiary: #aa8b6f;
+  --background: #F8F2E8; /* Your original warm beige, slightly brightened */
+  --foreground: #2C2622; /* Rich dark brown that's softer than black */
+  --accent-primary: #E9D5C3; /* Warm peach-cream - analogous to background */
+  --accent-secondary: #D6B795; /* Warm caramel - perfect midtone */
+  --accent-tertiary: #B08968; /* Rich caramel - warm accent for emphasis */
   --border-radius: 0.5rem;
-  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Arial', sans-serif;
+  --font-text: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', 'Arial', sans-serif;
+  --line-height-body: 1.6;
+  --line-height-headings: 1.3;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --accent-primary: #c6a686;
-    --accent-secondary: #aa8b6f;
-    --accent-tertiary: #8c6e57;
+    --background: #2A241C; /* Rich dark brown background */
+    --foreground: #F8F2E8; /* Warm light text */
+    --accent-primary: #53443A; /* Deep warm brown */
+    --accent-secondary: #8A6F58; /* Mid-tone caramel */
+    --accent-tertiary: #D6B795; /* Light caramel accent for dark mode */
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: var(--font-text);
+  line-height: var(--line-height-body);
   scroll-behavior: smooth;
   
   /* Custom scrollbar styling for entire website */
   /* Firefox */
   scrollbar-width: thin;
   scrollbar-color: #aa8b6f #f3ebe3; /* Using solid colors to match WebKit styling */
+}
+
+/* Apple-style animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.98); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.7s ease-out;
+  animation-fill-mode: both;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.5s ease-out;
 }
 
 /* WebKit scrollbar styling (Chrome, Safari, Edge) */
@@ -82,6 +115,9 @@ body {
   margin-bottom: 1.5rem;
   text-align: justify;
   color: #333333;
+  line-height: var(--line-height-body);
+  font-family: var(--font-text);
+  font-weight: 400;
 }
 
 .blog-post-content h1,
@@ -93,12 +129,21 @@ body {
   color: #333333;
   margin-top: 2rem;
   margin-bottom: 1.5rem;
+  font-family: var(--font-display);
+  line-height: var(--line-height-headings);
+  letter-spacing: -0.01em;
 }
+
+.blog-post-content h1 { font-weight: 600; }
+.blog-post-content h2 { font-weight: 600; }
+.blog-post-content h3 { font-weight: 500; }
+.blog-post-content h4, .blog-post-content h5, .blog-post-content h6 { font-weight: 500; }
 
 .blog-post-content .intro-paragraph {
   font-size: 1.125rem;
-  line-height: 1.8;
+  line-height: 1.6;
   font-weight: 500;
+  font-family: var(--font-text);
   color: #333333;
   margin-bottom: 2rem;
   border-left: 3px solid var(--accent-tertiary);
@@ -106,7 +151,7 @@ body {
 }
 
 .blog-post-content .section-heading {
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1.5rem;
   margin-top: 2.5rem;
   margin-bottom: 1.5rem;
@@ -114,6 +159,9 @@ body {
   border-bottom: 2px solid var(--accent-primary);
   padding-bottom: 0.5rem;
   width: fit-content;
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+  line-height: var(--line-height-headings);
 }
 
 .blog-post-content .journey-steps {
@@ -135,11 +183,14 @@ body {
   font-weight: 500;
   font-style: italic;
   font-size: 1.125rem;
+  line-height: var(--line-height-body);
+  font-family: var(--font-text);
   margin-top: 2rem;
   padding: 1rem;
   background-color: rgba(230, 201, 171, 0.2);
   border-radius: var(--border-radius);
   text-align: center;
+  letter-spacing: -0.01em;
 }
 
 /* Custom utility classes */
@@ -150,6 +201,23 @@ body {
 
   .focus-ring {
     @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-primary focus-visible:ring-opacity-75;
+  }
+  
+  /* Apple-style buttons */
+  .btn-apple {
+    @apply px-5 py-2.5 rounded-[22px] text-sm font-medium transition-all duration-300 inline-flex items-center justify-center;
+    @apply hover:scale-[1.03] active:scale-[0.98];
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-tertiary focus-visible:ring-opacity-50;
+  }
+  
+  .btn-apple-primary {
+    @apply btn-apple bg-accent-secondary text-foreground border border-transparent;
+    @apply hover:bg-accent-tertiary;
+  }
+  
+  .btn-apple-secondary {
+    @apply btn-apple bg-background bg-opacity-80 text-foreground border border-accent-secondary border-opacity-30;
+    @apply hover:bg-accent-primary hover:bg-opacity-40;
   }
 
   /* Animation utility classes */

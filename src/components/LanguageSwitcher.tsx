@@ -12,7 +12,7 @@ export default function LanguageSwitcher() {
   return (
     <button
       onClick={toggleLanguage}
-      className="rounded-full bg-accent-primary/20 px-3 py-1 font-medium text-dark-text hover:bg-accent-tertiary/30 transition-colors"
+      className="btn-apple-secondary"
       aria-label={language === 'de' ? 'Switch to English' : 'Auf Deutsch umschalten'}
     >
       {t('languageSwitch')}

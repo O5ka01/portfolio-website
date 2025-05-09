@@ -53,16 +53,16 @@ export default function BlogCard({ post }: BlogCardProps) {
     <>
       {/* Blog Card (Collapsed State) */}
       <motion.div 
-        className="bg-accent-primary/20 rounded-xl p-4 sm:p-6 cursor-pointer transition-all"
+        className="bg-accent-primary/10 rounded-xl p-6 sm:p-8 cursor-pointer transition-all duration-400 ease-apple shadow-[0_2px_6px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] border border-accent-secondary/5"
         onClick={handleCardClick}
-        whileHover={{ scale: 1.01 }}
+        whileHover={{ scale: 1.02 }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.4 }}
       >
         <div className="flex flex-col h-full">
           {post.imageUrl && (
-            <div className="relative w-full h-40 mb-4 rounded-lg overflow-hidden">
+            <div className="relative w-full h-48 mb-5 rounded-xl overflow-hidden shadow-sm">
               <Image
                 src={post.imageUrl}
                 alt={post.title}
@@ -72,10 +72,10 @@ export default function BlogCard({ post }: BlogCardProps) {
               />
             </div>
           )}
-          <h3 className="text-lg sm:text-xl font-bold text-dark-text mb-2">{post.title}</h3>
-          <p className="text-dark-text/80 text-sm mb-3">{formatDate(post.date)}</p>
-          <p className="text-dark-text/80">{post.excerpt}</p>
-          <div className="mt-3 text-accent-tertiary text-sm font-medium">
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-dark-text mb-3 leading-tight">{post.title}</h3>
+          <p className="text-accent-tertiary/80 text-xs uppercase tracking-wider mb-4 font-medium">{formatDate(post.date)}</p>
+          <p className="text-dark-text/80 text-base sm:text-lg leading-relaxed">{post.excerpt}</p>
+          <div className="mt-4 pt-2 text-accent-tertiary font-medium border-t border-accent-secondary/10">
             {t('blog.readMore')}
           </div>
         </div>
@@ -92,7 +92,7 @@ export default function BlogCard({ post }: BlogCardProps) {
             onClick={handleClose}
           >
             <motion.div
-              className="bg-warm-beige w-full max-w-4xl h-[90vh] rounded-xl overflow-y-auto shadow-xl"
+              className="bg-background/95 backdrop-blur-md w-full max-w-4xl h-[90vh] rounded-xl overflow-y-auto shadow-[0_10px_40px_rgba(0,0,0,0.15)] border border-accent-secondary/10"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
