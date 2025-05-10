@@ -12,6 +12,13 @@
     "profession": "Musician & Marketing Professional",
     "description": "Focused on the intersection of music and AI. Currently working in Marketing & Distribution at EuroArts and as Marketing Manager at KI-Academy. Passionate about music creation and AI advancements."
   },
+  "latestRelease": {
+    "new": "NEW RELEASE",
+    "description": "My latest track - available now on all platforms.",
+    "streamNow": "Stream Now",
+    "followMe": "Follow Me",
+    "watchVideo": "Watch on YouTube"
+  },
   "projects": {
     "title": "Selected Projects",
     "musicReleases": {

@@ -26,7 +26,7 @@ export default function AnimatedContent({
   animation = 'fade-in',
   delay = 0,
   duration = 500,
-  threshold = 0.1,
+  threshold = 0.05,
   rootMargin = '0px',
   once = true,
   className = '',
@@ -41,15 +41,15 @@ export default function AnimatedContent({
   const getAnimationClasses = (variant: AnimationVariant, isVisible: boolean): string => {
     if (variant === 'none') return '';
     
-    const baseStyles = `transition-all duration-${duration} delay-${delay}`;
+    const baseStyles = `transition-all duration-${duration} delay-${delay} ease-out`;
     
     const variantMap: Record<Exclude<AnimationVariant, 'none'>, string> = {
-      'fade-in': `${baseStyles} ${isVisible ? 'opacity-100' : 'opacity-0'}`,
-      'slide-up': `${baseStyles} transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`,
-      'slide-down': `${baseStyles} transform ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-10 opacity-0'}`,
-      'slide-left': `${baseStyles} transform ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`,
-      'slide-right': `${baseStyles} transform ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`,
-      'scale-up': `${baseStyles} transform ${isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`,
+      'fade-in': `${baseStyles} ${isVisible ? 'opacity-100' : 'opacity-5'}`,
+      'slide-up': `${baseStyles} transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-5'}`,
+      'slide-down': `${baseStyles} transform ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-5'}`,
+      'slide-left': `${baseStyles} transform ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-5'}`,
+      'slide-right': `${baseStyles} transform ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-5'}`,
+      'scale-up': `${baseStyles} transform ${isVisible ? 'scale-100 opacity-100' : 'scale-98 opacity-5'}`,
     };
     
     return variantMap[variant as Exclude<AnimationVariant, 'none'>];

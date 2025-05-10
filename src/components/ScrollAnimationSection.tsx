@@ -20,16 +20,16 @@ export default function ScrollAnimationSection({
   delay = 0, 
   id,
   animation = 'fade',
-  duration = 0.7,
+  duration = 0.9,
   once = true,
-  threshold = 0.2
+  threshold = 0.1
 }: ScrollAnimationSectionProps) {
   const controls = useAnimation();
   const sectionRef = useRef<HTMLDivElement>(null);
   const inView = useInView(sectionRef, { 
     once, 
     amount: threshold, // Using 'amount' instead of 'threshold'
-    margin: "0px 0px -10% 0px" // Start animation slightly before element is in view
+    margin: "0px 0px -5% 0px" // Start animation slightly before element is in view
   });
   
   // Define animation variants
@@ -42,20 +42,20 @@ export default function ScrollAnimationSection({
         };
       case 'slide-up':
         return {
-          hidden: { opacity: 0, y: 30 },
+          hidden: { opacity: 0.1, y: 15 },
           visible: { 
             opacity: 1, 
             y: 0, 
             transition: { 
               duration, 
               delay: delay / 1000,
-              ease: [0.33, 1, 0.68, 1] // Apple-style cubic-bezier
+              ease: [0.2, 0.8, 0.2, 1] // More subtle easing curve
             } 
           }
         };
       case 'slide-right':
         return {
-          hidden: { opacity: 0, x: -30 },
+          hidden: { opacity: 0.1, x: -15 },
           visible: { 
             opacity: 1, 
             x: 0, 
@@ -68,7 +68,7 @@ export default function ScrollAnimationSection({
         };
       case 'slide-left':
         return {
-          hidden: { opacity: 0, x: 30 },
+          hidden: { opacity: 0.1, x: 15 },
           visible: { 
             opacity: 1, 
             x: 0, 
@@ -81,7 +81,7 @@ export default function ScrollAnimationSection({
         };
       case 'scale':
         return {
-          hidden: { opacity: 0, scale: 0.95 },
+          hidden: { opacity: 0.1, scale: 0.98 },
           visible: { 
             opacity: 1, 
             scale: 1, 

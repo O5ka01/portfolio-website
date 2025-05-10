@@ -19,7 +19,7 @@ const NewReleaseBanner = () => {
 
   return (
     <div 
-      className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center" 
+      className="fixed inset-0 z-60 overflow-y-auto flex items-center justify-center" 
       aria-labelledby="modal-title" 
       role="dialog" 
       aria-modal="true"
@@ -31,11 +31,11 @@ const NewReleaseBanner = () => {
       }}
     >
       <div className="flex items-center justify-center min-h-screen px-4">
-        {/* Background overlay */}
-        <div className="fixed inset-0 bg-dark-text bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+        {/* Background overlay - increased z-index to be higher than the header but lower than modal content */}
+        <div className="fixed inset-0 bg-dark-text bg-opacity-75 transition-opacity z-55" aria-hidden="true"></div>
 
         {/* Release banner content */}
-        <div className="relative bg-warm-beige rounded-lg overflow-hidden shadow-xl transform transition-all max-w-md w-full mx-auto animate-fadeIn">
+        <div className="relative bg-warm-beige rounded-lg overflow-hidden shadow-xl transform transition-all max-w-md w-full mx-auto animate-fadeIn z-70">
           {/* Close button positioned at top right */}
           <button
             type="button"

@@ -83,8 +83,8 @@ export default function BlogSection() {
         {/* View All Button */}
         <Link href="/blog" passHref>
           <motion.span 
-            className="inline-flex items-center py-2 px-4 bg-accent-primary/20 hover:bg-accent-primary/30 text-accent-tertiary rounded-lg cursor-pointer transition-colors"
-            whileHover={{ scale: 1.05 }}
+            className="inline-flex items-center py-2 px-4 bg-accent-primary/20 hover:bg-accent-primary/30 text-accent-tertiary rounded-lg cursor-pointer transition-colors shadow-sm hover:shadow"
+            whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
             {t('blog.viewAll')}
@@ -107,11 +107,11 @@ export default function BlogSection() {
       ) : (
         // Fallback if no posts are available
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-          <div className="bg-accent-primary/20 rounded-xl p-4 sm:p-6 transition-transform hover:scale-[1.01]">
+          <div className="bg-accent-primary/25 rounded-xl p-4 sm:p-6 transition-all duration-400 hover:scale-[1.005] shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:shadow-[0_6px_16px_rgba(0,0,0,0.12)]">
             <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('blog.comingSoon')}</h3>
             <p className="text-dark-text/80 mt-2">{t('blog.description')}</p>
           </div>
-          <div className="bg-accent-primary/20 rounded-xl p-4 sm:p-6 transition-transform hover:scale-[1.01]">
+          <div className="bg-accent-primary/25 rounded-xl p-4 sm:p-6 transition-all duration-400 hover:scale-[1.005] shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:shadow-[0_6px_16px_rgba(0,0,0,0.12)]">
             <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('blog.stayTuned')}</h3>
             <p className="text-dark-text/80 mt-2">{t('blog.description')}</p>
           </div>

@@ -7,7 +7,7 @@ import { ConsentProvider } from "@/context/ConsentContext";
 import { ReleaseBannerProvider } from "@/context/ReleaseBannerContext";
 import CookieBanner from "@/components/CookieBanner";
 import ConditionalScripts from "@/components/ConditionalScripts";
-import SlimReleaseBanner from "@/components/SlimReleaseBanner";
+// SlimReleaseBanner removed as requested
 import NewReleaseBanner from "@/components/NewReleaseBanner";
 import PageTransition from "@/components/PageTransition";
 
@@ -175,7 +175,6 @@ export default function RootLayout({
           <ReleaseBannerProvider>
             <LanguageProvider>
               <NewReleaseBanner />
-              <SlimReleaseBanner />
               <PageTransition>
                 {children}
               </PageTransition>

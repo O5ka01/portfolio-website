@@ -12,6 +12,13 @@
     "profession": "Musiker & Marketing-Profi",
     "description": "Spezialisiert auf die Schnittstelle zwischen Musik und KI. Derzeit tätig im Marketing & Vertrieb bei EuroArts und als Marketing Manager bei KI-Academy. Leidenschaftlich interessiert an Musikproduktion und KI-Entwicklungen."
   },
+  "latestRelease": {
+    "new": "NEUE VERÖFFENTLICHUNG",
+    "description": "Mein neuester Track - jetzt auf allen Plattformen verfügbar.",
+    "streamNow": "Jetzt streamen",
+    "followMe": "Folge mir",
+    "watchVideo": "Auf YouTube ansehen"
+  },
   "projects": {
     "title": "Ausgewählte Projekte",
     "musicReleases": {

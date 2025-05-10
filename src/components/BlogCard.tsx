@@ -53,7 +53,7 @@ export default function BlogCard({ post }: BlogCardProps) {
     <>
       {/* Blog Card (Collapsed State) */}
       <motion.div 
-        className="bg-accent-primary/10 rounded-xl p-6 sm:p-8 cursor-pointer transition-all duration-400 ease-apple shadow-[0_2px_6px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] border border-accent-secondary/5"
+        className="bg-accent-primary/15 rounded-xl p-6 sm:p-8 cursor-pointer transition-all duration-400 ease-apple shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-accent-secondary/5"
         onClick={handleCardClick}
         whileHover={{ scale: 1.02 }}
         initial={{ opacity: 0, y: 20 }}
