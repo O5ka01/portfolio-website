@@ -213,6 +213,11 @@ export default function Home() {
                       </a>
                     </div>
                   </div>
+                  
+                  {/* Bandcamp Embed */}
+                  <div className="w-full mt-4">
+                    <div dangerouslySetInnerHTML={{ __html: `<iframe style="border: 0; width: 100%; height: 42px;" src="https://bandcamp.com/EmbeddedPlayer/track=829471641/size=small/bgcol=333333/linkcol=e99708/transparent=true/" seamless><a href="https://oskamusic.bandcamp.com/track/wegen-mir">Wegen Mir by O$ka</a></iframe>` }} />
+                  </div>
                 </div>
               </div>
             </div>
@@ -263,6 +268,16 @@ export default function Home() {
                 >
                   <i className="fa-brands fa-apple text-xl"></i>
                   <span>{t('projects.musicReleases.listenOnApple')}</span>
+                </a>
+                <a 
+                  href="https://oskamusic.bandcamp.com/track/wegen-mir" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-accent-tertiary hover:text-dark-text transition-all duration-300 ease-apple text-base sm:text-lg py-2 px-4 rounded-full hover:bg-accent-primary/10 hover:shadow-sm"
+                  aria-label="Listen to O$ka on Bandcamp"
+                >
+                  <i className="fa-brands fa-bandcamp text-xl"></i>
+                  <span>Bandcamp</span>
                 </a>
               </div>
             </article>

@@ -9,7 +9,8 @@ import {
   faYoutube, 
   faSpotify, 
   faSoundcloud, 
-  faGithub
+  faGithub,
+  faBandcamp
 } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
@@ -82,6 +83,15 @@ const SocialIcons: FC<SocialIconsProps> = ({ size = "lg" }) => {
         aria-label="GitHub profile"
       >
         <FontAwesomeIcon icon={faGithub} className="text-dark-text" size={size} />
+      </a>
+      <a 
+        href="https://oskamusic.bandcamp.com/track/wegen-mir" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="bg-accent-secondary/40 hover:bg-accent-secondary/70 transition-colors w-12 h-12 rounded-full flex items-center justify-center shadow-sm"
+        aria-label="Bandcamp profile"
+      >
+        <FontAwesomeIcon icon={faBandcamp} className="text-dark-text" size={size} />
       </a>
     </div>
   );
