@@ -134,12 +134,12 @@ export default function BlogCard({ post }: BlogCardProps) {
               
               {/* Featured Image (if available) */}
               {post.imageUrl && (
-                <div className="relative w-full h-48 sm:h-64 md:h-72 overflow-hidden">
+                <div className="relative w-full h-48 sm:h-64 md:h-96 overflow-hidden">
                   <Image
                     src={post.imageUrl}
                     alt={post.title}
                     fill
-                    className="object-cover"
+                    className="object-contain object-top"
                     sizes="(max-width: 768px) 100vw, 800px"
                     priority
                   />
