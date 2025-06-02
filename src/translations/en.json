@@ -76,7 +76,9 @@
     "noPostsWithTag": "No posts with the selected tag",
     "noPostsYet": "There are no blog posts available yet",
     "viewAllPosts": "View All Posts",
-    "backToHome": "Back to Home"
+    "backToHome": "Back to Home",
+    "redirecting": "Redirecting to Substack...",
+    "visitSubstack": "Visit Substack Now"
   },
   "connect": {
     "title": "Connect",

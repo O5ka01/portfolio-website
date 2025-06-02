@@ -37,7 +37,6 @@ async function contentHandler(request: NextRequest) {
     // Map content type to appropriate collection
     const collectionMap: Record<string, string> = {
       'project-highlights': 'projects',
-      'blog-posts': 'blogPosts',
       'experiences': 'experiences'
     };
     

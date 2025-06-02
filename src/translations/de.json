@@ -76,7 +76,9 @@
     "noPostsWithTag": "Keine Beiträge mit dieser Kategorie",
     "noPostsYet": "Es sind noch keine Blogbeiträge verfügbar",
     "viewAllPosts": "Alle Artikel",
-    "backToHome": "Zur Startseite"
+    "backToHome": "Zur Startseite",
+    "redirecting": "Weiterleitung zu Substack...",
+    "visitSubstack": "Jetzt zu Substack"
   },
   "connect": {
     "title": "Kontakt",

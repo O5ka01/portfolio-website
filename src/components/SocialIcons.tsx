@@ -14,6 +14,24 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
+// Custom Substack icon component
+const SubstackIcon: FC<{ size?: "sm" | "lg" }> = ({ size = 'sm' }) => {
+  // Set icon size based on the size prop
+  const iconSize = size === 'lg' ? 18 : 14;
+  
+  return (
+    <svg 
+      width={iconSize} 
+      height={iconSize} 
+      viewBox="0 0 24 24" 
+      fill="currentColor"
+      className="text-dark-text"
+    >
+      <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" />
+    </svg>
+  );
+};
+
 type SocialIconsProps = {
   size?: "sm" | "lg";
 };
@@ -92,6 +110,15 @@ const SocialIcons: FC<SocialIconsProps> = ({ size = "lg" }) => {
         aria-label="Bandcamp profile"
       >
         <FontAwesomeIcon icon={faBandcamp} className="text-dark-text" size={size} />
+      </a>
+      <a 
+        href="https://substack.com/@oskahayati" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="bg-accent-secondary/40 hover:bg-accent-secondary/70 transition-colors w-12 h-12 rounded-full flex items-center justify-center shadow-sm"
+        aria-label="Substack newsletter"
+      >
+        <SubstackIcon size={size} />
       </a>
     </div>
   );

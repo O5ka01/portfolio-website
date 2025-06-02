@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import Footer from '@/components/Footer';
-import BlogSection from '@/components/BlogSection';
+import SubstackEmbed from '@/components/SubstackEmbed';
 import ForceTranslationRefresh from '@/components/ForceTranslationRefresh';
 import ScrollAnimationSection from '@/components/ScrollAnimationSection';
 
@@ -109,7 +109,6 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
-        {/* Header Section */}
         <ScrollAnimationSection 
           className="flex flex-col md:flex-row gap-12 md:gap-16 items-center mb-16 md:mb-24 mt-8"
           animation="fade"
@@ -366,14 +365,17 @@ export default function Home() {
           </div>
         </ScrollAnimationSection>
 
-        {/* Blog Section - Wrapped in ScrollAnimationSection */}
+        {/* Blog Section - Substack Embed */}
         <ScrollAnimationSection
-          className="mb-12 md:mb-20"
+          id="blog"
+          className="mb-12 md:mb-20 scroll-mt-20"
           animation="slide-up"
           duration={0.8}
           delay={200}
+          aria-labelledby="blog-heading"
         >
-          <BlogSection />
+          <h2 id="blog-heading" className="text-2xl sm:text-3xl font-bold text-dark-text mb-6 sm:mb-8">{t('blog.title')}</h2>
+          <SubstackEmbed />
         </ScrollAnimationSection>
 
         {/* Connect Section */}

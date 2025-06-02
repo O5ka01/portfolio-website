@@ -60,7 +60,6 @@ export function createCollection<T>(name: string, language = 'de'): DbCollection
           // Map collection names to model types
           const collectionToModelType: Record<string, CollectionType> = {
             'projects': 'projects',
-            'blogPosts': 'blogPosts',
             'experiences': 'experiences',
             'content': 'projects' // Default to projects for content collection
           };

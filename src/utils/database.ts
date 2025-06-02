@@ -53,12 +53,11 @@ export interface Experience extends BaseModel {
 }
 
 // Map model types to their collection names
-export type CollectionType = 'projects' | 'blogPosts' | 'experiences' | 'content';
+export type CollectionType = 'projects' | 'experiences' | 'content';
 type ModelTypeMap = {
   projects: Project;
-  blogPosts: BlogPost;
   experiences: Experience;
-  content: Project | BlogPost;
+  content: Project;
 };
 
 /**
@@ -343,7 +342,6 @@ export function createCollection<T>(name: string, language = 'de') {
           // Map collection names to model types
           const collectionToModelType: Record<string, CollectionType> = {
             'projects': 'projects',
-            'blogPosts': 'blogPosts',
             'experiences': 'experiences',
             'content': 'projects' // Default to projects for content collection
           };
