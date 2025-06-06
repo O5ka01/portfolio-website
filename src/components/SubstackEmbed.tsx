@@ -61,8 +61,9 @@ export default function SubstackEmbed() {
             href="https://oskahayati.substack.com" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-accent-secondary text-white rounded-md hover:bg-accent-secondary/90 transition-colors duration-300 text-sm font-medium"
+            className="inline-flex items-center gap-2 bg-accent-tertiary text-white hover:bg-accent-tertiary/95 transition-all duration-300 ease-out text-sm py-2.5 px-5 rounded-full shadow-sm hover:shadow"
           >
+            <i className="fa-solid fa-newspaper text-xs"></i>
             {t('blog.visitSubstack')}
           </a>
         </div>

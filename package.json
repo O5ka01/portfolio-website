@@ -6,7 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "health": "curl -s http://localhost:3000/api/health | jq .",
+    "test:api": "npm run test:health && npm run test:contact && npm run test:stats",
+    "test:health": "curl -s http://localhost:3000/api/health",
+    "test:contact": "curl -s -X POST http://localhost:3000/api/contact -H 'Content-Type: application/json' -d '{\"name\":\"Test\",\"email\":\"test@example.com\",\"message\":\"Test message\"}'",
+    "test:stats": "curl -s http://localhost:3000/api/artist-stats",
+    "setup:env": "cp env.template .env.local",
+    "check:deps": "npm audit && npm outdated",
+    "clean": "rm -rf .next && npm run build"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.6.1",
@@ -14,6 +22,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@sendgrid/mail": "^8.1.5",
     "@vercel/analytics": "^1.5.0",
     "@vercel/edge-config": "^1.4.0",
     "@vercel/speed-insights": "^1.2.0",
@@ -23,8 +32,9 @@
     "next": "15.3.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "resend": "^4.5.2",
     "web-vitals": "^4.2.4",
-    "zod": "^3.24.3"
+    "zod": "^3.25.56"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -140,6 +140,34 @@ export default function Home() {
           </div>
         </ScrollAnimationSection>
 
+        {/* Professional Credentials Section */}
+        <ScrollAnimationSection 
+          className="mb-16 md:mb-24"
+          animation="fade"
+          delay={50}
+          duration={1.0}
+        >
+          <div className="bg-gradient-to-r from-accent-primary/10 to-accent-secondary/10 rounded-2xl p-6 md:p-8 border border-accent-primary/20">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+              <div className="space-y-2">
+                <div className="text-2xl md:text-3xl font-bold text-accent-tertiary">3+</div>
+                <div className="text-sm md:text-base text-dark-text/80 font-medium">{t('credentials.yearsExperience')}</div>
+                <div className="text-xs text-dark-text/60">{t('credentials.marketingDistribution')}</div>
+              </div>
+              <div className="space-y-2">
+                <div className="text-2xl md:text-3xl font-bold text-accent-tertiary">2</div>
+                <div className="text-sm md:text-base text-dark-text/80 font-medium">{t('credentials.currentRoles')}</div>
+                <div className="text-xs text-dark-text/60">{t('credentials.parallelPositions')}</div>
+              </div>
+              <div className="space-y-2">
+                <div className="text-2xl md:text-3xl font-bold text-accent-tertiary">BA</div>
+                <div className="text-sm md:text-base text-dark-text/80 font-medium">{t('credentials.degree')}</div>
+                <div className="text-xs text-dark-text/60">{t('credentials.musicProduction')}</div>
+              </div>
+            </div>
+          </div>
+        </ScrollAnimationSection>
+
         {/* Latest Release Section */}
         <ScrollAnimationSection 
           className="mb-16 md:mb-24 py-4"
@@ -231,7 +259,7 @@ export default function Home() {
           duration={0.8}
           aria-labelledby="projects-heading"
         >
-          <h2 id="projects-heading" className="text-2xl sm:text-3xl md:text-4xl font-semibold text-dark-text mb-8 sm:mb-12 transition-all duration-300 hover:text-accent-tertiary">{t('projects.title')}</h2>
+          <h2 id="projects-heading" className="text-2xl sm:text-3xl font-bold text-dark-text mb-8">{t('projects.title')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 lg:gap-12">
             {/* Project 1 */}
             <article className="bg-accent-primary/10 rounded-xl p-8 sm:p-10 transition-all duration-400 ease-apple hover:scale-[1.005] flex flex-col shadow-[0_5px_15px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.12)] border border-accent-secondary/10 group animate-scaleIn" style={{ animationDelay: '100ms' }}>
@@ -303,11 +331,119 @@ export default function Home() {
                   className="inline-flex items-center gap-2 text-accent-tertiary hover:text-dark-text transition-all duration-300 ease-apple text-base sm:text-lg py-2 px-4 rounded-full hover:bg-accent-primary/10 hover:shadow-sm"
                   aria-label="View O$ka's YouTube channel"
                 >
-                  <i className="fa-brands fa-youtube text-xl"></i>
+                  <FontAwesomeIcon icon={faYoutube} />
                   <span>{t('projects.youtubeCommentary.viewOn')}</span>
                 </a>
               </div>
             </article>
+          </div>
+        </ScrollAnimationSection>
+
+        {/* Skills & Expertise Section */}
+        <ScrollAnimationSection
+          id="skills"
+          className="mb-16 md:mb-24 scroll-mt-20"
+          animation="slide-up"
+          duration={0.8}
+          delay={50}
+          aria-labelledby="skills-heading"
+        >
+          <h2 id="skills-heading" className="text-2xl sm:text-3xl font-bold text-dark-text mb-8">{t('skills.title')}</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Marketing & Business Skills */}
+            <div className="bg-accent-primary/10 rounded-xl p-6 border border-accent-primary/20">
+              <h3 className="text-xl font-semibold text-dark-text mb-4 flex items-center gap-2">
+                <i className="fa-solid fa-chart-line text-accent-tertiary"></i>
+                {t('skills.marketing.title')}
+              </h3>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-dark-text/80">{t('skills.marketing.digitalMarketing')}</span>
+                  <div className="w-24 bg-accent-primary/20 rounded-full h-2">
+                    <div className="bg-accent-tertiary h-2 rounded-full" style={{width: '95%'}}></div>
+                  </div>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-dark-text/80">{t('skills.marketing.contentStrategy')}</span>
+                  <div className="w-24 bg-accent-primary/20 rounded-full h-2">
+                    <div className="bg-accent-tertiary h-2 rounded-full" style={{width: '90%'}}></div>
+                  </div>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-dark-text/80">{t('skills.marketing.distributionStrategy')}</span>
+                  <div className="w-24 bg-accent-primary/20 rounded-full h-2">
+                    <div className="bg-accent-tertiary h-2 rounded-full" style={{width: '85%'}}></div>
+                  </div>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-dark-text/80">{t('skills.marketing.analytics')}</span>
+                  <div className="w-24 bg-accent-primary/20 rounded-full h-2">
+                    <div className="bg-accent-tertiary h-2 rounded-full" style={{width: '80%'}}></div>
+                  </div>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-dark-text/80">{t('skills.marketing.projectManagement')}</span>
+                  <div className="w-24 bg-accent-primary/20 rounded-full h-2">
+                    <div className="bg-accent-tertiary h-2 rounded-full" style={{width: '85%'}}></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Technical & Creative Skills */}
+            <div className="bg-accent-secondary/10 rounded-xl p-6 border border-accent-secondary/20">
+              <h3 className="text-xl font-semibold text-dark-text mb-4 flex items-center gap-2">
+                <i className="fa-solid fa-code text-accent-tertiary"></i>
+                {t('skills.technical.title')}
+              </h3>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-dark-text/80">{t('skills.technical.musicProduction')}</span>
+                  <div className="w-24 bg-accent-secondary/20 rounded-full h-2">
+                    <div className="bg-accent-tertiary h-2 rounded-full" style={{width: '95%'}}></div>
+                  </div>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-dark-text/80">{t('skills.technical.aiTools')}</span>
+                  <div className="w-24 bg-accent-secondary/20 rounded-full h-2">
+                    <div className="bg-accent-tertiary h-2 rounded-full" style={{width: '80%'}}></div>
+                  </div>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-dark-text/80">{t('skills.technical.audioEngineering')}</span>
+                  <div className="w-24 bg-accent-secondary/20 rounded-full h-2">
+                    <div className="bg-accent-tertiary h-2 rounded-full" style={{width: '90%'}}></div>
+                  </div>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-dark-text/80">{t('skills.technical.webTechnologies')}</span>
+                  <div className="w-24 bg-accent-secondary/20 rounded-full h-2">
+                    <div className="bg-accent-tertiary h-2 rounded-full" style={{width: '75%'}}></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Tools & Technologies */}
+          <div className="mt-8 bg-gradient-to-r from-accent-primary/5 to-accent-secondary/5 rounded-xl p-6 border border-accent-primary/10">
+            <h3 className="text-lg font-semibold text-dark-text mb-4">{t('skills.tools.title')}</h3>
+            <div className="flex flex-wrap gap-3">
+              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Ableton Live</span>
+              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Logic Pro</span>
+              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Adobe Creative Suite</span>
+              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Adobe Audition</span>
+              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Google Analytics</span>
+              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Social Media Platforms</span>
+              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Streaming Platforms</span>
+              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">ChatGPT/Claude</span>
+              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Notion</span>
+              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Slack</span>
+              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Figma</span>
+              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Microsoft Office</span>
+              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Event Management</span>
+            </div>
           </div>
         </ScrollAnimationSection>
 
@@ -322,45 +458,166 @@ export default function Home() {
         >
           <h2 id="experience-heading" className="text-2xl sm:text-3xl font-bold text-dark-text mb-6 sm:mb-8">{t('experience.title')}</h2>
           <div className="space-y-4 sm:space-y-6">
-            {/* Work Experience Cards */}
+            {/* Current Work Experience Cards */}
             <div className="bg-accent-primary/15 rounded-xl p-4 sm:p-6 border-l-4 border-accent-secondary animate-slideUp shadow-[0_4px_10px_rgba(0,0,0,0.08)] transition-shadow duration-300 hover:shadow-[0_5px_15px_rgba(0,0,0,0.12)]" style={{ animationDelay: '100ms' }}>
-              <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('experience.euroarts.title')}</h3>
-              <p className="text-accent-tertiary">
-                <a href="https://www.euroarts.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">
-                  EuroArts
-                </a>
-              </p>
-              <p className="text-dark-text/70">{t('experience.euroarts.period')}</p>
+              <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
+                <div>
+                  <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('experience.euroarts.title')}</h3>
+                  <p className="text-accent-tertiary">
+                    <a href="https://www.euroarts.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                      EuroArts Music International GmbH
+                    </a>
+                  </p>
+                </div>
+                <span className="text-sm text-dark-text/70 bg-accent-primary/20 px-3 py-1 rounded-full">{t('experience.euroarts.period')}</span>
+              </div>
+              <p className="text-dark-text/80 mb-3">{t('experience.euroarts.description')}</p>
+              <div className="space-y-2">
+                <h4 className="text-sm font-semibold text-dark-text">{t('experience.keyAchievements')}</h4>
+                <ul className="text-sm text-dark-text/70 space-y-1">
+                  <li className="flex items-start gap-2">
+                    <span className="text-accent-tertiary mt-1">•</span>
+                    <span>{t('experience.euroarts.achievement1')}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-accent-tertiary mt-1">•</span>
+                    <span>{t('experience.euroarts.achievement2')}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-accent-tertiary mt-1">•</span>
+                    <span>{t('experience.euroarts.achievement3')}</span>
+                  </li>
+                </ul>
+              </div>
             </div>
 
             <div className="bg-accent-primary/15 rounded-xl p-4 sm:p-6 border-l-4 border-accent-secondary animate-slideUp shadow-[0_4px_10px_rgba(0,0,0,0.08)] transition-shadow duration-300 hover:shadow-[0_5px_15px_rgba(0,0,0,0.12)]" style={{ animationDelay: '200ms' }}>
-              <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('experience.kiacademy.title')}</h3>
-              <p className="text-accent-tertiary">
-                <a href="https://ki.academy/" target="_blank" rel="noopener noreferrer" className="hover:underline">
-                  KI-Academy
-                </a>
-              </p>
-              <p className="text-dark-text/70">{t('experience.kiacademy.period')}</p>
+              <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
+                <div>
+                  <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('experience.kiacademy.title')}</h3>
+                  <p className="text-accent-tertiary">
+                    <a href="https://ki.academy/" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                      KI Academy
+                    </a>
+                  </p>
+                </div>
+                <span className="text-sm text-dark-text/70 bg-accent-primary/20 px-3 py-1 rounded-full">{t('experience.kiacademy.period')}</span>
+              </div>
+              <p className="text-dark-text/80 mb-3">{t('experience.kiacademy.description')}</p>
+              <div className="space-y-2">
+                <h4 className="text-sm font-semibold text-dark-text">{t('experience.keyAchievements')}</h4>
+                <ul className="text-sm text-dark-text/70 space-y-1">
+                  <li className="flex items-start gap-2">
+                    <span className="text-accent-tertiary mt-1">•</span>
+                    <span>{t('experience.kiacademy.achievement1')}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-accent-tertiary mt-1">•</span>
+                    <span>{t('experience.kiacademy.achievement2')}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-accent-tertiary mt-1">•</span>
+                    <span>{t('experience.kiacademy.achievement3')}</span>
+                  </li>
+                </ul>
+              </div>
             </div>
 
-            {/* Education */}
-            <div className="bg-accent-primary/15 rounded-xl p-4 sm:p-6 border-l-4 border-accent-tertiary animate-slideUp shadow-[0_4px_10px_rgba(0,0,0,0.08)] transition-shadow duration-300 hover:shadow-[0_5px_15px_rgba(0,0,0,0.12)]" style={{ animationDelay: '300ms' }}>
-              <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('experience.education.title')}</h3>
-              <p className="text-accent-tertiary">
-                <a href="https://studium.bimm-institute.de/" target="_blank" rel="noopener noreferrer" className="hover:underline">BIMM Berlin</a>
-              </p>
-              <p className="text-dark-text/70">{t('experience.education.period')}</p>
+            {/* Previous Experience Cards */}
+            <div className="bg-accent-primary/10 rounded-xl p-4 sm:p-6 border-l-4 border-accent-primary animate-slideUp shadow-[0_4px_10px_rgba(0,0,0,0.06)] transition-shadow duration-300 hover:shadow-[0_5px_15px_rgba(0,0,0,0.10)]" style={{ animationDelay: '300ms' }}>
+              <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
+                <div>
+                  <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('experience.audioEngineer.title')}</h3>
+                  <p className="text-accent-tertiary">Hörbuch: Die Sieben Säulen des Seins</p>
+                </div>
+                <span className="text-sm text-dark-text/70 bg-accent-primary/15 px-3 py-1 rounded-full">{t('experience.audioEngineer.period')}</span>
+              </div>
+              <p className="text-dark-text/80 mb-3">{t('experience.audioEngineer.description')}</p>
+              <div className="space-y-2">
+                <h4 className="text-sm font-semibold text-dark-text">{t('experience.keyAchievements')}</h4>
+                <ul className="text-sm text-dark-text/70 space-y-1">
+                  <li className="flex items-start gap-2">
+                    <span className="text-accent-tertiary mt-1">•</span>
+                    <span>{t('experience.audioEngineer.achievement1')}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-accent-tertiary mt-1">•</span>
+                    <span>{t('experience.audioEngineer.achievement2')}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-accent-tertiary mt-1">•</span>
+                    <span>{t('experience.audioEngineer.achievement3')}</span>
+                  </li>
+                </ul>
+              </div>
             </div>
 
-            {/* Internship */}
-            <div className="bg-accent-primary/15 rounded-xl p-4 sm:p-6 border-l-4 border-accent-tertiary animate-slideUp shadow-[0_4px_10px_rgba(0,0,0,0.08)] transition-shadow duration-300 hover:shadow-[0_5px_15px_rgba(0,0,0,0.12)]" style={{ animationDelay: '400ms' }}>
-              <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('experience.internship.title')}</h3>
-              <p className="text-accent-tertiary">
-                <a href="https://www.about-us-records.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">
-                  aboutusrecords
-                </a>
-              </p>
-              <p className="text-dark-text/70">{t('experience.internship.period')}</p>
+            <div className="bg-accent-primary/10 rounded-xl p-4 sm:p-6 border-l-4 border-accent-primary animate-slideUp shadow-[0_4px_10px_rgba(0,0,0,0.06)] transition-shadow duration-300 hover:shadow-[0_5px_15px_rgba(0,0,0,0.10)]" style={{ animationDelay: '400ms' }}>
+              <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
+                <div>
+                  <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('experience.aboutUsRecords.title')}</h3>
+                  <p className="text-accent-tertiary">about us records</p>
+                </div>
+                <span className="text-sm text-dark-text/70 bg-accent-primary/15 px-3 py-1 rounded-full">{t('experience.aboutUsRecords.period')}</span>
+              </div>
+              <p className="text-dark-text/80 mb-3">{t('experience.aboutUsRecords.description')}</p>
+              <div className="space-y-2">
+                <h4 className="text-sm font-semibold text-dark-text">{t('experience.keyAchievements')}</h4>
+                <ul className="text-sm text-dark-text/70 space-y-1">
+                  <li className="flex items-start gap-2">
+                    <span className="text-accent-tertiary mt-1">•</span>
+                    <span>{t('experience.aboutUsRecords.achievement1')}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-accent-tertiary mt-1">•</span>
+                    <span>{t('experience.aboutUsRecords.achievement2')}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-accent-tertiary mt-1">•</span>
+                    <span>{t('experience.aboutUsRecords.achievement3')}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="bg-accent-primary/10 rounded-xl p-4 sm:p-6 border-l-4 border-accent-primary animate-slideUp shadow-[0_4px_10px_rgba(0,0,0,0.06)] transition-shadow duration-300 hover:shadow-[0_5px_15px_rgba(0,0,0,0.10)]" style={{ animationDelay: '500ms' }}>
+              <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
+                <div>
+                  <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('experience.eventOrganizer.title')}</h3>
+                  <p className="text-accent-tertiary">Lido Kultur & Veranstaltungs GmbH</p>
+                </div>
+                <span className="text-sm text-dark-text/70 bg-accent-primary/15 px-3 py-1 rounded-full">{t('experience.eventOrganizer.period')}</span>
+              </div>
+              <p className="text-dark-text/80 mb-3">{t('experience.eventOrganizer.description')}</p>
+              <div className="space-y-2">
+                <h4 className="text-sm font-semibold text-dark-text">{t('experience.keyAchievements')}</h4>
+                <ul className="text-sm text-dark-text/70 space-y-1">
+                  <li className="flex items-start gap-2">
+                    <span className="text-accent-tertiary mt-1">•</span>
+                    <span>{t('experience.eventOrganizer.achievement1')}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-accent-tertiary mt-1">•</span>
+                    <span>{t('experience.eventOrganizer.achievement2')}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-accent-tertiary mt-1">•</span>
+                    <span>{t('experience.eventOrganizer.achievement3')}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Education Section */}
+            <div className="bg-gradient-to-r from-accent-secondary/10 to-accent-tertiary/10 rounded-xl p-4 sm:p-6 border-l-4 border-accent-secondary animate-slideUp shadow-[0_4px_10px_rgba(0,0,0,0.08)] transition-shadow duration-300 hover:shadow-[0_5px_15px_rgba(0,0,0,0.12)]" style={{ animationDelay: '600ms' }}>
+              <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
+                <div>
+                  <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('experience.education.title')}</h3>
+                  <p className="text-accent-tertiary">{t('experience.education.institution')}</p>
+                </div>
+                <span className="text-sm text-dark-text/70 bg-accent-secondary/20 px-3 py-1 rounded-full">{t('experience.education.period')}</span>
+              </div>
+              <p className="text-dark-text/80">{t('experience.education.description')}</p>
             </div>
           </div>
         </ScrollAnimationSection>
@@ -376,6 +633,39 @@ export default function Home() {
         >
           <h2 id="blog-heading" className="text-2xl sm:text-3xl font-bold text-dark-text mb-6 sm:mb-8">{t('blog.title')}</h2>
           <SubstackEmbed />
+        </ScrollAnimationSection>
+
+        {/* Professional Call-to-Action Section */}
+        <ScrollAnimationSection
+          className="mb-16 md:mb-24"
+          animation="fade"
+          duration={0.8}
+          delay={100}
+        >
+          <div className="bg-gradient-to-r from-accent-tertiary/10 to-accent-primary/10 rounded-2xl p-8 md:p-12 text-center border border-accent-tertiary/20">
+            <h2 className="text-2xl md:text-3xl font-bold text-dark-text mb-4">{t('cta.title')}</h2>
+            <p className="text-lg text-dark-text/80 mb-8 max-w-2xl mx-auto leading-relaxed">
+              {t('cta.description')}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a 
+                href="mailto:ooh.oska@outlook.de" 
+                className="inline-flex items-center gap-3 bg-accent-tertiary text-white hover:bg-accent-tertiary/90 transition-all duration-300 text-lg py-3 px-8 rounded-full shadow-lg hover:shadow-xl hover:scale-[1.02]"
+              >
+                <i className="fa-solid fa-envelope"></i>
+                <span>{t('cta.contactButton')}</span>
+              </a>
+              <a 
+                href="https://www.linkedin.com/in/ole-oskar-heinrichs/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 bg-dark-text/5 text-dark-text hover:bg-dark-text/10 transition-all duration-300 text-lg py-3 px-8 rounded-full border border-dark-text/20 hover:border-dark-text/30"
+              >
+                <i className="fa-brands fa-linkedin"></i>
+                <span>{t('cta.linkedinButton')}</span>
+              </a>
+            </div>
+          </div>
         </ScrollAnimationSection>
 
         {/* Connect Section */}

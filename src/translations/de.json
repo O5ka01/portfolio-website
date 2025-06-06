@@ -2,6 +2,7 @@
   "navigation": {
     "home": "Startseite",
     "projects": "Projekte",
+    "skills": "Fähigkeiten",
     "experience": "Erfahrung",
     "blog": "Blog",
     "connect": "Kontakt"
@@ -36,26 +37,52 @@
   "experience": {
     "title": "Berufserfahrung & Ausbildung",
     "current": "Aktuell",
+    "keyAchievements": "Wichtige Erfolge",
     "euroarts": {
-      "title": "Marketing & Vertrieb",
-      "period": "Jan 2023 - Heute",
-      "description": "Verantwortlich für Marketing und Vertrieb klassischer Musikaufnahmen."
+      "title": "Assistant Marketing & Distribution",
+      "period": "Jan 2025 - Heute",
+      "description": "Unterstützung von Marketing-Initiativen und Vertriebsstrategien für klassische Musikaufnahmen bei einem der führenden klassischen Musiklabels Europas.",
+      "achievement1": "Unterstützung bei digitalen Marketing-Kampagnen für klassische Musikveröffentlichungen",
+      "achievement2": "Unterstützung von Vertriebsstrategien auf allen großen Streaming-Plattformen",
+      "achievement3": "Zusammenarbeit mit internationalen Künstlern und Orchestern bei Promotion-Inhalten"
     },
     "kiacademy": {
       "title": "Marketing Manager",
-      "period": "Apr 2023 - Heute",
-      "description": "Leitung von Marketing-Initiativen für KI-Bildungsprogramme."
+      "period": "Sept 2024 - Heute",
+      "description": "Die KI Academy, mit Sitz im Herzen Berlins, widmet sich der Aufgabe, Einzelpersonen und Unternehmen dabei zu helfen, das volle Potenzial der Künstlichen Intelligenz (KI) zu entfalten. Unsere Mission ist es, Lernende mit den Werkzeugen und dem Wissen auszustatten, die sie benötigen, um in einer sich schnell entwickelnden digitalen Welt erfolgreich zu sein.",
+      "achievement1": "Social Media Marketing und Online Marketing Expertise",
+      "achievement2": "Arbeit mit Branchenexperten, die die Grenzen der KI-Innovation erweitern",
+      "achievement3": "Bereitstellung modernster Einblicke und Fähigkeiten für Studierende"
+    },
+    "audioEngineer": {
+      "title": "Tontechniker",
+      "period": "Sept 2022 - Juni 2023",
+      "description": "Komplette Hörbuchbearbeitung und -mastering für 'Die Sieben Säulen des Seins: Von der Kunst ein erfülltes Leben zu führen - Das transformierende Praxis-Programm' mit Adobe Audition.",
+      "achievement1": "Eigenständige Projektkoordination und Organisation",
+      "achievement2": "Professionelle Audiobearbeitung und Mastering",
+      "achievement3": "Zeitmanagement und Tontechnik-Expertise"
+    },
+    "aboutUsRecords": {
+      "title": "Praktikant",
+      "period": "Juli 2020 - Okt 2020",
+      "description": "Umfassendes Praktikum bei about us records mit tiefen Einblicken in die Musikindustrie in verschiedenen Bereichen.",
+      "achievement1": "Musikpromotion und Künstlermanagement-Erfahrung",
+      "achievement2": "A&R-Erfahrung und Einblicke in die Musikproduktion",
+      "achievement3": "Musikvertrieb (physisch und digital) und Musikrecht-Kenntnisse"
+    },
+    "eventOrganizer": {
+      "title": "Veranstalter",
+      "period": "Jan 2020",
+      "description": "Organisation eines ausverkauften Konzerts mit mehreren Künstlern im Lido Berlin, inklusive eigenem Auftritt auf der Bühne.",
+      "achievement1": "Eventplanung und Veranstaltungsortmanagement",
+      "achievement2": "Erfolgreich organisiertes ausverkauftes Konzert",
+      "achievement3": "Kombination aus organisatorischen und Performance-Fähigkeiten"
     },
     "education": {
-      "title": "Musikproduktion & Songwriting, BA",
-      "institution": "BIMM Berlin",
-      "period": "2019 - 2022",
-      "description": "Fokus auf Musikproduktion, Recording und Komposition."
-    },
-    "internship": {
-      "title": "Praktikum",
-      "period": "2019",
-      "description": "Musikproduktion und Veranstaltungsmanagement"
+      "title": "Bachelor of Music, Songwriting",
+      "institution": "BIMM University",
+      "period": "Sept 2021 - Sept 2024",
+      "description": "Der BMus (Hons) Songwriting-Studiengang ermöglicht es den Studierenden, ihre kreativen Fähigkeiten zu entfalten und fundiertes Wissen über Musik und Industrie zu erwerben. Der Kurs legt Wert auf praktisches Lernen und Zusammenarbeit mit Fachleuten aus der Branche."
     }
   },
   "blog": {
@@ -141,5 +168,42 @@
     "title": "Datenschutzerklärung",
     "backToHome": "Zurück zur Startseite"
   },
-  "languageSwitch": "EN"
+  "credentials": {
+    "yearsExperience": "Jahre Erfahrung",
+    "marketingDistribution": "Marketing & Vertrieb",
+    "currentRoles": "Aktuelle Rollen",
+    "parallelPositions": "Parallele Positionen",
+    "degree": "Musikproduktion",
+    "musicProduction": "& Songwriting",
+    "specialization": "Fokus",
+    "musicTech": "Musik & KI"
+  },
+  "skills": {
+    "title": "Fähigkeiten & Expertise",
+    "marketing": {
+      "title": "Marketing & Business",
+      "digitalMarketing": "Digital Marketing",
+      "contentStrategy": "Content-Strategie",
+      "distributionStrategy": "Vertriebsstrategie",
+      "analytics": "Analytics & Daten",
+      "projectManagement": "Projektmanagement"
+    },
+    "technical": {
+      "title": "Technisch & Kreativ",
+      "musicProduction": "Musikproduktion",
+      "aiTools": "KI-Tools & Workflows",
+      "audioEngineering": "Audio Engineering",
+      "webTechnologies": "Web-Technologien"
+    },
+    "tools": {
+      "title": "Tools & Technologien"
+    }
+  },
+  "languageSwitch": "EN",
+  "cta": {
+    "title": "Bereit für eine Zusammenarbeit?",
+    "description": "Ich bin immer offen für Gespräche über neue Möglichkeiten im Marketing, der Musikproduktion oder KI-Integrationsprojekten. Lassen Sie uns in Kontakt treten und erkunden, wie wir zusammenarbeiten können.",
+    "contactButton": "Kontakt aufnehmen",
+    "linkedinButton": "Auf LinkedIn vernetzen"
+  }
 }

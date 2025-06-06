@@ -2,6 +2,7 @@
   "navigation": {
     "home": "Home",
     "projects": "Projects",
+    "skills": "Skills",
     "experience": "Experience",
     "blog": "Blog",
     "connect": "Connect"
@@ -36,26 +37,52 @@
   "experience": {
     "title": "Experience & Education",
     "current": "Current",
+    "keyAchievements": "Key Achievements",
     "euroarts": {
-      "title": "Marketing & Distribution",
-      "period": "Jan 2023 - Present",
-      "description": "Responsible for marketing and distribution of classical music recordings."
+      "title": "Assistant Marketing & Distribution",
+      "period": "Jan 2025 - Present",
+      "description": "Supporting marketing initiatives and distribution strategies for classical music recordings at one of Europe's premier classical music labels.",
+      "achievement1": "Assisting in digital marketing campaigns for classical music releases",
+      "achievement2": "Supporting distribution strategies across major streaming platforms",
+      "achievement3": "Collaborating with international artists and orchestras on promotional content"
     },
     "kiacademy": {
       "title": "Marketing Manager",
-      "period": "Apr 2023 - Present",
-      "description": "Leading marketing initiatives for AI education programs."
+      "period": "Sept 2024 - Present",
+      "description": "The KI Academy, based in the heart of Berlin, is dedicated to helping individuals and companies unlock the full potential of Artificial Intelligence (AI). Our mission is to equip learners with the tools and knowledge they need to succeed in a rapidly evolving digital world.",
+      "achievement1": "Social Media Marketing and Online Marketing expertise",
+      "achievement2": "Working with industry experts pushing the boundaries of AI innovation",
+      "achievement3": "Providing cutting-edge insights and skills to students"
+    },
+    "audioEngineer": {
+      "title": "Audio Engineer",
+      "period": "Sept 2022 - June 2023",
+      "description": "Complete audiobook editing and mastering for 'Die Sieben Säulen des Seins: Von der Kunst ein erfülltes Leben zu führen - Das transformierende Praxis-Programm' using Adobe Audition.",
+      "achievement1": "Independent project coordination and organization",
+      "achievement2": "Professional audio editing and mastering",
+      "achievement3": "Time management and audio engineering expertise"
+    },
+    "aboutUsRecords": {
+      "title": "Intern",
+      "period": "July 2020 - Oct 2020",
+      "description": "Comprehensive internship at about us records gaining deep insights into the music industry across multiple departments.",
+      "achievement1": "Music promotion and artist management experience",
+      "achievement2": "A&R experience and music production insights",
+      "achievement3": "Music distribution (physical and digital) and music law knowledge"
+    },
+    "eventOrganizer": {
+      "title": "Event Organizer",
+      "period": "Jan 2020",
+      "description": "Organized a sold-out concert with multiple artists at Lido Berlin, including performing on stage myself.",
+      "achievement1": "Event planning and venue management",
+      "achievement2": "Successfully organized sold-out concert",
+      "achievement3": "Combined organizational and performance skills"
     },
     "education": {
-      "title": "Music Production & Songwriting, BA",
-      "institution": "BIMM Berlin",
-      "period": "2019 - 2022",
-      "description": "Focus on music production, recording, and composition."
-    },
-    "internship": {
-      "title": "Internship",
-      "period": "2019",
-      "description": "Music production and event management"
+      "title": "Bachelor of Music, Songwriting",
+      "institution": "BIMM University",
+      "period": "Sept 2021 - Sept 2024",
+      "description": "The BMus (Hons) Songwriting degree enables students to develop their creative abilities and acquire solid knowledge about music and industry. The course emphasizes practical learning and collaboration with industry professionals."
     }
   },
   "blog": {
@@ -141,5 +168,49 @@
     "title": "Privacy Policy",
     "backToHome": "Back to Home"
   },
-  "languageSwitch": "DE"
+  "languageSwitch": "DE",
+  "credentials": {
+    "title": "Credentials",
+    "description": "Relevant certifications and licenses that showcase my expertise.",
+    "yearsExperience": "Years Experience",
+    "marketingDistribution": "Marketing & Distribution",
+    "currentRoles": "Current Roles",
+    "parallelPositions": "Parallel Positions",
+    "degree": "Music Production",
+    "musicProduction": "& Songwriting",
+    "specialization": "Focus",
+    "musicTech": "Music & AI"
+  },
+  "skills": {
+    "title": "Skills & Expertise",
+    "description": "Technical and soft skills that I possess and continuously develop.",
+    "marketing": {
+      "title": "Marketing & Business",
+      "digitalMarketing": "Digital Marketing",
+      "contentStrategy": "Content Strategy",
+      "distributionStrategy": "Distribution Strategy",
+      "analytics": "Analytics & Data",
+      "projectManagement": "Project Management"
+    },
+    "technical": {
+      "title": "Technical & Creative",
+      "musicProduction": "Music Production",
+      "aiTools": "AI Tools & Workflows",
+      "audioEngineering": "Audio Engineering",
+      "webTechnologies": "Web Technologies"
+    },
+    "tools": {
+      "title": "Tools & Technologies"
+    }
+  },
+  "enhancedExperience": {
+    "title": "Enhanced Experience",
+    "description": "Additional experience and achievements that demonstrate my capabilities."
+  },
+  "cta": {
+    "title": "Ready to Collaborate?",
+    "description": "I'm always open to discussing new opportunities in marketing, music production, or AI integration projects. Let's connect and explore how we can work together.",
+    "contactButton": "Get in Touch",
+    "linkedinButton": "Connect on LinkedIn"
+  }
 }

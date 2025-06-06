@@ -1,138 +1,115 @@
 import { NextResponse } from 'next/server';
 import { ServerCache } from '@/utils/cache';
 import { handleApiError } from '@/utils/errorHandler';
+import { getSpotifyAPI, getMockArtistStats, validateSpotifyConfig, type ArtistStats } from '@/utils/spotifyApi';
 
-// Initialize cache with 1-day TTL for stats (they don't change frequently)
-const cache = ServerCache.getInstance({ ttl: 24 * 60 * 60 * 1000 });
+// Initialize cache with 6-hour TTL for stats (Spotify data doesn't change frequently)
+const cache = ServerCache.getInstance({ ttl: 6 * 60 * 60 * 1000 });
 
-// Mock artist statistics - in a real app, these would come from Spotify/SoundCloud APIs
-interface ArtistStats {
-  plays: number;
-  followers: number;
-  monthlyListeners: number;
-  topTracks: Array<{
-    title: string;
-    plays: number;
-    link: string;
-  }>;
-  platforms: Record<string, number>;
-  growth: {
-    monthly: number; // Percentage growth
-    yearly: number;
-  };
-  countries: Array<{
-    name: string;
-    listeners: number;
-  }>;
-  lastUpdated: string;
-}
+// Ole Oskar Heinrichs (O$ka) Spotify Artist ID
+const ARTIST_ID = '4BTWTI3mEAVmYQbe94r0MY';
 
-// Demo stats for Ole Oskar Heinrichs (O$ka)
-const mockStats: ArtistStats = {
-  plays: 158742,
-  followers: 1243,
-  monthlyListeners: 842,
-  topTracks: [
-    {
-      title: 'Midnight Dreams',
-      plays: 42587,
-      link: 'https://open.spotify.com/intl-de/artist/4BTWTI3mEAVmYQbe94r0MY'
-    },
-    {
-      title: 'Urban Echo',
-      plays: 35219,
-      link: 'https://open.spotify.com/intl-de/artist/4BTWTI3mEAVmYQbe94r0MY'
-    },
-    {
-      title: 'Neon Lights',
-      plays: 27891,
-      link: 'https://open.spotify.com/intl-de/artist/4BTWTI3mEAVmYQbe94r0MY'
-    }
-  ],
-  platforms: {
-    'Spotify': 124568,
-    'SoundCloud': 28945,
-    'YouTube': 5229
-  },
-  growth: {
-    monthly: 4.8,
-    yearly: 67.2
-  },
-  countries: [
-    { name: 'Germany', listeners: 423 },
-    { name: 'United States', listeners: 156 },
-    { name: 'United Kingdom', listeners: 87 },
-    { name: 'France', listeners: 64 },
-    { name: 'Netherlands', listeners: 56 }
-  ],
-  lastUpdated: new Date().toISOString()
-};
-
-/**
- * In a real implementation, this would fetch data from Spotify/SoundCloud APIs
- * For now, we'll return mock data that simulates artist statistics
- */
-async function getArtistStats(): Promise<ArtistStats> {
-  // In a real implementation, you would fetch from music platform APIs
-  // Example with Spotify:
-  // const spotifyToken = await getSpotifyToken();
-  // const response = await fetch('https://api.spotify.com/v1/artists/{id}', {
-  //   headers: { 'Authorization': `Bearer ${spotifyToken}` }
-  // });
-  // const data = await response.json();
-  
-  // Instead, we'll return mock data with slight randomization for demo purposes
-  const variance = Math.random() * 0.1 - 0.05; // +/- 5% variance
-  
-  return {
-    ...mockStats,
-    plays: Math.round(mockStats.plays * (1 + variance)),
-    followers: Math.round(mockStats.followers * (1 + variance)),
-    monthlyListeners: Math.round(mockStats.monthlyListeners * (1 + variance)),
-    lastUpdated: new Date().toISOString()
-  };
-}
-
-/**
- * API route to get artist statistics
- */
 export async function GET() {
   try {
-    // Check cache first
-    const cacheKey = 'artist-stats';
+    const cacheKey = `artist-stats-${ARTIST_ID}`;
+    
+    // Try to get from cache first
     const cachedStats = cache.get<ArtistStats>(cacheKey);
-    
-    if (cachedStats !== null) {
-      return NextResponse.json(
-        { success: true, data: cachedStats },
-        { 
-          status: 200,
-          headers: {
-            'Cache-Control': 'public, max-age=3600', // 1 hour
-            'X-Cache': 'HIT'
-          } 
-        }
-      );
+    if (cachedStats) {
+      return NextResponse.json({
+        ...cachedStats,
+        cached: true,
+        cacheAge: Math.round((Date.now() - new Date(cachedStats.lastUpdated).getTime()) / 1000 / 60) // minutes
+      });
     }
-    
-    // Fetch fresh stats
-    const stats = await getArtistStats();
-    
-    // Cache the result
-    cache.set(cacheKey, stats);
-    
-    // Return response
-    return NextResponse.json(
-      { success: true, data: stats },
-      { 
-        status: 200,
-        headers: {
-          'Cache-Control': 'public, max-age=3600', // 1 hour
-          'X-Cache': 'MISS'
-        } 
+
+    // Check if Spotify API is configured
+    const spotifyConfig = validateSpotifyConfig();
+    let stats: ArtistStats;
+
+    if (spotifyConfig.isConfigured) {
+      try {
+        // Fetch real data from Spotify
+        const spotifyAPI = getSpotifyAPI();
+        stats = await spotifyAPI.getArtistStats(ARTIST_ID);
+        
+        console.log('Successfully fetched Spotify artist stats:', {
+          followers: stats.followers,
+          topTracks: stats.topTracks.length,
+          popularity: stats.popularity
+        });
+      } catch (spotifyError) {
+        console.warn('Failed to fetch from Spotify API, using mock data:', spotifyError);
+        stats = getMockArtistStats();
+        stats.lastUpdated = new Date().toISOString();
       }
-    );
+    } else {
+      console.warn('Spotify API not configured, using mock data:', spotifyConfig.error);
+      stats = getMockArtistStats();
+      stats.lastUpdated = new Date().toISOString();
+    }
+
+    // Cache the results
+    cache.set(cacheKey, stats);
+
+    return NextResponse.json({
+      ...stats,
+      cached: false,
+      dataSource: spotifyConfig.isConfigured ? 'spotify' : 'mock'
+    });
+
   } catch (error) {
-    return handleApiError(error, { path: '/api/artist-stats', method: 'GET' });
+    console.error('Artist stats API error:', error);
+    
+    // Return mock data as fallback
+    const fallbackStats = getMockArtistStats();
+    return NextResponse.json({
+      ...fallbackStats,
+      cached: false,
+      dataSource: 'fallback',
+      error: 'Failed to fetch live data'
+    });
+  }
+}
+
+// Health check for the artist stats API
+export async function POST() {
+  try {
+    const spotifyConfig = validateSpotifyConfig();
+    
+    if (spotifyConfig.isConfigured) {
+      // Test Spotify API connection
+      const spotifyAPI = getSpotifyAPI();
+      await spotifyAPI.getArtist(ARTIST_ID);
+      
+      return NextResponse.json({
+        status: 'healthy',
+        spotify: {
+          configured: true,
+          connection: 'ok'
+        },
+        cache: {
+          enabled: true,
+          ttl: '6 hours'
+        },
+        timestamp: new Date().toISOString()
+      });
+    } else {
+      return NextResponse.json({
+        status: 'degraded',
+        spotify: {
+          configured: false,
+          error: spotifyConfig.error
+        },
+        cache: {
+          enabled: true,
+          ttl: '6 hours'
+        },
+        fallback: 'mock data',
+        timestamp: new Date().toISOString()
+      });
+    }
+  } catch (error) {
+    return handleApiError(error, { path: '/api/artist-stats', method: 'POST' });
   }
 }
