@@ -86,10 +86,10 @@
     }
   },
   "blog": {
-    "title": "Blog & Thoughts",
-    "comingSoon": "Coming soon",
+    "title": "Blog",
+    "comingSoon": "Coming Soon",
+    "description": "Exciting content about music, technology, and creative process is on the way.",
     "stayTuned": "Stay Tuned",
-    "description": "Content about music and AI will be available here soon.",
     "headerDescription": "My thoughts and articles about music production, AI, and creative processes.",
     "readMore": "Read More",
     "viewAll": "View All Posts",
@@ -103,9 +103,7 @@
     "noPostsWithTag": "No posts with the selected tag",
     "noPostsYet": "There are no blog posts available yet",
     "viewAllPosts": "View All Posts",
-    "backToHome": "Back to Home",
-    "redirecting": "Redirecting to Substack...",
-    "visitSubstack": "Visit Substack Now"
+    "backToHome": "Back to Home"
   },
   "connect": {
     "title": "Connect",

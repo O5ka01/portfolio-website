@@ -10,9 +10,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import Footer from '@/components/Footer';
-import SubstackEmbed from '@/components/SubstackEmbed';
 import ForceTranslationRefresh from '@/components/ForceTranslationRefresh';
 import ScrollAnimationSection from '@/components/ScrollAnimationSection';
+import { motion } from 'framer-motion';
 
 // Helper function to safely render HTML content
 const RenderHTML = ({ html }: { html: string }) => {
@@ -622,7 +622,7 @@ export default function Home() {
           </div>
         </ScrollAnimationSection>
 
-        {/* Blog Section - Substack Embed */}
+        {/* Coming Soon Section */}
         <ScrollAnimationSection
           id="blog"
           className="mb-12 md:mb-20 scroll-mt-20"
@@ -632,7 +632,81 @@ export default function Home() {
           aria-labelledby="blog-heading"
         >
           <h2 id="blog-heading" className="text-2xl sm:text-3xl font-bold text-dark-text mb-6 sm:mb-8">{t('blog.title')}</h2>
-          <SubstackEmbed />
+          <div className="relative bg-gradient-to-br from-accent-primary/10 via-white to-accent-tertiary/10 rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] p-8 sm:p-10 overflow-hidden">
+            {/* Decorative elements */}
+            <div className="absolute top-0 left-0 w-40 h-40 bg-accent-primary/5 rounded-full -translate-x-20 -translate-y-20"></div>
+            <div className="absolute bottom-0 right-0 w-60 h-60 bg-accent-tertiary/5 rounded-full translate-x-20 translate-y-20"></div>
+            
+            <div className="relative flex flex-col items-center justify-center py-8 z-10">
+              {/* Coming soon animated icon */}
+              <motion.div 
+                className="w-24 h-24 mb-6 flex items-center justify-center rounded-full bg-white shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 260, 
+                  damping: 20 
+                }}
+              >
+                <motion.div
+                  animate={{
+                    rotate: [0, 10, 0, -10, 0],
+                  }}
+                  transition={{
+                    duration: 5,
+                    ease: "easeInOut",
+                    repeat: Infinity,
+                  }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-accent-tertiary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                </motion.div>
+              </motion.div>
+              
+              {/* Coming soon text */}
+              <motion.h3 
+                className="text-2xl sm:text-3xl font-bold text-accent-tertiary mb-4 tracking-tight"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                {t('blog.comingSoon')}
+              </motion.h3>
+              
+              <motion.p 
+                className="text-dark-text text-lg mb-6 max-w-lg text-center leading-relaxed"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
+                {t('blog.description')}
+              </motion.p>
+              
+              {/* Stay tuned badge */}
+              <motion.div 
+                className="inline-flex items-center py-2 px-5 bg-accent-tertiary text-white rounded-full shadow-sm"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
+              >
+                <motion.span 
+                  className="mr-2 text-lg"
+                  animate={{
+                    scale: [1, 1.2, 1],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    repeatType: "reverse"
+                  }}
+                >✨</motion.span>
+                <span className="font-medium">{t('blog.stayTuned')}</span>
+              </motion.div>
+            </div>
+          </div>
         </ScrollAnimationSection>
 
         {/* Professional Call-to-Action Section */}

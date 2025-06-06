@@ -56,14 +56,7 @@ const ResponsiveNavbar = () => {
               <span>{t('navigation.experience')}</span>
               <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-accent-tertiary transition-all duration-300 group-hover:w-full"></span>
             </a>
-            <a 
-              href="#blog" 
-              className="text-dark-text/80 hover:text-dark-text text-sm font-medium transition-all duration-200 relative group" 
-              aria-label="View blog section"
-            >
-              <span>{t('navigation.blog')}</span>
-              <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-accent-tertiary transition-all duration-300 group-hover:w-full"></span>
-            </a>
+            {/* Blog tab removed */}
             <a 
               href="#connect" 
               className="text-dark-text/80 hover:text-dark-text text-sm font-medium transition-all duration-200 relative group" 

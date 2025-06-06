@@ -69,13 +69,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
         >
           {t('navigation.experience')}
         </button>
-        <button 
-          onClick={() => scrollToSection('blog')} 
-          className="py-3 text-dark-text hover:text-accent-tertiary transition-colors focus:outline-none focus:ring-2 focus:ring-accent-tertiary focus:ring-opacity-50 rounded"
-          aria-label="View blog section"
-        >
-          {t('navigation.blog')}
-        </button>
+        {/* Blog tab removed */}
         <button 
           onClick={() => scrollToSection('connect')} 
           className="py-3 text-dark-text hover:text-accent-tertiary transition-colors focus:outline-none focus:ring-2 focus:ring-accent-tertiary focus:ring-opacity-50 rounded"
