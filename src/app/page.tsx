@@ -13,6 +13,7 @@ import Footer from '@/components/Footer';
 import ForceTranslationRefresh from '@/components/ForceTranslationRefresh';
 import ScrollAnimationSection from '@/components/ScrollAnimationSection';
 import { motion } from 'framer-motion';
+import SEOEnhancer from '@/components/SEOEnhancer';
 
 // Helper function to safely render HTML content
 const RenderHTML = ({ html }: { html: string }) => {
@@ -101,6 +102,9 @@ export default function Home() {
 
   return (
     <div className="bg-warm-beige min-h-screen">
+      {/* SEO Enhancement Component */}
+      <SEOEnhancer />
+      
       {/* Navigation - Using the new Responsive Navbar */}
       <header>
         <ResponsiveNavbar />
@@ -115,12 +119,56 @@ export default function Home() {
           duration={0.9}
         >
           <div className="w-full md:w-1/2 space-y-5 md:space-y-6 text-center md:text-left">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-dark-text tracking-tight">{t('header.title')}</h1>
-            <p className="text-lg sm:text-xl text-accent-tertiary">{t('header.subtitle')}</p>
-            <h2 className="text-xl sm:text-2xl font-medium text-dark-text">{t('header.profession')}</h2>
-            <p className="text-base sm:text-lg text-dark-text/80 leading-relaxed max-w-xl">
-              {t('header.description')}
-            </p>
+            {/* SEO-optimized heading structure */}
+            <header>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-dark-text tracking-tight">
+                {t('header.title')}
+                <span className="block text-2xl sm:text-3xl md:text-4xl text-accent-tertiary mt-2">
+                  ({t('header.subtitle')})
+                </span>
+              </h1>
+              <h2 className="text-xl sm:text-2xl font-medium text-dark-text mt-4">
+                {t('header.profession')}
+              </h2>
+            </header>
+            
+            {/* SEO-rich description with keywords */}
+            <div className="space-y-4">
+              <p className="text-base sm:text-lg text-dark-text/80 leading-relaxed max-w-xl">
+                {t('header.description')}
+              </p>
+              
+              {/* Additional SEO content - hidden from users but visible to search engines */}
+              <div className="sr-only">
+                <p>
+                  O$ka (Ole Heinrichs) is a German musician, music producer, and marketing professional 
+                  specializing in electronic music production, audio engineering, and digital marketing. 
+                  Based in Germany, Ole Oskar Heinrichs combines his expertise in music production 
+                  with professional marketing skills to create innovative musical experiences.
+                </p>
+                <p>
+                  Known professionally as O$ka and murphywav, Ole Heinrichs offers music production services, 
+                  marketing consultation, and artist development. His work spans electronic music, 
+                  pop production, and hip-hop beats, making him a versatile German music producer.
+                </p>
+              </div>
+            </div>
+            
+            {/* Professional keywords section */}
+            <div className="flex flex-wrap gap-2 mt-6">
+              <span className="px-3 py-1 bg-accent-primary/10 text-accent-tertiary text-sm rounded-full">
+                Music Producer
+              </span>
+              <span className="px-3 py-1 bg-accent-primary/10 text-accent-tertiary text-sm rounded-full">
+                German Musician
+              </span>
+              <span className="px-3 py-1 bg-accent-primary/10 text-accent-tertiary text-sm rounded-full">
+                Marketing Professional
+              </span>
+              <span className="px-3 py-1 bg-accent-primary/10 text-accent-tertiary text-sm rounded-full">
+                Audio Engineer
+              </span>
+            </div>
           </div>
           <div className="w-full md:w-1/2 flex justify-center py-4">
             <div className="w-48 h-48 sm:w-64 sm:h-64 rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.1)] relative transition-all duration-500 hover:scale-[1.01] hover:shadow-[0_6px_20px_rgba(0,0,0,0.18)]">

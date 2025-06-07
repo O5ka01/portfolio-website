@@ -22,33 +22,44 @@ const PUBLIC_ASSETS = /\.(.*)$/; // Files with extensions (public assets)
 const CACHE_CONTROL_VALUE = 'public, max-age=31536000, immutable'; // 1 year cache for static assets
 
 export function middleware(request: NextRequest) {
-  const response = NextResponse.next();
   const { pathname } = request.nextUrl;
-
-  // 1. Security headers for all routes
-  // Most security headers are already set in next.config.js, but here we can add custom logic
-  response.headers.set('X-Middleware-Cache', 'hit');
-
-  // 2. Cache control for static assets
-  if (PUBLIC_ASSETS.test(pathname) && !pathname.includes('/_next/data/')) {
-    response.headers.set('Cache-Control', CACHE_CONTROL_VALUE);
-  }
-
-  // 3. Handle language preference without redirecting
-  // This just sets a cookie for client-side language detection
-  if (pathname === '/' || pathname === '') {
-    // Skip if cookie is already set
+  
+  // Ensure visitors land on the main page when accessing the root domain
+  if (pathname === '' || pathname === '/') {
+    // Create a new URL object based on the request URL
+    const url = request.nextUrl.clone();
+    
+    // Explicitly set the pathname to '/' to ensure we land on the main page
+    url.pathname = '/';
+    
+    // Create a response that redirects to the main page
+    const response = NextResponse.redirect(url);
+    
+    // Set language preference cookie
     const cookie = request.cookies.get('preferred-language');
     if (!cookie) {
-      // Detect language from browser
       const locale = getLocale(request);
-      
-      // Instead of redirecting, just set the cookie
       response.cookies.set('preferred-language', locale, {
         path: '/',
         maxAge: 60 * 60 * 24 * 365, // 1 year
       });
     }
+    
+    // Add security headers
+    response.headers.set('X-Middleware-Cache', 'hit');
+    
+    return response;
+  }
+  
+  // For all other routes
+  const response = NextResponse.next();
+  
+  // 1. Security headers for all routes
+  response.headers.set('X-Middleware-Cache', 'hit');
+
+  // 2. Cache control for static assets
+  if (PUBLIC_ASSETS.test(pathname) && !pathname.includes('/_next/data/')) {
+    response.headers.set('Cache-Control', CACHE_CONTROL_VALUE);
   }
 
   return response;
