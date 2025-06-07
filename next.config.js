@@ -72,6 +72,37 @@ const nextConfig = {
       },
     ];
   },
+
+  // Add domain canonicalization redirects
+  async redirects() {
+    return [
+      // Redirect www to non-www (canonical domain)
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.oleoskarheinrichs.com',
+          },
+        ],
+        destination: 'https://oleoskarheinrichs.com/:path*',
+        permanent: true,
+      },
+      // Redirect HTTP to HTTPS
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'header',
+            key: 'x-forwarded-proto',
+            value: 'http',
+          },
+        ],
+        destination: 'https://oleoskarheinrichs.com/:path*',
+        permanent: true,
+      },
+    ];
+  },
   // Security headers
   async headers() {
     return [

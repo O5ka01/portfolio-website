@@ -1,18 +1,28 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://oleoskarheinrichs.com';
+  // Define canonical domain
+  const canonicalDomain = 'https://oleoskarheinrichs.com';
   
   return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: [
-        '/api/',
-        '/_next/',
-        '/_vercel/',
-      ],
-    },
-    sitemap: `${baseUrl}/sitemap.xml`,
+    rules: [
+      {
+        // Main rules for canonical domain
+        userAgent: '*',
+        allow: '/',
+        disallow: [
+          '/api/',
+          '/_next/',
+          '/_vercel/',
+        ],
+      },
+      {
+        // Specific rules for non-canonical domains
+        userAgent: '*',
+        disallow: '/',
+      },
+    ],
+    sitemap: `${canonicalDomain}/sitemap.xml`,
+    host: canonicalDomain,
   };
 }

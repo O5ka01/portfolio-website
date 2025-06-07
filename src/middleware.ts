@@ -24,6 +24,24 @@ const CACHE_CONTROL_VALUE = 'public, max-age=31536000, immutable'; // 1 year cac
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   
+  // Check if the pathname starts with a locale
+  const pathnameHasLocale = locales.some(
+    locale => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+  );
+  
+  // If the path already has a locale, just proceed
+  if (pathnameHasLocale) {
+    const response = NextResponse.next();
+    response.headers.set('X-Middleware-Cache', 'hit');
+    
+    // Set cache control for public assets
+    if (PUBLIC_ASSETS.test(pathname) && !pathname.includes('/_next/data/')) {
+      response.headers.set('Cache-Control', CACHE_CONTROL_VALUE);
+    }
+    
+    return response;
+  }
+  
   // Handle language preference for root path visits
   if (pathname === '' || pathname === '/') {
     const response = NextResponse.next();
