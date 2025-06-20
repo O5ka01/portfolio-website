@@ -1,4 +1,4 @@
-import { redirect } from 'next/navigation';
+
 import Home from '@/app/page';
 
 export default function EnglishHome() {

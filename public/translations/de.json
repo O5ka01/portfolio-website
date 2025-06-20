@@ -27,10 +27,6 @@
     "discography": {
       "title": "Diskografie"
     },
-    "musicVideos": {
-      "title": "Musikvideos",
-      "officialMusicVideo": "Offizielles Musikvideo"
-    },
     "blog": {
       "title": "Blog"
     },
@@ -163,11 +159,9 @@
     "acceptAll": "Alle akzeptieren",
     "rejectAll": "Alle ablehnen",
     "acceptSelected": "Auswahl akzeptieren",
-    "preferences": "Cookie-Einstellungen",
+    "preferences": "Einstellungen",
     "close": "Schließen",
-    "cookiePolicy": "Cookie-Richtlinie",
-    "essential": "Nur notwendige",
-    "customize": "Anpassen"
+    "cookiePolicy": "Cookie-Richtlinie"
   },
   "datenschutz": {
     "title": "Datenschutzerklärung"

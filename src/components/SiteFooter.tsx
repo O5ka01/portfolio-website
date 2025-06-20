@@ -17,24 +17,14 @@ export default function SiteFooter() {
           </div>
 
           <div className="flex items-center space-x-6">
-            <Link 
-              href="/imprint" 
-              className="text-dark-text/70 hover:text-dark-text transition-colors"
-            >
-              {language === 'de' ? 'Impressum' : 'Imprint'}
-            </Link>
+
             <Link 
               href="/datenschutz" 
               className="text-dark-text/70 hover:text-dark-text transition-colors"
             >
               {language === 'de' ? 'Datenschutz' : 'Privacy Policy'}
             </Link>
-            <Link 
-              href="/agb" 
-              className="text-dark-text/70 hover:text-dark-text transition-colors"
-            >
-              {language === 'de' ? 'AGB' : 'Terms'}
-            </Link>
+
             <CookieSettings />
           </div>
         </div>

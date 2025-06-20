@@ -1,7 +1,8 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode, useMemo } from 'react';
-import { getDefaultLanguage, getFeaturedContent } from '@/utils/edgeConfig';
+import { getDefaultLanguage, getFeaturedContent } from '@/utils/config';
+import { translations } from '@/translations';
 
 type Language = 'de' | 'en';
 
@@ -30,31 +31,22 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguage] = useState<Language>('de'); // Default to German
-  const [translations, setTranslations] = useState<Translations>({});
+  const [currentTranslations, setCurrentTranslations] = useState<Translations>({});
   const [isLoading, setIsLoading] = useState(true);
   const [featuredContent, setFeaturedContent] = useState<FeaturedContent | null>(null);
 
-  // Load Edge Config settings and translations when language changes
+  // Load translations when language changes
   useEffect(() => {
     const loadLanguageResources = async () => {
       try {
         setIsLoading(true);
         
-        // Check if translations are in sessionStorage first
-        const cachedTranslations = sessionStorage.getItem(`translations-${language}`);
-        if (cachedTranslations) {
-          setTranslations(JSON.parse(cachedTranslations));
-        } else {
-          // If not cached, load from file
-          const fetchedTranslations = await import(`@/translations/${language}.json`);
-          setTranslations(fetchedTranslations);
-          
-          // Cache in sessionStorage
-          sessionStorage.setItem(`translations-${language}`, JSON.stringify(fetchedTranslations));
-        }
+        // Get translations directly from imported object
+        const translationData = translations[language];
+        setCurrentTranslations(translationData);
         
         // Fetch featured content from Edge Config
-        const content = await getFeaturedContent(language);
+        const content = await getFeaturedContent();
         // Safely handle the result with proper typing
         setFeaturedContent(content as FeaturedContent | null);
       } catch (error) {
@@ -115,16 +107,19 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const t = useMemo(() => {
     return (key: string): string => {
       const keys = key.split('.');
-      let value: Translations | string = translations;
+      let value: Translations | string = currentTranslations;
 
       for (const k of keys) {
-        if (value === undefined || typeof value === 'string') return key; // Return key if path doesn't exist
+        if (value === undefined || typeof value === 'string') {
+          return key; // Return key if path doesn't exist
+        }
         value = value[k];
       }
 
-      return (typeof value === 'string' ? value : key); // Return value or key if value is undefined or not a string
+      const result = (typeof value === 'string' ? value : key);
+      return result; // Return value or key if value is undefined or not a string
     };
-  }, [translations]);
+  }, [currentTranslations]);
 
   // Memoize the context value to prevent unnecessary re-renders
   const contextValue = useMemo(() => ({

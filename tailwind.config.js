@@ -19,6 +19,8 @@ module.exports = {
         'accent-tertiary': '#B08968', /* Rich caramel - warm accent for emphasis */
       },
       fontFamily: {
+        friz: ['Friz Quadrata', 'serif'],
+        willow: ['Willow Std', 'serif'],
         sans: ['var(--font-text)', '-apple-system', 'BlinkMacSystemFont', 'system-ui'],
         display: ['var(--font-display)', '-apple-system', 'BlinkMacSystemFont', 'system-ui'],
       },

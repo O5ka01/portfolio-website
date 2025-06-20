@@ -4,11 +4,8 @@ import "./globals.css";
 import JsonLd from "@/components/JsonLd";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { ConsentProvider } from "@/context/ConsentContext";
-import { ReleaseBannerProvider } from "@/context/ReleaseBannerContext";
 import CookieBanner from "@/components/CookieBanner";
 import ConditionalScripts from "@/components/ConditionalScripts";
-// SlimReleaseBanner removed as requested
-import NewReleaseBanner from "@/components/NewReleaseBanner";
 import PageTransition from "@/components/PageTransition";
 
 // Using system fonts that mimic SF Pro Display and SF Pro Text - defined in globals.css
@@ -149,9 +146,9 @@ export default function RootLayout({
       "https://www.linkedin.com/in/ole-oskar-heinrichs/",
       "https://www.instagram.com/oska.hayati/",
       "https://www.youtube.com/@oska.hayati",
-      "https://open.spotify.com/intl-de/artist/4BTWTI3mEAVmYQbe94r0MY",
-      "https://soundcloud.com/murphywav",
-      "https://music.apple.com/artist/oska/",
+      "https://open.spotify.com/intl-de/artist/4BTWTI3mEAVmYQbe94r0MY?si=FBpspC__S7-hAWI5Omf3gQ",
+      "https://on.soundcloud.com/yc2BjCAlBb9tYhwGk5",
+      "https://music.apple.com/us/artist/o%24ka/1640653279",
       "https://www.tiktok.com/@oska.hayati"
     ],
     "jobTitle": ["Musician", "Music Producer", "Marketing Professional"],
@@ -286,15 +283,12 @@ export default function RootLayout({
         <JsonLd data={websiteStructuredData} />
         <JsonLd data={professionalServiceData} />
         <ConsentProvider>
-          <ReleaseBannerProvider>
-            <LanguageProvider>
-              <NewReleaseBanner />
-              <PageTransition>
-                {children}
-              </PageTransition>
-              <CookieBanner />
-            </LanguageProvider>
-          </ReleaseBannerProvider>
+          <LanguageProvider>
+            <PageTransition>
+              {children}
+            </PageTransition>
+            <CookieBanner />
+          </LanguageProvider>
           <ConditionalScripts />
         </ConsentProvider>
       </body>

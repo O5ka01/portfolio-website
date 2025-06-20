@@ -1,846 +1,322 @@
-"use client";
+'use client'
 
-import { useState, useEffect } from 'react';
-import SocialIcons, { EmailLink } from '@/components/SocialIcons';
-import Image from 'next/image';
-import { getNextImageProps } from '@/utils/imageOptimization';
-import { useLanguage } from '@/context/LanguageContext';
-import ResponsiveNavbar from '@/components/ResponsiveNavbar';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
-import Footer from '@/components/Footer';
-import ForceTranslationRefresh from '@/components/ForceTranslationRefresh';
-import ScrollAnimationSection from '@/components/ScrollAnimationSection';
-import { motion } from 'framer-motion';
-import SEOEnhancer from '@/components/SEOEnhancer';
-
-// Helper function to safely render HTML content
-const RenderHTML = ({ html }: { html: string }) => {
-  return <div dangerouslySetInnerHTML={{ __html: html }} />;
-};
+import { useState, useEffect } from 'react'
+import { useLanguage } from '@/context/LanguageContext'
+import ResponsiveNavbar from '@/components/ResponsiveNavbar'
+import Footer from '@/components/Footer'
+import SEOEnhancer from '@/components/SEOEnhancer'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { faSpotify, faInstagram, faYoutube, faSoundcloud, faBandcamp, faApple } from '@fortawesome/free-brands-svg-icons'
 
 export default function Home() {
-  // Use useEffect to ensure this code only runs on the client
-  const [isMounted, setIsMounted] = useState(false);
-  const { t } = useLanguage();
-  
-  // Videos with browser-friendly backup image URLs
-  const musicVideoData = {
-    videoUrl: "https://res.cloudinary.com/daaynrl8l/video/upload/showcase_f6z4wq.mp4",
-    imageUrl: "https://res.cloudinary.com/daaynrl8l/video/upload/so_auto/showcase_f6z4wq.jpg"
-  };
-  const commentaryVideoData = {
-    videoUrl: "https://res.cloudinary.com/daaynrl8l/video/upload/commentary_clip_mobwhq.mp4",
-    imageUrl: "https://res.cloudinary.com/daaynrl8l/video/upload/so_auto/commentary_clip_mobwhq.jpg"
-  };
-  
-  // CSS styles as objects with proper TypeScript typing
-  const videoWrapperStyle = {
-    position: 'relative' as const,
-    width: '100%',
-    height: '100%',
-    overflow: 'hidden' as const
-  };
-  
-  // Completely revised video component that prioritizes working over features
-  const BrowserFriendlyVideo = ({ videoData }: { videoData: { videoUrl: string, imageUrl: string } }) => {
-    // Check if we're running in the browser
-    const [isClient, setIsClient] = useState(false);
-    
-    useEffect(() => {
-      setIsClient(true);
-    }, []);
-    
-    // If we're not in the browser, just show a black div
-    if (!isClient) {
-      return <div className="w-full h-full bg-black" />;
-    }
-    
-    // In the browser, try to use the HTML video element
-    return (
-      <div className="relative w-full h-full bg-black overflow-hidden">
-        {/* Fallback image (always shown) */}
-        <div className="absolute inset-0 z-0">
-          <Image 
-            src={videoData.imageUrl || "https://res.cloudinary.com/daaynrl8l/image/upload/placeholder.jpg"} 
-            alt="Video placeholder"
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
-        </div>
-        
-        {/* Video overlay */}
-        <video 
-          className="absolute inset-0 z-10 w-full h-full object-cover"
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-          controls={false}
-          preload="auto"
-        >
-          <source src={videoData.videoUrl} type="video/mp4" />
-        </video>
-      </div>
-    );
-  };
-  
-  // Fix hydration mismatch by only rendering client-specific content after mounting
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const { t } = useLanguage()
+  const [mounted, setMounted] = useState(false)
 
-  if (!isMounted) {
-    // Return a skeleton or simplified version for server rendering
-    return <div className="bg-warm-beige min-h-screen"></div>;
-  }
-  
-  // Force translation refresh to ensure new keys are loaded
-  // This helps fix issues with showing raw translation keys like "blog.readMore"
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) return null
 
   return (
-    <div className="bg-warm-beige min-h-screen">
-      {/* SEO Enhancement Component */}
+    <>
       <SEOEnhancer />
       
-      {/* Navigation - Using the new Responsive Navbar */}
-      <header>
+      <div className="min-h-screen bg-white">
         <ResponsiveNavbar />
-        <ForceTranslationRefresh />
-      </header>
-
-      {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
-        <ScrollAnimationSection 
-          className="flex flex-col md:flex-row gap-12 md:gap-16 items-center mb-16 md:mb-24 mt-8"
-          animation="fade"
-          duration={0.9}
-        >
-          <div className="w-full md:w-1/2 space-y-5 md:space-y-6 text-center md:text-left">
-            {/* SEO-optimized heading structure */}
-            <header>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-dark-text tracking-tight">
-                {t('header.title')}
-                <span className="block text-2xl sm:text-3xl md:text-4xl text-accent-tertiary mt-2">
-                  ({t('header.subtitle')})
-                </span>
-              </h1>
-              <h2 className="text-xl sm:text-2xl font-medium text-dark-text mt-4">
-                {t('header.profession')}
-              </h2>
-            </header>
-            
-            {/* SEO-rich description with keywords */}
-            <div className="space-y-4">
-              <p className="text-base sm:text-lg text-dark-text/80 leading-relaxed max-w-xl">
-                {t('header.description')}
-              </p>
-              
-              {/* Additional SEO content - hidden from users but visible to search engines */}
-              <div className="sr-only">
-                <p>
-                  O$ka (Ole Heinrichs) is a German musician, music producer, and marketing professional 
-                  specializing in electronic music production, audio engineering, and digital marketing. 
-                  Based in Germany, Ole Oskar Heinrichs combines his expertise in music production 
-                  with professional marketing skills to create innovative musical experiences.
-                </p>
-                <p>
-                  Known professionally as O$ka and murphywav, Ole Heinrichs offers music production services, 
-                  marketing consultation, and artist development. His work spans electronic music, 
-                  pop production, and hip-hop beats, making him a versatile German music producer.
-                </p>
-              </div>
-            </div>
-            
-            {/* Professional keywords section */}
-            <div className="flex flex-wrap gap-2 mt-6">
-              <span className="px-3 py-1 bg-accent-primary/10 text-accent-tertiary text-sm rounded-full">
-                Music Producer
-              </span>
-              <span className="px-3 py-1 bg-accent-primary/10 text-accent-tertiary text-sm rounded-full">
-                German Musician
-              </span>
-              <span className="px-3 py-1 bg-accent-primary/10 text-accent-tertiary text-sm rounded-full">
-                Marketing Professional
-              </span>
-              <span className="px-3 py-1 bg-accent-primary/10 text-accent-tertiary text-sm rounded-full">
-                Audio Engineer
-              </span>
-            </div>
-          </div>
-          <div className="w-full md:w-1/2 flex justify-center py-4">
-            <div className="w-48 h-48 sm:w-64 sm:h-64 rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.1)] relative transition-all duration-500 hover:scale-[1.01] hover:shadow-[0_6px_20px_rgba(0,0,0,0.18)]">
-              <Image 
-                {...getNextImageProps('WhatsApp_Image_2025-04-29_at_11.36.15_v0w2ab.jpg', {
-                  quality: 95, // Using very high quality
-                  responsive: true,
-                  format: 'webp' // Using modern format for better quality/size ratio
-                })}
-                alt="Ole Oskar Heinrichs (O$ka) - Musician and Marketing Professional"
-                fill
-                sizes="(max-width: 640px) 12rem, (max-width: 768px) 16rem, 16rem"
-                className="object-cover"
-                priority
-              />
-            </div>
-          </div>
-        </ScrollAnimationSection>
-
-        {/* Professional Credentials Section */}
-        <ScrollAnimationSection 
-          className="mb-16 md:mb-24"
-          animation="fade"
-          delay={50}
-          duration={1.0}
-        >
-          <div className="bg-gradient-to-r from-accent-primary/10 to-accent-secondary/10 rounded-2xl p-6 md:p-8 border border-accent-primary/20">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-              <div className="space-y-2">
-                <div className="text-2xl md:text-3xl font-bold text-accent-tertiary">3+</div>
-                <div className="text-sm md:text-base text-dark-text/80 font-medium">{t('credentials.yearsExperience')}</div>
-                <div className="text-xs text-dark-text/60">{t('credentials.marketingDistribution')}</div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-2xl md:text-3xl font-bold text-accent-tertiary">2</div>
-                <div className="text-sm md:text-base text-dark-text/80 font-medium">{t('credentials.currentRoles')}</div>
-                <div className="text-xs text-dark-text/60">{t('credentials.parallelPositions')}</div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-2xl md:text-3xl font-bold text-accent-tertiary">BA</div>
-                <div className="text-sm md:text-base text-dark-text/80 font-medium">{t('credentials.degree')}</div>
-                <div className="text-xs text-dark-text/60">{t('credentials.musicProduction')}</div>
-              </div>
-            </div>
-          </div>
-        </ScrollAnimationSection>
-
-        {/* Latest Release Section */}
-        <ScrollAnimationSection 
-          className="mb-16 md:mb-24 py-4"
-          animation="fade"
-          delay={100}
-          duration={1.2}
-        >
-          <div className="bg-accent-primary/15 rounded-2xl overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.08)] hover:shadow-[0_6px_18px_rgba(0,0,0,0.14)] transition-all duration-500 border border-accent-primary/10">
-            <div className="grid grid-cols-1 md:grid-cols-12 items-center">
-              {/* Video Container - Adjusted for 4:3 aspect ratio */}
-              <div className="md:col-span-5 md:order-2 p-4 md:p-8 flex justify-center">
-                <div className="relative w-full overflow-hidden rounded-xl" style={{ aspectRatio: '4/3' }}>
-                  <div className="absolute inset-0 bg-gradient-to-r from-accent-primary/10 to-accent-tertiary/10 z-0"></div>
-                  <video 
-                    className="absolute inset-0 w-full h-full object-cover z-10"
-                    autoPlay 
-                    loop 
-                    muted 
-                    playsInline
-                    controls={false}
-                    preload="auto"
-                  >
-                    <source src="https://res.cloudinary.com/daaynrl8l/video/upload/Wegen_mir_website_nbqr2t.mp4" type="video/mp4" />
-                  </video>
-                </div>
-              </div>
-              
-              {/* Content Container */}
-              <div className="md:col-span-7 md:order-1 p-6 md:p-10 md:pr-2">
-                <div className="flex flex-col items-start space-y-6">
-                  {/* Release Info */}
-                  <div className="space-y-3">
-                    <div className="flex items-center space-x-3">
-                      <span className="inline-block h-px w-6 bg-accent-tertiary"></span>
-                      <span className="text-xs uppercase tracking-wider text-accent-tertiary font-medium">{t('latestRelease.new')}</span>
-                    </div>
-                    <h2 className="text-3xl md:text-4xl font-bold text-dark-text tracking-tight">Wegen Mir</h2>
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex flex-wrap gap-3">
-                    <a 
-                      href="https://oska.lnk.to/WegenMir" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-accent-tertiary text-white hover:bg-accent-tertiary/95 transition-all duration-300 ease-out text-sm py-2.5 px-5 rounded-full shadow-sm hover:shadow"
-                    >
-                      <i className="fa-solid fa-play text-xs"></i>
-                      <span>{t('latestRelease.streamNow')}</span>
-                    </a>
-                    
-                    <div className="flex gap-3 mt-2 md:mt-0">
-                      <a 
-                        href="https://www.instagram.com/oska.hayati/" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center w-10 h-10 bg-dark-text/5 text-dark-text hover:bg-dark-text/8 transition-all duration-300 ease-out rounded-full shadow-sm hover:shadow"
-                        aria-label={t('latestRelease.followMe')}
-                      >
-                        <FontAwesomeIcon icon={faInstagram} />
-                      </a>
-                      <a 
-                        href="https://youtu.be/B4JAMlgGfpw?si=JwwUhuBshZyHoYsz" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center w-10 h-10 bg-dark-text/5 text-dark-text hover:bg-dark-text/8 transition-all duration-300 ease-out rounded-full shadow-sm hover:shadow"
-                        aria-label={t('latestRelease.watchVideo')}
-                      >
-                        <FontAwesomeIcon icon={faYoutube} />
-                      </a>
-                    </div>
-                  </div>
-                  
-                  {/* Bandcamp Embed */}
-                  <div className="w-full mt-4">
-                    <div dangerouslySetInnerHTML={{ __html: `<iframe style="border: 0; width: 100%; height: 42px;" src="https://bandcamp.com/EmbeddedPlayer/track=829471641/size=small/bgcol=333333/linkcol=e99708/transparent=true/" seamless><a href="https://oskamusic.bandcamp.com/track/wegen-mir">Wegen Mir by O$ka</a></iframe>` }} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </ScrollAnimationSection>
         
-        {/* Projects Section */}
-        <ScrollAnimationSection 
-          id="projects" 
-          className="mb-16 md:mb-28 py-6 scroll-mt-20" 
-          animation="slide-up"
-          duration={0.8}
-          aria-labelledby="projects-heading"
-        >
-          <h2 id="projects-heading" className="text-2xl sm:text-3xl font-bold text-dark-text mb-8">{t('projects.title')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 lg:gap-12">
-            {/* Project 1 */}
-            <article className="bg-accent-primary/10 rounded-xl p-8 sm:p-10 transition-all duration-400 ease-apple hover:scale-[1.005] flex flex-col shadow-[0_5px_15px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.12)] border border-accent-secondary/10 group animate-scaleIn" style={{ animationDelay: '100ms' }}>
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-dark-text mb-5 group-hover:text-accent-tertiary transition-colors duration-300">{t('projects.musicReleases.title')}</h3>
-              <div 
-                className="aspect-video bg-accent-secondary/20 rounded-xl mb-6 overflow-hidden shadow-sm" 
-              >
-                {/* Custom video player with no controls and auto-loop */}
-                <div style={videoWrapperStyle}>
-                  <BrowserFriendlyVideo videoData={musicVideoData} />
-                </div>
-              </div>
-              <div className="text-dark-text/80 mb-6 text-base sm:text-lg leading-relaxed">
-                <RenderHTML html={t('projects.musicReleases.description')} />
-              </div>
-              <div className="mt-auto flex items-center gap-6">
-                <a 
-                  href="https://open.spotify.com/artist/4BTWTI3mEAVmYQbe94r0MY" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-accent-tertiary hover:text-dark-text transition-all duration-300 ease-apple text-base sm:text-lg py-2 px-4 rounded-full hover:bg-accent-primary/10 hover:shadow-sm"
-                  aria-label="Listen to O$ka on Spotify"
-                >
-                  <i className="fa-brands fa-spotify text-xl"></i>
-                  <span>{t('projects.musicReleases.listenOn')}</span>
-                </a>
-                <a 
-                  href="https://music.apple.com/us/artist/o%24ka/1640653279" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-accent-tertiary hover:text-dark-text transition-all duration-300 ease-apple text-base sm:text-lg py-2 px-4 rounded-full hover:bg-accent-primary/10 hover:shadow-sm"
-                  aria-label="Listen to O$ka on Apple Music"
-                >
-                  <i className="fa-brands fa-apple text-xl"></i>
-                  <span>{t('projects.musicReleases.listenOnApple')}</span>
-                </a>
-                <a 
-                  href="https://oskamusic.bandcamp.com/track/wegen-mir" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-accent-tertiary hover:text-dark-text transition-all duration-300 ease-apple text-base sm:text-lg py-2 px-4 rounded-full hover:bg-accent-primary/10 hover:shadow-sm"
-                  aria-label="Listen to O$ka on Bandcamp"
-                >
-                  <i className="fa-brands fa-bandcamp text-xl"></i>
-                  <span>Bandcamp</span>
-                </a>
-              </div>
-            </article>
-
-            {/* Project 2 */}
-            <article className="bg-accent-primary/10 rounded-xl p-8 sm:p-10 transition-all duration-400 ease-apple hover:scale-[1.005] flex flex-col shadow-[0_5px_15px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.12)] border border-accent-secondary/10 group animate-scaleIn" style={{ animationDelay: '250ms' }}>
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-dark-text mb-5 group-hover:text-accent-tertiary transition-colors duration-300">{t('projects.youtubeCommentary.title')}</h3>
-              <div 
-                className="aspect-video bg-accent-secondary/20 rounded-xl mb-6 overflow-hidden shadow-sm"
-              >
-                {/* Custom video player with no controls and auto-loop */}
-                <div style={videoWrapperStyle}>
-                  <BrowserFriendlyVideo videoData={commentaryVideoData} />
-                </div>
-              </div>
-              <div className="text-dark-text/80 mb-6 text-base sm:text-lg leading-relaxed">
-                <RenderHTML html={t('projects.youtubeCommentary.description')} />
-              </div>
-              <div className="mt-auto flex items-center">
-                <a 
-                  href="https://www.youtube.com/@oska.hayati" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-accent-tertiary hover:text-dark-text transition-all duration-300 ease-apple text-base sm:text-lg py-2 px-4 rounded-full hover:bg-accent-primary/10 hover:shadow-sm"
-                  aria-label="View O$ka's YouTube channel"
-                >
-                  <FontAwesomeIcon icon={faYoutube} />
-                  <span>{t('projects.youtubeCommentary.viewOn')}</span>
-                </a>
-              </div>
-            </article>
-          </div>
-        </ScrollAnimationSection>
-
-        {/* Skills & Expertise Section */}
-        <ScrollAnimationSection
-          id="skills"
-          className="mb-16 md:mb-24 scroll-mt-20"
-          animation="slide-up"
-          duration={0.8}
-          delay={50}
-          aria-labelledby="skills-heading"
-        >
-          <h2 id="skills-heading" className="text-2xl sm:text-3xl font-bold text-dark-text mb-8">{t('skills.title')}</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Marketing & Business Skills */}
-            <div className="bg-accent-primary/10 rounded-xl p-6 border border-accent-primary/20">
-              <h3 className="text-xl font-semibold text-dark-text mb-4 flex items-center gap-2">
-                <i className="fa-solid fa-chart-line text-accent-tertiary"></i>
-                {t('skills.marketing.title')}
-              </h3>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-dark-text/80">{t('skills.marketing.digitalMarketing')}</span>
-                  <div className="w-24 bg-accent-primary/20 rounded-full h-2">
-                    <div className="bg-accent-tertiary h-2 rounded-full" style={{width: '95%'}}></div>
-                  </div>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-dark-text/80">{t('skills.marketing.contentStrategy')}</span>
-                  <div className="w-24 bg-accent-primary/20 rounded-full h-2">
-                    <div className="bg-accent-tertiary h-2 rounded-full" style={{width: '90%'}}></div>
-                  </div>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-dark-text/80">{t('skills.marketing.distributionStrategy')}</span>
-                  <div className="w-24 bg-accent-primary/20 rounded-full h-2">
-                    <div className="bg-accent-tertiary h-2 rounded-full" style={{width: '85%'}}></div>
-                  </div>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-dark-text/80">{t('skills.marketing.analytics')}</span>
-                  <div className="w-24 bg-accent-primary/20 rounded-full h-2">
-                    <div className="bg-accent-tertiary h-2 rounded-full" style={{width: '80%'}}></div>
-                  </div>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-dark-text/80">{t('skills.marketing.projectManagement')}</span>
-                  <div className="w-24 bg-accent-primary/20 rounded-full h-2">
-                    <div className="bg-accent-tertiary h-2 rounded-full" style={{width: '85%'}}></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Technical & Creative Skills */}
-            <div className="bg-accent-secondary/10 rounded-xl p-6 border border-accent-secondary/20">
-              <h3 className="text-xl font-semibold text-dark-text mb-4 flex items-center gap-2">
-                <i className="fa-solid fa-code text-accent-tertiary"></i>
-                {t('skills.technical.title')}
-              </h3>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-dark-text/80">{t('skills.technical.musicProduction')}</span>
-                  <div className="w-24 bg-accent-secondary/20 rounded-full h-2">
-                    <div className="bg-accent-tertiary h-2 rounded-full" style={{width: '95%'}}></div>
-                  </div>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-dark-text/80">{t('skills.technical.aiTools')}</span>
-                  <div className="w-24 bg-accent-secondary/20 rounded-full h-2">
-                    <div className="bg-accent-tertiary h-2 rounded-full" style={{width: '80%'}}></div>
-                  </div>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-dark-text/80">{t('skills.technical.audioEngineering')}</span>
-                  <div className="w-24 bg-accent-secondary/20 rounded-full h-2">
-                    <div className="bg-accent-tertiary h-2 rounded-full" style={{width: '90%'}}></div>
-                  </div>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-dark-text/80">{t('skills.technical.webTechnologies')}</span>
-                  <div className="w-24 bg-accent-secondary/20 rounded-full h-2">
-                    <div className="bg-accent-tertiary h-2 rounded-full" style={{width: '75%'}}></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Tools & Technologies */}
-          <div className="mt-8 bg-gradient-to-r from-accent-primary/5 to-accent-secondary/5 rounded-xl p-6 border border-accent-primary/10">
-            <h3 className="text-lg font-semibold text-dark-text mb-4">{t('skills.tools.title')}</h3>
-            <div className="flex flex-wrap gap-3">
-              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Ableton Live</span>
-              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Logic Pro</span>
-              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Adobe Creative Suite</span>
-              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Adobe Audition</span>
-              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Google Analytics</span>
-              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Social Media Platforms</span>
-              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Streaming Platforms</span>
-              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">ChatGPT/Claude</span>
-              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Notion</span>
-              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Slack</span>
-              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Figma</span>
-              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Microsoft Office</span>
-              <span className="px-3 py-1 bg-accent-primary/20 text-dark-text rounded-full text-sm">Event Management</span>
-            </div>
-          </div>
-        </ScrollAnimationSection>
-
-        {/* Experience & Education Section */}
-        <ScrollAnimationSection
-          id="experience"
-          className="mb-12 md:mb-20 scroll-mt-20"
-          animation="slide-up"
-          duration={0.8}
-          delay={100}
-          aria-labelledby="experience-heading"
-        >
-          <h2 id="experience-heading" className="text-2xl sm:text-3xl font-bold text-dark-text mb-6 sm:mb-8">{t('experience.title')}</h2>
-          <div className="space-y-4 sm:space-y-6">
-            {/* Current Work Experience Cards */}
-            <div className="bg-accent-primary/15 rounded-xl p-4 sm:p-6 border-l-4 border-accent-secondary animate-slideUp shadow-[0_4px_10px_rgba(0,0,0,0.08)] transition-shadow duration-300 hover:shadow-[0_5px_15px_rgba(0,0,0,0.12)]" style={{ animationDelay: '100ms' }}>
-              <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
-                <div>
-                  <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('experience.euroarts.title')}</h3>
-                  <p className="text-accent-tertiary">
-                    <a href="https://www.euroarts.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">
-                      EuroArts Music International GmbH
-                    </a>
-                  </p>
-                </div>
-                <span className="text-sm text-dark-text/70 bg-accent-primary/20 px-3 py-1 rounded-full">{t('experience.euroarts.period')}</span>
-              </div>
-              <p className="text-dark-text/80 mb-3">{t('experience.euroarts.description')}</p>
-              <div className="space-y-2">
-                <h4 className="text-sm font-semibold text-dark-text">{t('experience.keyAchievements')}</h4>
-                <ul className="text-sm text-dark-text/70 space-y-1">
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent-tertiary mt-1">•</span>
-                    <span>{t('experience.euroarts.achievement1')}</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent-tertiary mt-1">•</span>
-                    <span>{t('experience.euroarts.achievement2')}</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent-tertiary mt-1">•</span>
-                    <span>{t('experience.euroarts.achievement3')}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="bg-accent-primary/15 rounded-xl p-4 sm:p-6 border-l-4 border-accent-secondary animate-slideUp shadow-[0_4px_10px_rgba(0,0,0,0.08)] transition-shadow duration-300 hover:shadow-[0_5px_15px_rgba(0,0,0,0.12)]" style={{ animationDelay: '200ms' }}>
-              <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
-                <div>
-                  <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('experience.kiacademy.title')}</h3>
-                  <p className="text-accent-tertiary">
-                    <a href="https://ki.academy/" target="_blank" rel="noopener noreferrer" className="hover:underline">
-                      KI Academy
-                    </a>
-                  </p>
-                </div>
-                <span className="text-sm text-dark-text/70 bg-accent-primary/20 px-3 py-1 rounded-full">{t('experience.kiacademy.period')}</span>
-              </div>
-              <p className="text-dark-text/80 mb-3">{t('experience.kiacademy.description')}</p>
-              <div className="space-y-2">
-                <h4 className="text-sm font-semibold text-dark-text">{t('experience.keyAchievements')}</h4>
-                <ul className="text-sm text-dark-text/70 space-y-1">
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent-tertiary mt-1">•</span>
-                    <span>{t('experience.kiacademy.achievement1')}</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent-tertiary mt-1">•</span>
-                    <span>{t('experience.kiacademy.achievement2')}</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent-tertiary mt-1">•</span>
-                    <span>{t('experience.kiacademy.achievement3')}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Previous Experience Cards */}
-            <div className="bg-accent-primary/10 rounded-xl p-4 sm:p-6 border-l-4 border-accent-primary animate-slideUp shadow-[0_4px_10px_rgba(0,0,0,0.06)] transition-shadow duration-300 hover:shadow-[0_5px_15px_rgba(0,0,0,0.10)]" style={{ animationDelay: '300ms' }}>
-              <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
-                <div>
-                  <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('experience.audioEngineer.title')}</h3>
-                  <p className="text-accent-tertiary">Hörbuch: Die Sieben Säulen des Seins</p>
-                </div>
-                <span className="text-sm text-dark-text/70 bg-accent-primary/15 px-3 py-1 rounded-full">{t('experience.audioEngineer.period')}</span>
-              </div>
-              <p className="text-dark-text/80 mb-3">{t('experience.audioEngineer.description')}</p>
-              <div className="space-y-2">
-                <h4 className="text-sm font-semibold text-dark-text">{t('experience.keyAchievements')}</h4>
-                <ul className="text-sm text-dark-text/70 space-y-1">
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent-tertiary mt-1">•</span>
-                    <span>{t('experience.audioEngineer.achievement1')}</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent-tertiary mt-1">•</span>
-                    <span>{t('experience.audioEngineer.achievement2')}</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent-tertiary mt-1">•</span>
-                    <span>{t('experience.audioEngineer.achievement3')}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="bg-accent-primary/10 rounded-xl p-4 sm:p-6 border-l-4 border-accent-primary animate-slideUp shadow-[0_4px_10px_rgba(0,0,0,0.06)] transition-shadow duration-300 hover:shadow-[0_5px_15px_rgba(0,0,0,0.10)]" style={{ animationDelay: '400ms' }}>
-              <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
-                <div>
-                  <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('experience.aboutUsRecords.title')}</h3>
-                  <p className="text-accent-tertiary">about us records</p>
-                </div>
-                <span className="text-sm text-dark-text/70 bg-accent-primary/15 px-3 py-1 rounded-full">{t('experience.aboutUsRecords.period')}</span>
-              </div>
-              <p className="text-dark-text/80 mb-3">{t('experience.aboutUsRecords.description')}</p>
-              <div className="space-y-2">
-                <h4 className="text-sm font-semibold text-dark-text">{t('experience.keyAchievements')}</h4>
-                <ul className="text-sm text-dark-text/70 space-y-1">
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent-tertiary mt-1">•</span>
-                    <span>{t('experience.aboutUsRecords.achievement1')}</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent-tertiary mt-1">•</span>
-                    <span>{t('experience.aboutUsRecords.achievement2')}</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent-tertiary mt-1">•</span>
-                    <span>{t('experience.aboutUsRecords.achievement3')}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="bg-accent-primary/10 rounded-xl p-4 sm:p-6 border-l-4 border-accent-primary animate-slideUp shadow-[0_4px_10px_rgba(0,0,0,0.06)] transition-shadow duration-300 hover:shadow-[0_5px_15px_rgba(0,0,0,0.10)]" style={{ animationDelay: '500ms' }}>
-              <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
-                <div>
-                  <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('experience.eventOrganizer.title')}</h3>
-                  <p className="text-accent-tertiary">Lido Kultur & Veranstaltungs GmbH</p>
-                </div>
-                <span className="text-sm text-dark-text/70 bg-accent-primary/15 px-3 py-1 rounded-full">{t('experience.eventOrganizer.period')}</span>
-              </div>
-              <p className="text-dark-text/80 mb-3">{t('experience.eventOrganizer.description')}</p>
-              <div className="space-y-2">
-                <h4 className="text-sm font-semibold text-dark-text">{t('experience.keyAchievements')}</h4>
-                <ul className="text-sm text-dark-text/70 space-y-1">
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent-tertiary mt-1">•</span>
-                    <span>{t('experience.eventOrganizer.achievement1')}</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent-tertiary mt-1">•</span>
-                    <span>{t('experience.eventOrganizer.achievement2')}</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent-tertiary mt-1">•</span>
-                    <span>{t('experience.eventOrganizer.achievement3')}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Education Section */}
-            <div className="bg-gradient-to-r from-accent-secondary/10 to-accent-tertiary/10 rounded-xl p-4 sm:p-6 border-l-4 border-accent-secondary animate-slideUp shadow-[0_4px_10px_rgba(0,0,0,0.08)] transition-shadow duration-300 hover:shadow-[0_5px_15px_rgba(0,0,0,0.12)]" style={{ animationDelay: '600ms' }}>
-              <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
-                <div>
-                  <h3 className="text-lg sm:text-xl font-bold text-dark-text">{t('experience.education.title')}</h3>
-                  <p className="text-accent-tertiary">{t('experience.education.institution')}</p>
-                </div>
-                <span className="text-sm text-dark-text/70 bg-accent-secondary/20 px-3 py-1 rounded-full">{t('experience.education.period')}</span>
-              </div>
-              <p className="text-dark-text/80">{t('experience.education.description')}</p>
-            </div>
-          </div>
-        </ScrollAnimationSection>
-
-        {/* Coming Soon Section */}
-        <ScrollAnimationSection
-          id="blog"
-          className="mb-12 md:mb-20 scroll-mt-20"
-          animation="slide-up"
-          duration={0.8}
-          delay={200}
-          aria-labelledby="blog-heading"
-        >
-          <h2 id="blog-heading" className="text-2xl sm:text-3xl font-bold text-dark-text mb-6 sm:mb-8">{t('blog.title')}</h2>
-          <div className="relative bg-gradient-to-br from-accent-primary/10 via-white to-accent-tertiary/10 rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] p-8 sm:p-10 overflow-hidden">
-            {/* Decorative elements */}
-            <div className="absolute top-0 left-0 w-40 h-40 bg-accent-primary/5 rounded-full -translate-x-20 -translate-y-20"></div>
-            <div className="absolute bottom-0 right-0 w-60 h-60 bg-accent-tertiary/5 rounded-full translate-x-20 translate-y-20"></div>
-            
-            <div className="relative flex flex-col items-center justify-center py-8 z-10">
-              {/* Coming soon animated icon */}
-              <motion.div 
-                className="w-24 h-24 mb-6 flex items-center justify-center rounded-full bg-white shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ 
-                  type: "spring", 
-                  stiffness: 260, 
-                  damping: 20 
-                }}
-              >
-                <motion.div
-                  animate={{
-                    rotate: [0, 10, 0, -10, 0],
-                  }}
-                  transition={{
-                    duration: 5,
-                    ease: "easeInOut",
-                    repeat: Infinity,
-                  }}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-accent-tertiary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
-                </motion.div>
-              </motion.div>
+        <main className="pt-16">
+          {/* Artist Identity */}
+          <section className="py-32 px-6">
+            <div className="max-w-4xl mx-auto text-center">
+              <h1 className="text-7xl md:text-9xl lg:text-[10rem] brand-hero text-black leading-[0.85] mb-12">
+                O$ka
+              </h1>
               
-              {/* Coming soon text */}
-              <motion.h3 
-                className="text-2xl sm:text-3xl font-bold text-accent-tertiary mb-4 tracking-tight"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                {t('blog.comingSoon')}
-              </motion.h3>
-              
-              <motion.p 
-                className="text-dark-text text-lg mb-6 max-w-lg text-center leading-relaxed"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-              >
-                {t('blog.description')}
-              </motion.p>
-              
-              {/* Stay tuned badge */}
-              <motion.div 
-                className="inline-flex items-center py-2 px-5 bg-accent-tertiary text-white rounded-full shadow-sm"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
-              >
-                <motion.span 
-                  className="mr-2 text-lg"
-                  animate={{
-                    scale: [1, 1.2, 1],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    repeatType: "reverse"
-                  }}
-                >✨</motion.span>
-                <span className="font-medium">{t('blog.stayTuned')}</span>
-              </motion.div>
-            </div>
-          </div>
-        </ScrollAnimationSection>
-
-        {/* Professional Call-to-Action Section */}
-        <ScrollAnimationSection
-          className="mb-16 md:mb-24"
-          animation="fade"
-          duration={0.8}
-          delay={100}
-        >
-          <div className="bg-gradient-to-r from-accent-tertiary/10 to-accent-primary/10 rounded-2xl p-8 md:p-12 text-center border border-accent-tertiary/20">
-            <h2 className="text-2xl md:text-3xl font-bold text-dark-text mb-4">{t('cta.title')}</h2>
-            <p className="text-lg text-dark-text/80 mb-8 max-w-2xl mx-auto leading-relaxed">
-              {t('cta.description')}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a 
-                href="mailto:ooh.oska@outlook.de" 
-                className="inline-flex items-center gap-3 bg-accent-tertiary text-white hover:bg-accent-tertiary/90 transition-all duration-300 text-lg py-3 px-8 rounded-full shadow-lg hover:shadow-xl hover:scale-[1.02]"
-              >
-                <i className="fa-solid fa-envelope"></i>
-                <span>{t('cta.contactButton')}</span>
-              </a>
-              <a 
-                href="https://www.linkedin.com/in/ole-oskar-heinrichs/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-dark-text/5 text-dark-text hover:bg-dark-text/10 transition-all duration-300 text-lg py-3 px-8 rounded-full border border-dark-text/20 hover:border-dark-text/30"
-              >
-                <i className="fa-brands fa-linkedin"></i>
-                <span>{t('cta.linkedinButton')}</span>
-              </a>
-            </div>
-          </div>
-        </ScrollAnimationSection>
-
-        {/* Connect Section */}
-        <ScrollAnimationSection
-          id="connect"
-          className="mb-12 md:mb-20 scroll-mt-20"
-          animation="fade"
-          duration={0.8}
-          delay={300}
-          aria-labelledby="connect-heading"
-        >
-          <h2 id="connect-heading" className="text-2xl sm:text-3xl font-bold text-dark-text mb-6 sm:mb-8">{t('connect.title')}</h2>
-          
-          {/* Redesigned layout with cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Personal Contact Card */}
-            <div className="bg-accent-primary/15 rounded-xl p-6 flex flex-col h-full transition-all duration-300 shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:shadow-[0_5px_16px_rgba(0,0,0,0.12)] animate-fadeIn" style={{ animationDelay: '150ms' }}>
-              <h3 className="text-lg sm:text-xl font-medium text-dark-text mb-5 text-center">{t('connect.getInSection')}</h3>
-              <div className="mb-6 flex justify-center">
-                <EmailLink />
+              <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 md:gap-12">
+                <span className="text-xl md:text-2xl font-light text-neutral-400 tracking-[0.3em] uppercase">songwriter</span>
+                <span className="text-xl md:text-2xl font-light text-neutral-400 tracking-[0.3em] uppercase">producer</span>
+                <span className="text-xl md:text-2xl font-light text-neutral-400 tracking-[0.3em] uppercase">performer</span>
               </div>
-              
-              {/* Management Contact */}
-              <div className="mt-auto">
-                <h3 className="text-base font-medium text-dark-text mb-3 text-center">{t('connect.management')}</h3>
-                <div className="flex justify-center">
-                  <a 
-                    href="mailto:info@about-us-records.com" 
-                    className="inline-flex items-center gap-2 text-accent-tertiary hover:text-dark-text transition-colors"
-                    aria-label="Email Management"
+            </div>
+          </section>
+
+          {/* Featured New Release */}
+          <section id="music" className="py-20 px-6 bg-neutral-50">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <p className="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-4">
+                  {t('home.newRelease.label')}
+                </p>
+                <h2 className="text-5xl font-extralight text-black mb-6 tracking-tight">
+                  Falsche Idole
+                </h2>
+                <p className="text-lg font-light text-neutral-600 mb-8">
+                  {t('home.newRelease.description')}
+                </p>
+              </div>
+
+              <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
+                {/* Featured Bandcamp Embed */}
+                <div className="w-full max-w-[350px]">
+                  <iframe 
+                    style={{border: 0, width: '100%', height: '442px'}} 
+                    src="https://bandcamp.com/EmbeddedPlayer/track=641840065/size=large/bgcol=ffffff/linkcol=e99708/tracklist=false/transparent=true/" 
+                    title="Falsche Idole by O$ka - New Release"
+                  />
+                </div>
+
+                {/* Streaming Links */}
+                <div className="text-center lg:text-left">
+                  <h3 className="text-2xl font-light text-black mb-6">
+                    {t('home.newRelease.listenEverywhere')}
+                  </h3>
+                  <a
+                    href="https://oska.lnk.to/Idole"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-black text-white px-8 py-4 font-light tracking-wide hover:bg-neutral-800 transition-colors duration-300"
                   >
-                    <div className="bg-accent-secondary/40 w-8 h-8 rounded-full flex items-center justify-center shadow-sm">
-                      <FontAwesomeIcon icon={faEnvelope} className="text-dark-text" size="sm" />
-                    </div>
-                    <span>{t('connect.managementEmail')}</span>
+                    {t('home.newRelease.streamNow')}
                   </a>
                 </div>
               </div>
             </div>
-            
-            {/* Social Media Card */}
-            <div className="bg-accent-primary/10 rounded-xl p-6 h-full transition-all duration-300 hover:shadow-md animate-fadeIn" style={{ animationDelay: '300ms' }}>
-              <h3 className="text-lg sm:text-xl font-medium text-dark-text mb-5 text-center">{t('connect.socialMedia')}</h3>
-              <div className="flex flex-wrap justify-center">
-                <SocialIcons />
+          </section>
+
+          {/* Discography */}
+          <section className="py-20 px-6">
+            <div className="max-w-4xl mx-auto">
+              {/* Section Title */}
+              <div className="text-center mb-20">
+                <h2 className="text-4xl font-extralight text-black mb-4 tracking-tight">
+                  {t('home.discography.title')}
+                </h2>
+                <div className="w-16 h-px bg-neutral-300 mx-auto" />
+              </div>
+
+              {/* Discography Grid - Excluding Featured Track */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 justify-items-center">
+                {/* Wegen Mir */}
+                <div className="w-full max-w-[350px]">
+                  <iframe 
+                    style={{border: 0, width: '100%', height: '442px'}} 
+                    src="https://bandcamp.com/EmbeddedPlayer/track=829471641/size=large/bgcol=ffffff/linkcol=e99708/tracklist=false/transparent=true/" 
+                    title="Wegen Mir by O$ka"
+                  />
+                </div>
+
+                {/* Don't give a fuck */}
+                <div className="w-full max-w-[350px]">
+                  <iframe 
+                    style={{border: 0, width: '100%', height: '442px'}} 
+                    src="https://bandcamp.com/EmbeddedPlayer/track=1310404552/size=large/bgcol=ffffff/linkcol=de270f/tracklist=false/transparent=true/" 
+                    title="Don't give a fuck by O$ka"
+                  />
+                </div>
+
+                {/* Alle meine Homies essen auf */}
+                <div className="w-full max-w-[350px]">
+                  <iframe 
+                    style={{border: 0, width: '100%', height: '442px'}} 
+                    src="https://bandcamp.com/EmbeddedPlayer/track=1563685798/size=large/bgcol=ffffff/linkcol=f171a2/tracklist=false/transparent=true/" 
+                    title="Alle meine Homies essen auf by O$ka"
+                  />
+                </div>
+
+                {/* Intervention */}
+                <div className="w-full max-w-[350px]">
+                  <iframe 
+                    style={{border: 0, width: '100%', height: '442px'}} 
+                    src="https://bandcamp.com/EmbeddedPlayer/track=571788196/size=large/bgcol=ffffff/linkcol=f171a2/tracklist=false/transparent=true/" 
+                    title="Intervention by O$ka"
+                  />
+                </div>
+
+                {/* Rockstar */}
+                <div className="w-full max-w-[350px]">
+                  <iframe 
+                    style={{border: 0, width: '100%', height: '442px'}} 
+                    src="https://bandcamp.com/EmbeddedPlayer/track=758771639/size=large/bgcol=ffffff/linkcol=de270f/tracklist=false/transparent=true/" 
+                    title="Rockstar by O$ka"
+                  />
+                </div>
+
+                {/* So Oft Gesagt */}
+                <div className="w-full max-w-[350px]">
+                  <iframe 
+                    style={{border: 0, width: '100%', height: '442px'}} 
+                    src="https://bandcamp.com/EmbeddedPlayer/track=2588520989/size=large/bgcol=ffffff/linkcol=de270f/tracklist=false/transparent=true/" 
+                    title="So Oft Gesagt by O$ka"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        </ScrollAnimationSection>
-      </main>
+          </section>
 
-      {/* Footer */}
-      <Footer />
-    </div>
-  );
+          {/* Music Videos */}
+          <section id="videos" className="py-20 px-6 bg-neutral-50">
+            <div className="max-w-4xl mx-auto">
+              {/* Section Title */}
+              <div className="text-center mb-20">
+                <h2 className="text-4xl font-extralight text-black mb-4 tracking-tight">
+                  {t('home.musicVideos.title')}
+                </h2>
+                <div className="w-16 h-px bg-neutral-300 mx-auto" />
+              </div>
+
+              {/* Video Content */}
+              <div className="max-w-5xl mx-auto">
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-light text-black mb-2">Wegen Mir</h3>
+                  <p className="text-sm text-neutral-500">{t('home.musicVideos.officialMusicVideo')}</p>
+                </div>
+                
+                <div className="relative max-w-sm mx-auto md:max-w-lg lg:max-w-2xl">
+                  <a 
+                    href="https://www.youtube.com/watch?v=B4JAMlgGfpw"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block relative group cursor-pointer"
+                  >
+                    {/* 4:3 Aspect Ratio Container */}
+                    <div className="relative w-full bg-black rounded-lg overflow-hidden shadow-lg" style={{aspectRatio: '4/3'}}>
+                      {/* Cloudinary Video - Centered with letterboxing */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <iframe
+                          src="https://player.cloudinary.com/embed/?cloud_name=daaynrl8l&public_id=Wegen_mir_website_nbqr2t&player[autoplay]=true&player[autoplayMode]=on-scroll&player[muted]=true&player[loop]=true&player[controls]=false"
+                          className="w-full h-full object-cover"
+                          style={{
+                            width: '120%',
+                            height: '120%',
+                            marginLeft: '-10%',
+                            marginTop: '-5%'
+                          }}
+                          allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+                          allowFullScreen
+                          frameBorder="0"
+                          title="Wegen Mir - Official Music Video"
+                        />
+                      </div>
+                      
+                      {/* Click Overlay */}
+                      <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center rounded-lg">
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-75 text-white px-6 py-3 rounded-lg text-sm font-light flex items-center space-x-2">
+                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                          </svg>
+                          <span>{t('home.video.watchOnYoutube')}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Essential Information */}
+          <section id="blog" className="py-24 px-6">
+            <div className="max-w-2xl mx-auto text-center space-y-16">
+              {/* Blog */}
+              <div>
+                <h2 className="text-3xl font-extralight text-black mb-8 tracking-tight">
+                  {t('home.blog.title')}
+                </h2>
+                <div className="flex justify-center">
+                  <iframe 
+                    src="https://oskahayati.substack.com/embed" 
+                    width="480" 
+                    height="320" 
+                    style={{border: '1px solid #EEE', background: 'white', maxWidth: '100%'}} 
+                    frameBorder="0" 
+                    scrolling="no"
+                    className="rounded-lg shadow-sm"
+                    title="Substack Blog"
+                  />
+                </div>
+              </div>
+
+              {/* Connect */}
+              <div id="connect">
+                <h2 className="text-3xl font-extralight text-black mb-8 tracking-tight">
+                  {t('home.connect.title')}
+                </h2>
+                
+                {/* Social Links */}
+                <div className="flex justify-center items-center space-x-8 mb-12">
+                  <a
+                    href="https://open.spotify.com/intl-de/artist/4BTWTI3mEAVmYQbe94r0MY?si=FBpspC__S7-hAWI5Omf3gQ"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-neutral-500 hover:text-black transition-colors duration-300"
+                    aria-label="Spotify"
+                  >
+                    <FontAwesomeIcon icon={faSpotify} className="text-2xl" />
+                  </a>
+                  <a
+                    href="https://oskamusic.bandcamp.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-neutral-500 hover:text-black transition-colors duration-300"
+                    aria-label="Bandcamp"
+                  >
+                    <FontAwesomeIcon icon={faBandcamp} className="text-2xl" />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/oska.hayati/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-neutral-500 hover:text-black transition-colors duration-300"
+                    aria-label="Instagram"
+                  >
+                    <FontAwesomeIcon icon={faInstagram} className="text-2xl" />
+                  </a>
+                  <a
+                    href="https://www.youtube.com/@oska.hayati"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-neutral-500 hover:text-black transition-colors duration-300"
+                    aria-label="YouTube"
+                  >
+                    <FontAwesomeIcon icon={faYoutube} className="text-2xl" />
+                  </a>
+                  <a
+                    href="https://on.soundcloud.com/yc2BjCAlBb9tYhwGk5"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-neutral-500 hover:text-black transition-colors duration-300"
+                    aria-label="SoundCloud"
+                  >
+                    <FontAwesomeIcon icon={faSoundcloud} className="text-2xl" />
+                  </a>
+                  <a
+                    href="https://music.apple.com/us/artist/o%24ka/1640653279"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-neutral-500 hover:text-black transition-colors duration-300"
+                    aria-label="Apple Music"
+                  >
+                    <FontAwesomeIcon icon={faApple} className="text-2xl" />
+                  </a>
+                </div>
+
+                {/* Contact */}
+                <a
+                  href="mailto:info@about-us-records.com"
+                  className="inline-flex items-center space-x-3 text-neutral-600 hover:text-black transition-colors duration-300 font-light"
+                >
+                  <FontAwesomeIcon icon={faEnvelope} className="text-lg" />
+                  <span>info@about-us-records.com</span>
+                </a>
+              </div>
+            </div>
+          </section>
+        </main>
+        
+        <Footer />
+      </div>
+    </>
+  )
 }

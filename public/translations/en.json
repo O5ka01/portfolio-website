@@ -27,10 +27,6 @@
     "discography": {
       "title": "Discography"
     },
-    "musicVideos": {
-      "title": "Music Videos",
-      "officialMusicVideo": "Official Music Video"
-    },
     "blog": {
       "title": "Blog"
     },
@@ -154,20 +150,18 @@
   "cookies": {
     "title": "Privacy Settings",
     "description": "This website uses cookies and similar technologies that are necessary for the website to function. You can optionally consent to the use of cookies for analytics purposes.",
-    "necessary": "Essential",
+    "necessary": "Necessary",
     "necessaryDescription": "These cookies are necessary for the basic functions of the website and cannot be disabled.",
     "analytics": "Analytics",
     "analyticsDescription": "These cookies help us understand how visitors interact with the website.",
     "functional": "Functional",
     "functionalDescription": "These cookies enable enhanced functionality and personalization.",
-    "acceptAll": "Accept All",
+    "acceptAll": "Accept all",
     "rejectAll": "Reject all",
-    "acceptSelected": "Accept Selected",
-    "preferences": "Cookie Preferences",
+    "acceptSelected": "Accept selected",
+    "preferences": "Preferences",
     "close": "Close",
-    "cookiePolicy": "Cookie Policy",
-    "essential": "Essential Only",
-    "customize": "Customize"
+    "cookiePolicy": "Cookie Policy"
   },
   "datenschutz": {
     "title": "Privacy Policy"

@@ -11,9 +11,9 @@ const languages = ['de', 'en'];
 const routes = [
   { path: '', priority: 1.0, changeFrequency: 'weekly' as const },       // Home page - highest priority
   { path: '/blog', priority: 0.8, changeFrequency: 'weekly' as const },  // Blog page
-  { path: '/imprint', priority: 0.3, changeFrequency: 'yearly' as const }, // Legal pages
+
   { path: '/datenschutz', priority: 0.3, changeFrequency: 'yearly' as const },
-  { path: '/agb', priority: 0.3, changeFrequency: 'yearly' as const },
+
 ];
 
 // Additional important pages for SEO
@@ -26,7 +26,7 @@ const additionalPages = [
   // Professional pages  
   { path: '/services', priority: 0.8, changeFrequency: 'monthly' as const },
   { path: '/portfolio', priority: 0.8, changeFrequency: 'monthly' as const },
-  { path: '/contact', priority: 0.7, changeFrequency: 'monthly' as const },
+
   
   // About pages
   { path: '/about', priority: 0.7, changeFrequency: 'monthly' as const },

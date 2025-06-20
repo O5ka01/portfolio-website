@@ -76,7 +76,7 @@ const SocialIcons: FC<SocialIconsProps> = ({ size = "lg" }) => {
         <FontAwesomeIcon icon={faYoutube} className="text-dark-text" size={size} />
       </a>
       <a 
-        href="https://open.spotify.com/intl-de/artist/4BTWTI3mEAVmYQbe94r0MY" 
+        href="https://open.spotify.com/intl-de/artist/4BTWTI3mEAVmYQbe94r0MY?si=FBpspC__S7-hAWI5Omf3gQ" 
         target="_blank" 
         rel="noopener noreferrer"
         className="bg-accent-secondary/40 hover:bg-accent-secondary/70 transition-colors w-12 h-12 rounded-full flex items-center justify-center shadow-sm"
@@ -85,7 +85,7 @@ const SocialIcons: FC<SocialIconsProps> = ({ size = "lg" }) => {
         <FontAwesomeIcon icon={faSpotify} className="text-dark-text" size={size} />
       </a>
       <a 
-        href="https://soundcloud.com/murphywav" 
+        href="https://on.soundcloud.com/yc2BjCAlBb9tYhwGk5" 
         target="_blank" 
         rel="noopener noreferrer"
         className="bg-accent-secondary/40 hover:bg-accent-secondary/70 transition-colors w-12 h-12 rounded-full flex items-center justify-center shadow-sm"

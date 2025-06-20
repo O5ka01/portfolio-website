@@ -1,88 +1,81 @@
 /**
- * Configuration settings for the application
- * This centralizes environment variables and other config settings
+ * Core Configuration
+ * Following Steve Jobs' philosophy: "Simplicity is the ultimate sophistication"
+ * Every setting here serves a specific, essential purpose.
  */
 
-interface SiteConfig {
-  siteName: string;
-  siteUrl: string;
-  defaultLocale: string;
-  availableLocales: string[];
-  contactEmail: string;
-  apiEndpoints: Record<string, string>;
-  analytics: {
-    enabled: boolean;
-    endpoint?: string;
-  };
-  imageCdn: string;
-  socials: {
-    instagram: string;
-    linkedin: string;
-    youtube: string;
-    spotify: string;
-    soundcloud: string;
+// Environment validation
+const requiredEnvVars = {
+  NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+  NODE_ENV: process.env.NODE_ENV || 'development',
+} as const;
+
+// Core site configuration
+export const siteConfig = {
+  name: 'Ole Heinrichs (O$ka)',
+  url: requiredEnvVars.NEXT_PUBLIC_SITE_URL,
+  defaultLocale: 'de',
+  locales: ['de', 'en'],
+  isDevelopment: requiredEnvVars.NODE_ENV === 'development',
+  isProduction: requiredEnvVars.NODE_ENV === 'production',
+} as const;
+
+// API configuration - only for essential endpoints
+export const apiConfig = {
+  // Rate limiting - simple and effective
+  rateLimit: {
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    maxRequests: 100, // per window
+  },
+  
+  // Cache settings - minimal but effective
+  cache: {
+    defaultTtl: 5 * 60 * 1000, // 5 minutes
+    spotifyTtl: 30 * 60 * 1000, // 30 minutes for Spotify data
+  },
+  
+  // Spotify API configuration
+  spotify: {
+    clientId: process.env.SPOTIFY_CLIENT_ID,
+    clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+    artistId: '4BTWTI3mEAVmYQbe94r0MY', // O$ka's Spotify artist ID
+  },
+} as const;
+
+// Health check configuration
+export const healthConfig = {
+  timeout: 5000, // 5 seconds
+  criticalServices: ['spotify'] as const,
+} as const;
+
+/**
+ * Validate environment configuration
+ */
+export function validateEnvironment(): { isValid: boolean; missing: string[] } {
+  const missing: string[] = [];
+  
+  if (!siteConfig.url) missing.push('NEXT_PUBLIC_SITE_URL');
+  if (!apiConfig.spotify.clientId) missing.push('SPOTIFY_CLIENT_ID');
+  if (!apiConfig.spotify.clientSecret) missing.push('SPOTIFY_CLIENT_SECRET');
+  
+  return {
+    isValid: missing.length === 0,
+    missing,
   };
 }
 
-export const siteConfig: SiteConfig = {
-  siteName: 'Ole Oskar Heinrichs',
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://oleoskarheinrichs.com',
-  defaultLocale: 'de',
-  availableLocales: ['de', 'en'],
-  contactEmail: 'info@about-us-records.com', // Replace with your actual contact email
-  apiEndpoints: {
-    contact: '/api/contact',
-    subscribe: '/api/subscribe', // For future newsletter subscription feature
-  },
-  analytics: {
-    enabled: process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === 'true',
-    endpoint: process.env.NEXT_PUBLIC_ANALYTICS_ENDPOINT,
-  },
-  imageCdn: 'https://res.cloudinary.com/daaynrl8l',
-  socials: {
-    instagram: 'https://www.instagram.com/oska.hayati/',
-    linkedin: 'https://www.linkedin.com/in/ole-oskar-heinrichs/',
-    youtube: 'https://www.youtube.com/@oska.hayati',
-    spotify: 'https://open.spotify.com/intl-de/artist/4BTWTI3mEAVmYQbe94r0MY',
-    soundcloud: 'https://soundcloud.com/murphywav',
-  },
-};
+/**
+ * Simple language configuration (replaces edgeConfig)
+ */
+export async function getDefaultLanguage(): Promise<'de' | 'en'> {
+  // Default to German for this portfolio
+  return 'de';
+}
 
 /**
- * Cache configuration
+ * Featured content configuration (replaces edgeConfig)
  */
-export const cacheConfig = {
-  staticAssetMaxAge: 31536000, // 1 year in seconds
-  pageDataMaxAge: 3600, // 1 hour in seconds
-  apiResponseMaxAge: 300, // 5 minutes in seconds
-};
-
-/**
- * Server runtime configuration
- */
-export const serverConfig = {
-  rateLimits: {
-    contact: {
-      windowMs: 60 * 1000, // 1 minute
-      maxRequests: 5,
-    },
-  },
-};
-
-/**
- * Get environment-specific configuration
- */
-export function getEnvironmentConfig() {
-  const environment = process.env.NODE_ENV || 'development';
-  const isDev = environment === 'development';
-  const isProd = environment === 'production';
-  const isTest = environment === 'test';
-  
-  return {
-    environment,
-    isDev,
-    isProd,
-    isTest,
-    debug: isDev || process.env.DEBUG === 'true',
-  };
+export async function getFeaturedContent(): Promise<null> {
+  // No featured content needed for this simplified portfolio
+  return null;
 }

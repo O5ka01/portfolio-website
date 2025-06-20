@@ -1,107 +1,98 @@
 /**
- * Server-side error handling utilities
+ * Elegant Error Handling
+ * "Simplicity is the ultimate sophistication" - Steve Jobs
+ * 
+ * Clean, focused error handling for our three essential APIs
  */
+
 import { NextResponse } from 'next/server';
-import { getEnvironmentConfig } from './config';
 
-type ErrorLevel = 'info' | 'warning' | 'error' | 'critical';
-
-interface ApiError extends Error {
-  statusCode: number;
-  level: ErrorLevel;
-  context?: Record<string, unknown>;
+/**
+ * Standard API error structure
+ */
+export interface ApiError {
+  message: string;
+  status: number;
+  code?: string;
+  timestamp: string;
 }
 
 /**
- * Create a formatted API error
+ * Create a standardized API error
  */
-export function createApiError(message: string, statusCode = 500, level: ErrorLevel = 'error', context?: Record<string, unknown>): ApiError {
-  const error = new Error(message) as ApiError;
-  error.statusCode = statusCode;
-  error.level = level;
-  error.context = context;
-  return error;
-}
-
-/**
- * Log an error with additional context
- */
-export function logError(error: Error | ApiError, additionalContext?: Record<string, unknown>): void {
-  const { debug } = getEnvironmentConfig();
-  const level = (error as ApiError).level || 'error';
-  const statusCode = (error as ApiError).statusCode;
-  const context = (error as ApiError).context || {};
-  
-  // Combine all context
-  const fullContext = { ...context, ...additionalContext };
-  
-  // Format the error message
-  const formattedError = {
-    message: error.message,
-    ...(statusCode && { statusCode }),
-    level,
-    stack: debug ? error.stack : undefined,
-    context: Object.keys(fullContext).length > 0 ? fullContext : undefined,
+export function createApiError(
+  message: string,
+  status: number = 500,
+  code?: string
+): ApiError {
+  return {
+    message,
+    status,
+    code,
     timestamp: new Date().toISOString(),
   };
-  
-  // Log to appropriate console method based on level
-  switch (level) {
-    case 'info':
-      console.info(JSON.stringify(formattedError));
-      break;
-    case 'warning':
-      console.warn(JSON.stringify(formattedError));
-      break;
-    case 'critical':
-      console.error('CRITICAL ERROR:', JSON.stringify(formattedError));
-      break;
-    case 'error':
-    default:
-      console.error(JSON.stringify(formattedError));
-  }
-  
-  // In a production environment, you could send critical errors to an external service
-  // like Sentry, LogRocket, etc.
 }
 
 /**
- * Handle API errors and return appropriate response
+ * Handle API errors with consistent response format
  */
-export function handleApiError(error: unknown, requestContext?: Record<string, unknown>): NextResponse {
-  // Ensure error is an Error object
-  const normalizedError = error instanceof Error ? error : new Error(String(error));
-  
-  // Treat as ApiError if possible
-  const apiError = normalizedError as Partial<ApiError>;
-  const statusCode = apiError.statusCode || 500;
-  
-  // Log the error
-  logError(normalizedError, requestContext);
-  
-  // Prepare user-facing error message
-  const { isDev } = getEnvironmentConfig();
-  let userMessage: string;
-  
-  if (isDev) {
-    // In development, show more details
-    userMessage = normalizedError.message;
-  } else {
-    // In production, show generic messages for 5xx errors
-    if (statusCode >= 500) {
-      userMessage = 'An unexpected error occurred. Please try again later.';
-    } else {
-      userMessage = normalizedError.message;
-    }
+export function handleApiError(error: unknown): NextResponse {
+  // Handle our custom API errors
+  if (isApiError(error)) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: error.message,
+        code: error.code,
+        timestamp: error.timestamp,
+      },
+      { status: error.status }
+    );
   }
-  
-  // Return formatted error response
+
+  // Handle standard JavaScript errors
+  if (error instanceof Error) {
+    const apiError = createApiError(error.message, 500, 'INTERNAL_ERROR');
+    return NextResponse.json(
+      {
+        success: false,
+        error: apiError.message,
+        code: apiError.code,
+        timestamp: apiError.timestamp,
+      },
+      { status: 500 }
+    );
+  }
+
+  // Handle unknown errors
+  const apiError = createApiError('An unexpected error occurred', 500, 'UNKNOWN_ERROR');
   return NextResponse.json(
-    { 
-      error: userMessage,
-      ...(isDev && { detail: normalizedError.message }),
-      success: false 
+    {
+      success: false,
+      error: apiError.message,
+      code: apiError.code,
+      timestamp: apiError.timestamp,
     },
-    { status: statusCode }
+    { status: 500 }
   );
+}
+
+/**
+ * Type guard to check if an error is our ApiError
+ */
+function isApiError(error: unknown): error is ApiError {
+  return (
+    typeof error === 'object' &&
+    error !== null &&
+    'message' in error &&
+    'status' in error &&
+    'timestamp' in error
+  );
+}
+
+/**
+ * Throw an API error (for use in try/catch blocks)
+ */
+export function throwApiError(message: string, status: number = 500, code?: string): never {
+  throw createApiError(message, status, code);
 }
